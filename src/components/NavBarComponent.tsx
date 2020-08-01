@@ -9,6 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
 import { green } from '@material-ui/core/colors';
+import { useSelector } from 'react-redux';
+import { IState } from '../reducers';
 
 const useStyles = makeStyles((theme) => ({ //change color too
   root: {
@@ -29,6 +31,10 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  const currUser = useSelector((state:IState) => {
+    return state.loginState.currUser
+  })
+
   const handleClick = (event:any) => {
     setAnchorEl(event.currentTarget);
   };
@@ -38,10 +44,9 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
   };
 
   let menuItems = []
-  //changes the nav bar back after logout for when the there is no currenUser
+ //changes the nav bar back after logout for when the there is no currenUser
   useEffect(()=>{
-      if (props.user === null){
-        menuItems = []
+      if (!currUser){
         menuItems.push(
           <Link to= "/login" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Login</MenuItem></Link>,
           <Link to= "/register" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Sign Up</MenuItem></Link>,
@@ -49,7 +54,7 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
       }
   })
 
-  if (props.user) {
+  if (currUser) {
     menuItems.push(
       <Link to= "/home" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
       <Link to={`/user/profile/${(props.user)?props.user.userId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>User Profile</MenuItem></Link>,
