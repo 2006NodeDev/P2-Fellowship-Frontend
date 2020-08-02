@@ -9,9 +9,6 @@ import { Location } from '../models/Location';
 import { getLocationProfile } from '../remote/getLocationProfile';
 
 
-
-
-
 const useStyles = makeStyles({
     card: {
       display: 'flex',

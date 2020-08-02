@@ -23,8 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export const NewLocationComponent:FunctionComponent<any> = ((props) => {
     const classes = useStyles();
 
-    
-
     const [name, changeName] = useState('')
     const [image, changeImage] = useState<any>(null)
     const [realm, changeRealm] = useState('')
