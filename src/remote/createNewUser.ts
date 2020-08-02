@@ -3,17 +3,16 @@ import { fellowshipClient } from "."
 
 
 
-export const createNewUser = async (userId: number, username:string, password:string, firstName:string, lastName:string,  address:string, email:string, role:string, image:string) => {
+export const createNewUser = async (username:string, password:string, firstName:string, lastName:string,  affiliation:string, placesVisited:number, address:string, email:string, role:string, image:string) => {
     
     let credentials = {
-        userId,
         username,
         password,
         firstName,
         lastName,
-        address,
         affiliation:null,
         placesVisited:0,
+        address,
         email,
         role,
         image 

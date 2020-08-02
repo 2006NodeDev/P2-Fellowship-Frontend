@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { getAllLocations } from '../remote/getAllLocations'
 import { Location } from '../models/Location'
-import { DisplayLOTRLocationComponent } from './DisplayLOTRLocationComponent'
+import { DisplayLOTRLocationComponent } from './DisplayLocationComponent'
 
 
 export const AllLocationsComponent:FunctionComponent<any> = (props) => {
@@ -10,14 +10,12 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
 
     //query the server
     useEffect(()=>{
-
-        const getUsers = async ()=>{
+        const getLocations = async ()=>{
             let response = await getAllLocations()
             changeAllLocations(response)
         }
-
         if(allLocations.length === 0){
-            getUsers()
+            getLocations()
         }
     })  
 
@@ -26,7 +24,6 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     })
 
     return(
-        //we should turn this into a grid to make it look nicer
         <div>
             {locationDisplays}
         </div>
