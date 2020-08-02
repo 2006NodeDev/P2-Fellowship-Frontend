@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { getAllLocations } from '../remote/getAllLocations'
-import { Location } from '../models/Location'
-import { DisplayLOTRLocationComponent } from './DisplayLocationComponent'
-
+import { getAllLocations } from '../../remote/location-service/getAllLocations'
+import { Location } from '../../models/Location'
+import { DisplayLocationCardComponent } from '../Location-Display-Components/LocationCardDisplayComponent'
 
 export const AllLocationsComponent:FunctionComponent<any> = (props) => {
 
@@ -20,7 +19,7 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     })  
 
     let locationDisplays = allLocations.map((location)=>{
-        return <DisplayLOTRLocationComponent key={'location-key-' + location.locationId} location={location}/>
+        return <DisplayLocationCardComponent key={'location-key-' + location.locationId} location={location}/>
     })
 
     return(

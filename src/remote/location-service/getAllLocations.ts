@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react"
-import { fellowshipClient } from "."
+import { fellowshipClient } from ".."
 
 
 

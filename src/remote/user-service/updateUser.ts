@@ -1,5 +1,5 @@
-import { fellowshipClient } from ".";
-import { User } from "../models/User";
+import { fellowshipClient } from "..";
+import { User } from "../../models/User";
 
 export const updateUser = async (user:User) => {
     

@@ -1,12 +1,12 @@
-//display a user's profile in detail
+//display a location's profile in detail
 
 import 'react-toastify/dist/ReactToastify.css';
 import React, { FunctionComponent, useState, useEffect, SyntheticEvent } from 'react'
 import { useParams, Redirect } from 'react-router'
 import { Grid, Paper, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { Location } from '../models/Location';
-import { getLocationProfile } from '../remote/getLocationProfile';
+import { Location } from '../../models/Location';
+import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
 
 
 const useStyles = makeStyles({
@@ -45,7 +45,7 @@ export const LocationProfileComponent:FunctionComponent<any> = (props) => {
         }
         //else do nothing
     })
-    
+    //use a grid display instead? 
     return(
         
         (locationProfile)?
@@ -57,7 +57,13 @@ export const LocationProfileComponent:FunctionComponent<any> = (props) => {
             <Card className={classes.card}>
             <div className={classes.cardDetails}>
                 <CardContent>
-            
+                <CardMedia
+                //   component = "img"
+                //   className={classes.media}
+                //   alt="Profile Picture"
+                //   image={props.location.image} 
+                //   FIND OUT HOW TO DO THE SLIDE SHOW HERE
+                />
                 <Typography component="h2" variant="h5">
                     NAME: {locationProfile?.name}
                 </Typography>

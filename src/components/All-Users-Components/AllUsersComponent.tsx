@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { getAllUsers } from '../remote/getAllUsers'
-import { DisplayUserComponent } from './DisplayUserComponent'
-import { User } from '../models/User'
+import { getAllUsers } from '../../remote/user-service/getAllUsers'
+import { DisplayUserCardComponent } from '../User-Display-Components/UserCardDisplayComponent'
+import { User } from '../../models/User'
 
 
 export const AllUsersComponent:FunctionComponent<any> = (props) => {
@@ -22,7 +22,7 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
     })  
 
     let userDisplays = allUsers.map((user)=>{
-        return <DisplayUserComponent key={'user-key-' + user.userId} user={user}/>
+        return <DisplayUserCardComponent key={'user-key-' + user.userId} user={user}/>
     })
 
     return(

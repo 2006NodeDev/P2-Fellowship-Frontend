@@ -1,5 +1,5 @@
 import { User } from "../models/User";
-import { getUserProfile } from "../remote/getUserProfile";
+import { getUserProfile } from "../remote/user-service/getUserProfile";
 
 
 export const userProfileTypes = {

@@ -1,19 +1,17 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
 import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles } from "@material-ui/core";
-import { updateUser } from "../remote/updateUser";
-import { User } from "../models/User";
-import { Link, useParams, RouteComponentProps } from 'react-router-dom';
+import { Link, useParams, } from 'react-router-dom';
 import { green, lime } from "@material-ui/core/colors";
 import {toast} from 'react-toastify'
-import { updateUserActionMapper, updateUserErrorReset } from "../action-mappers/update-user-action-mapper";
+import { updateUserActionMapper, updateUserErrorReset } from "../../action-mappers/update-user-action-mapper";
 import { useSelector, useDispatch } from "react-redux";
-import { IState } from "../reducers";
 import { createStyles, Theme } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { IState } from "../../reducers";
 
 
 // interface ISignInProps extends RouteComponentProps{

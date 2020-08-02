@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react"
-import { User } from '../models/User'
-import { fellowshipClient } from "."
+import { User } from '../../models/User'
+import { fellowshipClient } from ".."
 
 
 

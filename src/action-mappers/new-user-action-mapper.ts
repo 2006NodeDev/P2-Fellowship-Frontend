@@ -1,5 +1,5 @@
 import { User } from "../models/User";
-import { createNewUser } from "../remote/createNewUser";
+import { createNewUser } from "../remote/user-service/createNewUser";
 
 
 export const newuserTypes = {

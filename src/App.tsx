@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import './App.css';
-import 'react-toastify/dist/ReactToastify.css';
+import './components/User-Profile-Component/node_modules/react-toastify/dist/ReactToastify.css';
 import { User } from './models/User';
-import { LoginComponent } from './components/LoginComponent';
-import { NavBarComponent } from './components/NavBarComponent';
-import { HomeComponent } from './components/HomeComponent';
-import { LocationProfileComponent } from './components/LocationProfileComponent'
+import { LoginComponent } from './components/Login-Component/LoginComponent';
+import { NavBarComponent } from './components/Nav-Bar-Component/NavBarComponent';
+import { HomeComponent } from './components/Home-Page-Component/HomeComponent';
 import {BrowserRouter as Router, Route} from "react-router-dom";
-import { UserProfileComponent } from './components/UserProfileComponent';
+import { UserProfileComponent } from './components/User-Display-Components/FullUserDisplayComponent';
 import {ToastContainer} from 'react-toastify'
-import { NewUserComponent } from './components/NewUserComponent';
-import { UpdateUserProfileComponent } from './components/UpdateUserProfileComponent';
-import { LogOutComponent } from './components/LogOutComponent';
-import { AllUsersComponent } from './components/AllUsersComponent';
-import { AllLocationsComponent } from './components/AllLocationsComponent';
+import { NewUserComponent } from './components/New-User-Component/NewUserComponent';
+import { LogOutComponent } from './components/Logout-Component/LogOutComponent';
+import { AllUsersComponent } from './components/All-Users-Components/AllUsersComponent';
+import { AllLocationsComponent } from './components/All-Locations-Component/AllLocationsComponent';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { LocationProfileComponent } from './components/Location-Display-Components/FullLocationDisplayComponent';
 
 function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)

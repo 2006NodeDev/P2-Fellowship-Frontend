@@ -1,5 +1,5 @@
 import { User } from "../models/User";
-import { updateUser } from "../remote/updateUser";
+import { updateUser } from "../remote/user-service/updateUser";
 
 
 export const updateUserTypes = {
