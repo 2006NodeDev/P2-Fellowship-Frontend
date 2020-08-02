@@ -1,0 +1,1 @@
+//this will use the GetFUllUserComponent (probabably) to show all users' information

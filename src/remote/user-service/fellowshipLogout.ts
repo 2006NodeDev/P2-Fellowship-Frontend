@@ -1,4 +1,4 @@
-import { fellowshipClient } from "."
+import { fellowshipClient } from ".."
 
 export const fellowshipLogout = async () =>{
     try {

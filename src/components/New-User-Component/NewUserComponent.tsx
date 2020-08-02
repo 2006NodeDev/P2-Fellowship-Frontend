@@ -2,13 +2,10 @@ import React, { FunctionComponent, useState, SyntheticEvent, useEffect } from 'r
 import TextField from '@material-ui/core/TextField';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { User } from '../models/User';
-import {createNewUser} from '../remote/createNewUser'
 import { useDispatch } from 'react-redux';
-import { newuserActionMapper } from '../action-mappers/new-user-action-mapper';
+import { newuserActionMapper } from '../../action-mappers/new-user-action-mapper';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 

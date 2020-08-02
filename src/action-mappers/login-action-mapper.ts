@@ -1,5 +1,5 @@
 import { User } from "../models/User";
-import { fellowshipLogin } from "../remote/fellowshipLogin";
+import { fellowshipLogin } from "../remote/user-service/fellowshipLogin";
 
 
 export const loginTypes = {

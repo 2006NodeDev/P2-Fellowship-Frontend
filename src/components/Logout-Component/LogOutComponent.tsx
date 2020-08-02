@@ -1,5 +1,5 @@
 import React, { FunctionComponent, SyntheticEvent } from "react";
-import { fellowshipLogout } from "../remote/fellowshipLogout";
+import { fellowshipLogout } from "../../remote/user-service/fellowshipLogout";
 import { Button, makeStyles, CssBaseline, Container, Typography, Grid } from "@material-ui/core";
 import { RouteComponentProps } from "react-router";
 

@@ -2,11 +2,11 @@
 
 import 'react-toastify/dist/ReactToastify.css';
 import React, { FunctionComponent, useState, useEffect, SyntheticEvent } from 'react'
-import { User } from '../models/User'
-import { useParams, Redirect } from 'react-router'
-import { getUserProfile } from '../remote/getUserProfile'
-import { Grid, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, CardMedia, Button, Link } from '@material-ui/core'
-import { TitleComponent } from './TitleComponent';
+import { User } from '../../models/User'
+import { useParams } from 'react-router'
+import { getUserProfile } from '../../remote/user-service/getUserProfile'
+import { Grid, makeStyles, CardActionArea, Card, CardContent, Typography, CardMedia, Button } from '@material-ui/core'
+import { TitleComponent } from '../TitleComponent';
 import { Link } from 'react-router-dom'
 
 

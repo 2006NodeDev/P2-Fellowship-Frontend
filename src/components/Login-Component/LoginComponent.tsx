@@ -1,13 +1,9 @@
 import React, { FunctionComponent, useState, SyntheticEvent, useEffect } from 'react'
-import { TextField, makeStyles, createStyles, Theme, Button, FormGroup, FormControlLabel, Checkbox, CheckboxProps, withStyles } from '@material-ui/core'
+import { TextField, makeStyles, createStyles, Theme, Button,  FormControlLabel, Checkbox, CheckboxProps, withStyles } from '@material-ui/core'
 import { Route, Router, Redirect, RouteComponentProps } from 'react-router';
-import { UserProfileComponent } from './UserProfileComponent';
-import {fellowshipLogin} from '../remote/fellowshipLogin'
-import { User } from '../models/User';
 import { useSelector, useDispatch } from 'react-redux';
-import { ILoginState, IState } from '../reducers';
-import { loginActionMapper, loginErrorReset } from '../action-mappers/login-action-mapper';
-import thunk from 'redux-thunk';
+import { ILoginState, IState } from '../../reducers';
+import { loginActionMapper, loginErrorReset } from '../../action-mappers/login-action-mapper';
 import { toast } from 'react-toastify'
 import { teal, green } from '@material-ui/core/colors';
 

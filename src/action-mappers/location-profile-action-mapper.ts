@@ -1,6 +1,6 @@
 import { User } from "../models/User";
-import { getUserProfile } from "../remote/getUserProfile";
-import { getLocationProfile } from "../remote/getLocationProfile";
+import { getUserProfile } from "../remote/user-service/getUserProfile";
+import { getLocationProfile } from "../remote/location-service/getLocationProfile";
 
 
 export const locationProfileTypes = {

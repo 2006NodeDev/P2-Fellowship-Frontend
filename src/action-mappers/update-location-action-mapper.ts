@@ -1,5 +1,5 @@
 import { Location } from "../models/Location";
-import { updateLocation } from "../remote/updateLocation";
+import { updateLocation } from "../remote/location-service/updateLocation";
 import { LocationImage } from "../models/LocationImage";
 
 

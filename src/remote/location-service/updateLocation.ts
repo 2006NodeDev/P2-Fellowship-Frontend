@@ -1,5 +1,5 @@
-import { fellowshipClient } from ".";
-import { Location } from "../models/Location";
+import { fellowshipClient } from "..";
+import { Location } from "../../models/Location";
 
 export const updateLocation = async (location:Location) => {
     

@@ -11,7 +11,7 @@ import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
 import { green, teal } from '@material-ui/core/colors';
 import { useSelector } from 'react-redux';
-import { IState } from '../reducers';
+import { IState } from '../../reducers';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';

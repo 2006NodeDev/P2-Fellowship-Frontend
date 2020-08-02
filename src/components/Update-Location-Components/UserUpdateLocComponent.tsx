@@ -1,84 +1,79 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
 import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles } from "@material-ui/core";
-import { updateLocation } from "../remote/updateLocation";
-import { User } from "../models/User";
+import { User } from "../../models/User";
 import { Link, useParams, RouteComponentProps } from 'react-router-dom';
 import { green, lime } from "@material-ui/core/colors";
 import {toast} from 'react-toastify'
-import { Location } from "../models/Location";
-import { LocationImage } from "../models/LocationImage";
-import { updateLocationErrorReset, updateLocationActionMapper } from "../action-mappers/update-location-action-mapper";
-import { useSelector, useDispatch } from "react-redux";
-import { IState } from "../reducers";
+import { Location } from "../../models/Location";
+import { LocationImage } from "../../models/LocationImage";
+import { useDispatch, useSelector } from "react-redux";
+import { updateLocationActionMapper, updateLocationErrorReset } from "../../action-mappers/update-location-action-mapper";
+import { IState } from "../../reducers";
 
-
+// interface ISignInProps extends RouteComponentProps{
+//      user:User
+// } //check if this even works
 
 export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     const classes = useStyles();
 
     let {location_Id} = useParams()
 
-    const [name, changeName] = useState("") 
-    const [image, changeImage] = useState<any>(undefined)
-    const [realm, changeRealm] = useState("")
-    const [governance, changeGovernance] = useState("")
-    const [primaryPopulation, changePrimaryPopulation] = useState("")
-    const [description, changeDescription] = useState("")
+    const [name, changeName] = useState('')
+    const [image, changeImage] = useState<any>(null)
+    const [realm, changeRealm] = useState('')
+    const [governance, changeGovernance] = useState('')
+    const [primaryPopulation, changePrimaryPopulation] = useState('')
+    const [type, changeType] = useState('')
+    const [description, changeDescription] = useState('')
     const [rating, changeRating] = useState(0)
     const [numVisited, changeNumVisited] = useState(0)
 
-    const updateName = (e:any) => {
-        e.preventDefault()
-        changeName(e.currentTarget.value)
+  const updateName = (event:any) => {
+      event.preventDefault()
+      changeName(event.currentTarget.value)
+  }
+  const updateRealm = (event:any) => {
+    event.preventDefault()
+    changeRealm(event.currentTarget.value)
+  }
+  const updateGovernance = (event:any) => {
+    event.preventDefault()
+    changeGovernance(event.currentTarget.value)
+}
+  const updateprimaryPopulation = (event:any) => {
+      event.preventDefault()
+      changePrimaryPopulation(event.currentTarget.value)
+  }
+  const updateType = (event:any) => {
+      event.preventDefault()
+      changeType(event.currentTarget.value)
+  }
+  const updateDescription = (event:any) => {
+    event.preventDefault()
+    changeDescription(event.currentTarget.value)
+}
+const updateRating = (event:any) => {
+    event.preventDefault()
+    changeRating(event.currentTarget.value)''
+}
+const updateNumVisited = (event:any) => {
+    event.preventDefault()
+    changeNumVisited(event.currentTarget.value)
+}
+
+const updateImage = (event:any) => {
+    let file:File = event.currentTarget.files[0]
+    let reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => {
+      changeImage(reader.result)
     }
-    const updateRealm = (e:any) => {
-        e.preventDefault()
-        changeRealm(e.currentTarget.value)
-    }
-    const updateGovernance = (e:any) => {
-        e.preventDefault()
-        changeGovernance(e.currentTarget.value)
-    }
-    const updatePrimaryPopulation = (e:any) => {
-        e.preventDefault()
-        if (e.currentTarget.value !== ''){
-            changePrimaryPopulation(e.currentTarget.value)
-        } 
-    }
-    const updateDescription = (e:any) => {
-        e.preventDefault()
-        if (e.currentTarget.value !== ''){
-            changeDescription(e.currentTarget.value)
-        } 
-    } 
-    const updateRating = (e:any) => {
-        e.preventDefault()
-        if (e.currentTarget.value !== ''){
-            changeRating(e.currentTarget.value)
-        } 
-    }
-    const updateNumVisited = (e:any) => {
-        e.preventDefault()
-        if (e.currentTarget.value !== ''){
-            changeNumVisited(e.currentTarget.value)
-        } 
-    }
-    const updateImage = (e:any) => {
-        e.preventDefault()
-        //type file has array called files, since you could upload multiple. Thus we speficy we want only want the first 
-        let file:File = e.currentTarget.files[0]
-        //utlize FileReader - the old way of doing it without promises
-        let reader = new FileReader()
-        //start an async function on reader object
-        reader.readAsDataURL(file)
-        //set a callback for when it's done reading
-        reader.onload = () =>{
-            console.log(reader.result); //to see binary representation of the image
-            changeImage(reader.result) 
-        }
-    }
+}
+
     
     const dispatch = useDispatch()
+
     
     const updateThisLocation = async (e:SyntheticEvent) => {
       e.preventDefault()        
@@ -107,7 +102,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
 
       }
     })
-    
+
     // const updateThisLocation = async (e:SyntheticEvent) => {
     //     e.preventDefault() // always have to prevent default of refreshing the page
     //    if (!name){
@@ -126,7 +121,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     //       let res = await updateLocation(updatedLocation) //make sure endpoint returns new user
     //       props.history.push(`/locations/profile/${res.locationId}`) //send too profile page (or elsewhere?)
     //     } else {
-    //         let location: Location = { //assign values to new user
+    //         let updatedLocation: Location = { //assign values to new user
     //             locationId:0,
     //             name,
     //             image:[],
@@ -137,7 +132,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     //             rating:0,
     //             numVisited:0 
     //         }
-    //         let res = await updateLocation(location) //make sure endpoint returns new user
+    //         let res = await updateLocation(updatedLocation) //make sure endpoint returns new user
     //         props.history.push(`/locations/profile/${res.locationId}`) //send too profile page (or elsewhere?)
     //     }
     // }
@@ -195,7 +190,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
                   label="New Primary Population"
                   name="primary-population"
                   value={primaryPopulation}
-                  onChange={updatePrimaryPopulation}
+                  onChange={updateprimaryPopulation}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
