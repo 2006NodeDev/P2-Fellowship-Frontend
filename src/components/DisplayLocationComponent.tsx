@@ -4,16 +4,6 @@ import { Location } from '../models/Location'
 import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom';
 
-
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
-    },
-    media: {
-        height: 140,
-    },
-});
-
 export const DisplayLOTRLocationComponent:FunctionComponent<any> = (props) => {
     //get all the user infomation 
     
@@ -68,3 +58,12 @@ export const DisplayLOTRLocationComponent:FunctionComponent<any> = (props) => {
     )
     
 }
+
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 345,
+    },
+    media: {
+        height: 140,
+    },
+});

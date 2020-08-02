@@ -4,7 +4,7 @@ import { fellowshipClient } from "."
 
 
 
-export const getLOTRLocationProfile = async (locationId:number) => {
+export const getLocationProfile = async (locationId:number) => {
     
     try{
         let response = await fellowshipClient.get(`/users/${locationId}`)

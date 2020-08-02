@@ -3,7 +3,7 @@ import { fellowshipClient } from "."
 
 
 
-export const createNewLocation = async (name:string, image:string, realm:string, governance:string,  primaryPopulation:string, type:string, description:string, rating: number, visited:number) => {
+export const createNewLocation = async (name:string, image:string, realm:string, governance:string,  primaryPopulation:string, description:string, rating: number, visited:number) => {
     
     let credentials = {
         name, // not null
@@ -11,7 +11,6 @@ export const createNewLocation = async (name:string, image:string, realm:string,
         realm,
         governance,
         primaryPopulation,
-        type,
         description,
         rating,
         visited

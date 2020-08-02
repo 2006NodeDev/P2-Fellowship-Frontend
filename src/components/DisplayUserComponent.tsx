@@ -5,15 +5,6 @@ import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, 
 import { Link } from 'react-router-dom';
 
 
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
-    },
-    media: {
-        height: 140,
-    },
-});
-
 export const DisplayUserComponent:FunctionComponent<any> = (props) => {
     //get all the user infomation 
     
@@ -62,3 +53,12 @@ export const DisplayUserComponent:FunctionComponent<any> = (props) => {
     )
     
 }
+
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 345,
+    },
+    media: {
+        height: 140,
+    },
+});
