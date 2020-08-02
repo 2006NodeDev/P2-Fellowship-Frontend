@@ -6,9 +6,7 @@ import { useParams, Redirect } from 'react-router'
 import { Grid, Paper, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { Location } from '../models/Location';
-
-
-
+import { getLocationProfile } from '../remote/getLocationProfile';
 
 
 const useStyles = makeStyles({
@@ -24,11 +22,29 @@ const useStyles = makeStyles({
   });
 
 
-export const LOTRLocationProfileComponent:FunctionComponent<any> = (props) => {
+export const LocationProfileComponent:FunctionComponent<any> = (props) => {
     let[locationProfile, changelocationProfile] = useState<Location|null>(null)
-    let {locationId} = useParams()
+    let {location_Id} = useParams()
    
     const classes = useStyles();
+
+
+    
+
+    useEffect(()=>{
+        //we define an async operation we want to run
+        let getLocation = async ()=>{
+            //we await user info and then call a state updat function with it
+            let locationInfo = await getLocationProfile(location_Id)
+            changelocationProfile(locationInfo)
+        }
+        //if we haven't gotten a user profile yet
+        if(!locationProfile || locationProfile.locationId !== +location_Id){
+            //go get the user
+            getLocation()
+        }
+        //else do nothing
+    })
     
     return(
         
@@ -75,7 +91,7 @@ export const LOTRLocationProfileComponent:FunctionComponent<any> = (props) => {
         
         :
         <div>
-            <h3> User Not Found</h3>
+            <h3> Location Not Found</h3>
         </div>
     )
 

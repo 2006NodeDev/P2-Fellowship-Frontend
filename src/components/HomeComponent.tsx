@@ -1,16 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import { withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { green, lime } from '@material-ui/core/colors';
+import { teal, green } from '@material-ui/core/colors';
 import { Card, CardContent, Typography, CardActions } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import Logo from "../../src/logo.jpg"
+
 
 const SignUpButton = withStyles((theme) => ({
   root: {
-    color: theme.palette.getContrastText(lime[700]),
-    backgroundColor: "lime[700]",
+    color: theme.palette.getContrastText(teal[700]),
+    backgroundColor: "teal[700]",
     '&:hover': {
-      backgroundColor: green[900],
+      backgroundColor: teal[800],
     },
   },
 }))(Button);
@@ -27,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(1),
-    backgroundColor: lime[700],
+    backgroundColor: green[600],
     color: 'white',
     //background color? for when hovering/submitting?
     fontFamily: "Bookman Old Style",
@@ -42,6 +44,9 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
     <Card className={classes.root}>
         {/* <CardMedia  /> 
         Insert image of middle earth here! (or slideshow?)*/}
+        <br/>
+        <img src={Logo} alt="website logo" height='300' width='200'/>
+
         <CardContent>
             <Typography gutterBottom variant="h5" component="h2" className={classes.text}>
                 Explore the unknown territories of the world!                 
@@ -55,11 +60,18 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
             </Typography>
         </CardContent>
         <CardActions className={classes.root}>
-          {/*EDIT THE LINKS IN THE BUTTONS */}
-            <Link to= "/register" style={{ textDecoration:"none"}}><SignUpButton variant="contained" className={classes.submit}>
-              Register Now!
-            </SignUpButton></Link>  
-             or  <Link to="/login" className={classes.text}>Login</Link>
+            <Link to= "/register" style={{ textDecoration:"none"}}>
+              <SignUpButton variant="contained" className={classes.submit}>
+                Register Now!
+              </SignUpButton>
+            </Link>
+            <Link to="/login" style={{ textDecoration:"none"}} >
+             <SignUpButton variant="contained" className={classes.submit}>
+                Login
+             </SignUpButton> 
+            </Link>
+   
+             
         </CardActions>
     </Card>
   )

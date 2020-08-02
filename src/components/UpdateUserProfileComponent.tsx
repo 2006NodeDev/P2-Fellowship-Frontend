@@ -1,10 +1,20 @@
-import React, { FunctionComponent, SyntheticEvent, useState } from "react";
+import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
 import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles } from "@material-ui/core";
 import { updateUser } from "../remote/updateUser";
 import { User } from "../models/User";
 import { Link, useParams, RouteComponentProps } from 'react-router-dom';
 import { green, lime } from "@material-ui/core/colors";
 import {toast} from 'react-toastify'
+import { updateUserActionMapper, updateUserErrorReset } from "../action-mappers/update-user-action-mapper";
+import { useSelector, useDispatch } from "react-redux";
+import { IState } from "../reducers";
+import { createStyles, Theme } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 
 // interface ISignInProps extends RouteComponentProps{
 //      user:User
@@ -20,8 +30,12 @@ export const UpdateUserProfileComponent:FunctionComponent<any> = (props) =>{
     let [confirmPassword, changeConfirmPassword] = useState("")
     let [firstName, changeFirstName] = useState("")
     let [lastName, changeLastName] = useState("")
+    let [affiliation, changeAffiliation] = useState("")
+    let [placesVisited, changePlacesVisited] = useState(0)
+    let [address, changeAddress] = useState("")
     let [email, changeEmail] = useState("")
-    let [image, changeImage] = useState(undefined)
+    let [role, changeRole] = useState("")
+    let [image, changeImage] = useState<any>(null)
 
     const updateUsername = (e:any) => {
         e.preventDefault()
@@ -46,11 +60,35 @@ export const UpdateUserProfileComponent:FunctionComponent<any> = (props) =>{
         if (e.currentTarget.value !== ''){
             changeLastName(e.currentTarget.value)
         } 
+    }
+    const updateAffiliation = (e:any) => {
+        e.preventDefault()
+        if (e.currentTarget.value !== ''){
+            changeAffiliation(e.currentTarget.value)
+        } 
     } 
+    const updatePlacesVisited = (e:any) => {
+        e.preventDefault()
+        if (e.currentTarget.value !== ''){
+            changePlacesVisited(e.currentTarget.value)
+        } 
+    }
+    const updateAddress = (e:any) => {
+        e.preventDefault()
+        if (e.currentTarget.value !== ''){
+            changeAddress(e.currentTarget.value)
+        } 
+    }
     const updateEmail = (e:any) => {
         e.preventDefault()
         if (e.currentTarget.value !== ''){
             changeEmail(e.currentTarget.value)
+        } 
+    }
+    const updateRole = (e:any) => {
+        e.preventDefault()
+        if (e.currentTarget.value !== ''){
+            changeRole(e.currentTarget.value)
         } 
     }
     const updateImage = (e:any) => {
@@ -68,47 +106,84 @@ export const UpdateUserProfileComponent:FunctionComponent<any> = (props) =>{
         }
     }
 
-    const updateUser = async (e:SyntheticEvent) => {
-        e.preventDefault() // always have to prevent default of refreshing the page
-        if(password !== confirmPassword){
-            toast.error('Passwords Do Not Match!')
-        } else if (username && props.user.image && !image){
-            toast.error('Please re-upload image so that file can be updated to match username!')
-        } else if (!username){
-            username = props.user.username
-            let updatedUser: User = { //assign values to new user
-              userId,
-              username,
-              password,
-              firstName,
-              lastName,
-              affiliation:"none",
-              placesVisited:0,
-              address:"",
-              email,
-              role: "Member",
-              image 
-          }
-          let res = await updateUser(updatedUser) //make sure endpoint returns new user
-          props.history.push(`/user/profile/${res.userId}`) //send too profile page (or elsewhere?)
-        } else {
-            let updatedUser: User = { //assign values to new user
-              userId,
-              username,
-              password,
-              firstName,
-              lastName,
-              affiliation:"none",
-              placesVisited:0,
-              address:"",
-              email,
-              role: "Member",
-              image  
-            }
-            let res = await updateUser(updatedUser) //make sure endpoint returns new user
-            props.history.push(`/user/profile/${res.userId}`) //send too profile page (or elsewhere?)
-        }
+
+
+    const dispatch = useDispatch()
+
+    
+    const updateThisUser = async (e:SyntheticEvent) => {
+      e.preventDefault()        
+        let thunk = updateUserActionMapper(userId, username, password, firstName, lastName, affiliation, placesVisited, address, email, role, image)
+        dispatch(thunk) 
+        
     }
+    const updatedUser = useSelector((state:IState) => {
+      return state.loginState.currUser
+    })
+
+    const errorMessage = useSelector((state:IState) => {
+      return state.loginState.errorMessage
+    })
+
+    useEffect(() => {
+      if(errorMessage){
+        toast.error(errorMessage)
+        dispatch(updateUserErrorReset())
+      }
+    })
+
+    useEffect(()=>{
+      if(updatedUser){
+        props.history.push(`/profile/${updatedUser.userId}`)
+
+      }
+    })
+
+
+
+
+
+    // const updateThisUser = async (e:SyntheticEvent) => {
+    //     e.preventDefault() // always have to prevent default of refreshing the page
+    //     if(password !== confirmPassword){
+    //         toast.error('Passwords Do Not Match!')
+    //     } else if (username && props.user.image && !image){
+    //         toast.error('Please re-upload image so that file can be updated to match username!')
+    //     } else if (!username){
+    //         username = props.user.username
+    //         let updatedUser: User = { //assign values to new user
+    //           userId,
+    //           username,
+    //           password,
+    //           firstName,
+    //           lastName,
+    //           affiliation:"none",
+    //           placesVisited:0,
+    //           address:"",
+    //           email,
+    //           role: "Member",
+    //           image 
+    //       }
+    //       let res = await updateUser(updatedUser) //make sure endpoint returns new user
+    //       props.history.push(`/user/profile/${res.userId}`) //send too profile page (or elsewhere?)
+    //     } else {
+    //         let updatedUser: User = { //assign values to new user
+    //           userId,
+    //           username,
+    //           password,
+    //           firstName,
+    //           lastName,
+    //           affiliation:"none",
+    //           placesVisited:0,
+    //           address:"",
+    //           email,
+    //           role: "Member",
+    //           image  
+    //         }
+    //         let res = await updateUser(updatedUser) //make sure endpoint returns new user
+    //         props.history.push(`/user/profile/${res.userId}`) //send too profile page (or elsewhere?)
+    //     }
+    // }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -117,7 +192,7 @@ export const UpdateUserProfileComponent:FunctionComponent<any> = (props) =>{
           <Typography component="h1" variant="h5">
             Update User Profile
           </Typography>
-          <form autoComplete="off" onSubmit={updateUser} className={classes.form} noValidate>
+          <form autoComplete="off" onSubmit={updateThisUser} className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -190,6 +265,56 @@ export const UpdateUserProfileComponent:FunctionComponent<any> = (props) =>{
                   onChange={updateLastName}
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="Affiliation"
+                  label="Change Affiliation"
+                  name="affiliation"
+                  value={affiliation}
+                  onChange={updateAffiliation}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="placesVisited"
+                  label="Change No of Places Visited"
+                  name="Places Visited"
+                  value={placesVisited}
+                  onChange={updatePlacesVisited}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="address"
+                  label="Change Address"
+                  name="address"
+                  value={address}
+                  onChange={updateAddress}
+                />
+              </Grid>
+              <Grid>
+              <FormControl required className={classes.formControl}>
+                    <InputLabel id="role">Role</InputLabel>
+                    <Select
+                      labelId="role"
+                      id="role"
+                      value={role}
+                      onChange={updateRole}
+                      className={classes.selectEmpty}
+                    >
+                    <MenuItem value={"User"}>User</MenuItem>
+                    <MenuItem value={"Admin"}>Admin</MenuItem>
+                    </Select>
+                    <FormHelperText>Required</FormHelperText>
+                </FormControl>
+              
+              </Grid>          
               <Grid item xs={12}>
                 <label htmlFor="file">Change Profile Picture</label> <br/>
                 <input type="file" name="file" accept="image/*" onChange={updateImage} />
@@ -234,30 +359,39 @@ const CustomButton = withStyles((theme) => ({
 }))(Button);
 
 //styles at the bottom because closer to html return
-const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: '100%',
-      marginTop: theme.spacing(3),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-      backgroundColor: lime[700],
-      color: 'white',
-      //background color?
-      fontFamily: "Bookman Old Style",
-      fontSize: 16
-    },
-    media: {
+const useStyles = makeStyles((theme) => 
+    createStyles({
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: 120,
+        },
+        selectEmpty: {
+           marginTop: theme.spacing(2),
+        },
+        paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        },
+        avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+        },
+        form: {
+        width: '100%',
+        marginTop: theme.spacing(3),
+        },
+        submit: {
+        margin: theme.spacing(3, 0, 2),
+        backgroundColor: lime[700],
+        color: 'white',
+        //background color?
+        fontFamily: "Bookman Old Style",
+        fontSize: 16
+        },
+        media: {
 
-    }
+        }
+    
 }));

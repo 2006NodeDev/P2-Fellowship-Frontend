@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { User } from "../models/User";
+import {Location} from "../models/Location";
 import { loginReducer } from "./login-reducer";
 import { newLocationReducer } from "./newLocation-reducer";
 import { userProfileReducer } from "./userProfile-reducer";

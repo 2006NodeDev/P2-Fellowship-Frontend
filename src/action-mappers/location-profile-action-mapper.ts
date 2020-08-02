@@ -1,6 +1,6 @@
 import { User } from "../models/User";
 import { getUserProfile } from "../remote/getUserProfile";
-import { getLOTRLocationProfile } from "../remote/getLOTRLocationProfile";
+import { getLocationProfile } from "../remote/getLocationProfile";
 
 
 export const locationProfileTypes = {
@@ -15,7 +15,7 @@ export const locationProfileTypes = {
 export const locationProfileActionMapper = (locationId:number)=> async (dispatch:any) => {
     
     try{
-        let currLocation = await getLOTRLocationProfile(locationId)
+        let currLocation = await getLocationProfile(locationId)
         console.log(currLocation)
         dispatch({
             type:locationProfileTypes.PROFILE_FOUND,

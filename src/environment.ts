@@ -5,5 +5,9 @@ if(process.env['NODE_ENV'] === 'production'){
     //change this
 
 }else{
-    fellowshipBaseURL='http://localhost:2020'
+<<<<<<< HEAD
+    fellowshipBaseURL='http://localhost:2006'
+=======
+    fellowshipBaseURL='http://localhost:80/P2-Fellowship-User-Service'
+>>>>>>> master
 }

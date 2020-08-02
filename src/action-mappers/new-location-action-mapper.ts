@@ -1,6 +1,7 @@
 import { Location } from "../models/Location";
 import { updateLocation } from "../remote/updateLocation";
 import { LocationImage } from "../models/LocationImage";
+import { createNewLocation } from "../remote/createNewLocation";
 
 
 export const newLocationTypes = {
@@ -12,28 +13,16 @@ export const newLocationTypes = {
 
 }
 
-export const newLocationActionMapper = (locationId:number, name:string, image:LocationImage[], realm:string, governance:string, primaryPopulation: string, description: string, rating:number, numVisited:number)=> async (dispatch:any) => {
+export const newLocationActionMapper = (name:string, image:string, realm:string, governance:string, primaryPopulation: string, description: string, rating:number, numVisited:number)=> async (dispatch:any) => {
    
-    let location:Location = {
-        locationId,
-        name,
-        image,
-        realm,
-        governance,
-        primaryPopulation,
-        description,
-        rating,
-        numVisited
-
-    }
    
     try{
-        let newLocation = await updateLocation(location)
-        console.log(newLocation)
+        let new_loc = await createNewLocation(name, image, realm, governance, primaryPopulation, description , rating, numVisited)
+        console.log(new_loc)
         dispatch({
             type:newLocationTypes.CREATION_SUCCESSFUL,
             payload:{
-                newLocation
+                new_loc
             }
         })
     }catch (err) {

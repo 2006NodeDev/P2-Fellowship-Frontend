@@ -7,9 +7,7 @@ import { useParams, Redirect } from 'react-router'
 import { getUserProfile } from '../remote/getUserProfile'
 import { Grid, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, CardMedia, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-
-
-
+import { TitleComponent } from './TitleComponent';
 
 
 const useStyles = makeStyles({
@@ -28,18 +26,31 @@ const useStyles = makeStyles({
 export const UserProfileComponent:FunctionComponent<any> = (props) => {
     let[userProfile, changeUserProfile] = useState<User|null>(null)
     let {userId} = useParams()
+
+    useEffect(()=>{
+        //we define an async operation we want to run
+        let getUser = async ()=>{
+            //we await user info and then call a state updat function with it
+            let userInfo = await getUserProfile(userId)
+            changeUserProfile(userInfo)
+        }
+        //if we haven't gotten a user profile yet
+        if(!userProfile || userProfile.userId !== +userId){
+            //go get the user
+            getUser()
+        }
+        //else do nothing
+    })
    
-    
-    const classes = useStyles();
-    
+    const classes = useStyles(); 
  
     return(
         
         (userProfile)?
         <div>
+             <TitleComponent size='large' title={`Hello ${userProfile.firstName}`}/>
             <Link to='/users/updateuser'>
                 <Button>Update Profile</Button>
-            
             </Link>
 
            <Grid item xs={12} md={6}>
