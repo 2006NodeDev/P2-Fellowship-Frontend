@@ -1,8 +1,6 @@
 import { FunctionComponent } from "react"
 import { fellowshipClient } from ".."
 
-
-
 export const getAllUsers = async () => {
     
     try{
@@ -10,7 +8,7 @@ export const getAllUsers = async () => {
         console.log(response)
         return response.data
 
-    }catch(err){
+    } catch(err){
         console.log(err)
     }
 }

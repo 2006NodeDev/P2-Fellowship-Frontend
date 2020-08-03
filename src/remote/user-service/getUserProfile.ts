@@ -1,8 +1,4 @@
-import { FunctionComponent } from "react"
-import { User } from '../../models/User'
 import { fellowshipClient } from ".."
-
-
 
 export const getUserProfile = async (userId:number) => {
     
@@ -11,10 +7,7 @@ export const getUserProfile = async (userId:number) => {
         console.log(response)
         return response.data
 
-    }catch(err){
+    } catch(err){
         console.log(err)
-
     }
-    
-
 }
