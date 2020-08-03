@@ -1,1 +1,1 @@
-//this will use the GetFUllUserComponent (probabably) to show all users' information
+//this will use the FullUserDisplayComponent (probabably) to show all users' information
