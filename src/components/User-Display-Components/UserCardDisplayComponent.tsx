@@ -40,7 +40,6 @@ export const DisplayUserCardComponent:FunctionComponent<any> = (props) => {
                 <Link to={`/profile/${props.user.userId}`}>
                     Details
                 </Link>
-
                 </Button>
                 
                 

@@ -6,7 +6,7 @@ import { User } from '../../models/User'
 import { useParams } from 'react-router'
 import { getUserProfile } from '../../remote/user-service/getUserProfile'
 import { Grid, makeStyles, CardActionArea, Card, CardContent, Typography, CardMedia, Button } from '@material-ui/core'
-import { TitleComponent } from '../TitleComponent';
+import { TitleComponent } from '../Title-Component/TitleComponent';
 import { Link } from 'react-router-dom'
 
 
