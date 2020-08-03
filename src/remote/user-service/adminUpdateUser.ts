@@ -5,7 +5,7 @@ export const updateUser = async (user:User) => {
     
     try{
         console.log(user)
-        let response = await fellowshipClient.patch(`/users/profile/update/${user.userId}`, user) //for the update endpoint
+        let response = await fellowshipClient.patch(`/users/update/${user.userId}`, user) //for the update endpoint
         console.log(response);
         return response.data
     } catch(e){

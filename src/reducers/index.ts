@@ -2,7 +2,6 @@ import { combineReducers } from "redux";
 import { User } from "../models/User";
 import {Location} from "../models/Location";
 import { loginReducer } from "./login-reducer";
-import { newLocationReducer } from "./newLocation-reducer";
 import { userProfileReducer } from "./userProfile-reducer";
 import { locationProfileReducer } from "./locationProfile-reducer";
 
@@ -40,8 +39,6 @@ export const state = combineReducers <IState>({
     //takes in an object that is all of the reducers
     loginState:loginReducer,
     locationState:locationProfileReducer,
-    userState:userProfileReducer
-
-
+    userState:userProfileReducer,
 
 })

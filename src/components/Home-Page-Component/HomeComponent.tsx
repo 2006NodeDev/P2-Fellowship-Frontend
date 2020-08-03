@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import { teal, green } from '@material-ui/core/colors';
 import { Card, CardContent, Typography, CardActions } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Logo from "../../src/logo.jpg"
 
 
 const SignUpButton = withStyles((theme) => ({
@@ -45,7 +44,7 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
         {/* <CardMedia  /> 
         Insert image of middle earth here! (or slideshow?)*/}
         <br/>
-        <img src={Logo} alt="website logo" height='300' width='200'/>
+       {/* <img src={Logo} alt="website logo" height='300' width='200'/> */}
 
         <CardContent>
             <Typography gutterBottom variant="h5" component="h2" className={classes.text}>

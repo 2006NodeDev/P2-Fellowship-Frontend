@@ -55,7 +55,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
 }
 const updateRating = (event:any) => {
     event.preventDefault()
-    changeRating(event.currentTarget.value)''
+    changeRating(event.currentTarget.value)
 }
 const updateNumVisited = (event:any) => {
     event.preventDefault()

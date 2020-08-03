@@ -16,7 +16,7 @@ export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
         let res = await fellowshipLogout()
         console.log(res)
         props.changeCurrentUser(res)
-        props.history.push(`/home`)
+        props.history.push(`/`)
     } 
 
     return (

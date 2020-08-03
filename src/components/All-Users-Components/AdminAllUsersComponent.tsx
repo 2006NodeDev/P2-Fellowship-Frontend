@@ -1,1 +1,3 @@
-//this will use the GetFUllUserComponent (probabably) to show all users' information
+import React from 'react';
+
+//this will use the FullUserDisplayComponent (probabably) to show all users' information

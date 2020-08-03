@@ -1,15 +1,15 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
 import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles } from "@material-ui/core";
-import { updateLocation } from "../remote/updateLocation";
-import { User } from "../models/User";
+import { updateLocation } from "../../remote/location-service/updateLocation";
+import { User } from "../../models/User";
 import { Link, useParams, RouteComponentProps } from 'react-router-dom';
 import { green, lime } from "@material-ui/core/colors";
 import {toast} from 'react-toastify'
-import { Location } from "../models/Location";
-import { LocationImage } from "../models/LocationImage";
-import { updateLocationErrorReset, updateLocationActionMapper } from "../action-mappers/update-location-action-mapper";
+import { Location } from "../../models/Location";
+import { LocationImage } from "../../models/LocationImage";
+import { updateLocationErrorReset, updateLocationActionMapper } from "../../action-mappers/update-location-action-mapper";
 import { useSelector, useDispatch } from "react-redux";
-import { IState } from "../reducers";
+import { IState } from "../../reducers/index";
 
 
 
