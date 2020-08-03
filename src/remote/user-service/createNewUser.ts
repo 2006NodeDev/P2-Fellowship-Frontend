@@ -18,7 +18,7 @@ export const createNewUser = async (username:string, password:string, firstName:
         image 
     }
     try{
-        let response = await fellowshipClient.put('/users/newuser', credentials)
+        let response = await fellowshipClient.put('/P2-Fellowship-User-Service/users/newuser', credentials)
         return response.data
 
     }catch(err){

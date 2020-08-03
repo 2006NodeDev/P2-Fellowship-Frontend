@@ -5,5 +5,5 @@ if(process.env['NODE_ENV'] === 'production'){
     //change this
 
 }else{ //need access to location service too though???
-    fellowshipBaseURL='http://localhost:80/'
+    fellowshipBaseURL='http://localhost:80'
 }
