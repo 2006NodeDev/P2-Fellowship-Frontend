@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import './components/User-Profile-Component/node_modules/react-toastify/dist/ReactToastify.css';
+//import './components/User-Profile-Component/node_modules/react-toastify/dist/ReactToastify.css';
 import { User } from './models/User';
 import { LoginComponent } from './components/Login-Component/LoginComponent';
 import { NavBarComponent } from './components/Nav-Bar-Component/NavBarComponent';
@@ -26,7 +26,7 @@ function App() {
         <NavBarComponent user={currentUser}/>
 
         <Route path='/users' component={AllUsersComponent}/>
-        <Route path='/home' component={HomeComponent}/>
+        <Route exact path='/' component={HomeComponent}/>
         {/*Figure out how to make this the start up screen */}
         <Route path='/login' render={(props)=>(<LoginComponent changeCurrentUser={changeCurrentUser} {...props} />)} />
         <Route path='/logout' render={(props)=>(<LogOutComponent changeCurrentUser={changeCurrentUser} {...props}/>)}/>
