@@ -6,5 +6,5 @@ export const fellowshipClient = axios.create({
     headers:{
         'Content-Type':'application/json'
     },
-    withCredentials:true
+    // withCredentials:true
 })
