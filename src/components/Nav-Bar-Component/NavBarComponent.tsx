@@ -117,13 +117,13 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
         menuItems.push(
          <Link to= "/login" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose} >Login</MenuItem></Link>,
          <Link to= "/register" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Sign Up</MenuItem></Link>,
-         <Link to= "/home" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>)
+         <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>)
       }
   })
 
   if (currUser) {
     menuItems.push(
-      <Link to= "/home" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
+      <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
       <Link to={`/users/profile/${(props.user)?props.user.userId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>User Profile</MenuItem></Link>,
       <Link to ={`/users/update/${(props.user)?props.user.userId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
       <Link to ={`/locations/profile/${(props.location)?props.location.locationId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Location Profile</MenuItem></Link>,
@@ -133,7 +133,7 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
       //info page? 
   } else {
     menuItems.push(
-      <Link to= "/home" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
+      <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
       <Link to= "/login" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Login</MenuItem></Link>,
       <Link to= "/register" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Sign Up</MenuItem></Link>
     )
