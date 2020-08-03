@@ -1,16 +1,22 @@
-//display a user's profile in detail
+//display a user's profile in full detail -ADMIN
 
 import 'react-toastify/dist/ReactToastify.css';
 import React, { FunctionComponent, useState, useEffect, SyntheticEvent } from 'react'
 import { User } from '../../models/User'
 import { useParams } from 'react-router'
 import { getUserProfile } from '../../remote/user-service/getUserProfile'
-import { Grid, makeStyles, CardActionArea, Card, CardContent, Typography, CardMedia, Button } from '@material-ui/core'
+import { Grid, makeStyles, CardActions, CardActionArea, Card, CardContent, Typography, CardMedia, Button } from '@material-ui/core'
 import { TitleComponent } from '../Title-Component/TitleComponent';
 import { Link } from 'react-router-dom'
 
 
 const useStyles = makeStyles({
+    root: {
+        maxWidth: 345,
+      },
+      media: {
+        height: 140,
+      },
     card: {
       display: 'flex',
     },
@@ -23,7 +29,7 @@ const useStyles = makeStyles({
   });
 
 
-export const UserProfileComponent:FunctionComponent<any> = (props) => {
+export const FullUserDisplayComponent   :FunctionComponent<any> = (props) => {
     let[userProfile, changeUserProfile] = useState<User|null>(null)
     let {userId} = useParams()
 
@@ -47,40 +53,49 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
     return(
         
         (userProfile)?
-        <div>
-             <TitleComponent size='large' title={`Hello ${userProfile.firstName}`}/>
-            <Link to='/users/updateuser'>
-                <Button>Update Profile</Button>
-            </Link>
-
-           <Grid item xs={12} md={6}>
-            <CardActionArea component="a" href="#">
-          
-            <Card className={classes.card}>
-            <div className={classes.cardDetails}>
+        <Card className={classes.root}>
+            <CardActionArea>
+               <CardMedia
+                className={classes.media}
+                image={userProfile.image}
+               />
                 <CardContent>
-            
-                <Typography component="h2" variant="h5">
-                    NAME: {userProfile.firstName} {userProfile.lastName}
+                    {/* Name of User: */}
+                <Typography gutterBottom variant="h5" component="h2">
+                    {userProfile.firstName} {userProfile.lastName}
                 </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
+                <Typography variant="body2" color="textSecondary" component="p">
+                   ID: {userProfile.userId} 
+                   USERNAME: {userProfile.username}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
                     ROLE: {userProfile.role}
                 </Typography>
-                <Typography variant="subtitle1" paragraph>
+                <Typography variant="body2" color="textSecondary" component="p">
                     AFFILIATION: {userProfile.affiliation}
                 </Typography>
-                <Link to = '/contact'>
+                <Typography variant="body2" color="textSecondary" component="p">
+                    ADDRESS: {userProfile.address}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
                     EMAIL: {userProfile.email}
-                </Link>
-                </CardContent>
-            </div>
-            
-            </Card>
-            </CardActionArea>
-            </Grid>
-            
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                    PLACES VISITED: {userProfile.placesVisited}
+                </Typography>
 
-        </div>
+
+                </CardContent>
+            </CardActionArea>
+            <CardActions>
+                <Button size="small" color="primary">
+                Contact
+                </Button>
+                <Button size="small" color="primary">
+                Learn More
+                </Button>
+            </CardActions>
+        </Card>
         
         :
         <div>
