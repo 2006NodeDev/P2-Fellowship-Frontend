@@ -9,7 +9,7 @@ import { IState } from '../../reducers'
 import { getUserProfile } from '../../remote/user-service/getUserProfile'
 import { useParams } from 'react-router'
 
-
+//navbar - admin update location 
 export const UserProfileComponent:FunctionComponent<any> = (props) => {
 
     let[userProfile, changeUserProfile] = useState<any>(null)

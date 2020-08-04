@@ -8,6 +8,16 @@ import { Link } from 'react-router-dom'
 import { Location } from '../../models/Location';
 import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
 
+//rough suggestion of how to grab images form LocationImage[]:
+// while(x<length(image array)){
+//     if(image[x]){
+//         display image
+        
+//     }
+    
+// }
+
+
 interface ILocationDisplayProps {
     location: Location
 }

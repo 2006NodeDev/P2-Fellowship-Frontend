@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 import { IState } from '../../reducers'
 
 
-export const UserProfileComponent:FunctionComponent<any> = (props) => {
+export const AllUsersComponent:FunctionComponent<any> = (props) => {
 
     let [allUsers, changeAllUsers] = useState<User[]>([])
 

@@ -24,7 +24,6 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     const [realm, changeRealm] = useState('')
     const [governance, changeGovernance] = useState('')
     const [primaryPopulation, changePrimaryPopulation] = useState('')
-    const [type, changeType] = useState('')
     const [description, changeDescription] = useState('')
     const [rating, changeRating] = useState(0)
     const [numVisited, changeNumVisited] = useState(0)
@@ -45,10 +44,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
       event.preventDefault()
       changePrimaryPopulation(event.currentTarget.value)
   }
-  const updateType = (event:any) => {
-      event.preventDefault()
-      changeType(event.currentTarget.value)
-  }
+  
   const updateDescription = (event:any) => {
     event.preventDefault()
     changeDescription(event.currentTarget.value)
@@ -81,11 +77,11 @@ const updateImage = (event:any) => {
         
     }
     const updatedLocation= useSelector((state:IState) => {
-      return state.locationState.currLocation
+      return state.locationProfileState.profLocation
     })
 
     const errorMessage = useSelector((state:IState) => {
-      return state.locationState.errorMessage
+      return state.locationProfileState.errorMessage
     })
 
     useEffect(() => {

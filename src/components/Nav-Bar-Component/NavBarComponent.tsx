@@ -124,8 +124,10 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
   if (currUser) {
     menuItems.push(
       <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
+      <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
       <Link to={`/users/profile/${(props.user)?props.user.userId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>User Profile</MenuItem></Link>,
       <Link to ={`/users/update/${(props.user)?props.user.userId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
+      <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
       <Link to ={`/locations/profile/${(props.location)?props.location.locationId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Location Profile</MenuItem></Link>,
       <Link to ={`/locations/update/${(props.location)?props.location.locationId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
 

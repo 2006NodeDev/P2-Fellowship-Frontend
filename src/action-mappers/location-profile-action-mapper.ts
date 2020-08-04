@@ -3,6 +3,9 @@ import { getUserProfile } from "../remote/user-service/getUserProfile";
 import { getLocationProfile } from "../remote/location-service/getLocationProfile";
 
 
+//tells you with a string, what the action is that happened
+//if you need to do something with this action (e.g. return an error or return a profile in this case),
+//then this is the place to state that
 export const locationProfileTypes = {
     PROFILE_FOUND: 'P2_PROFILE_FOUND',
     BAD_CREDENTIALS: 'P2_BAD_CREDENTIALS',
@@ -12,6 +15,8 @@ export const locationProfileTypes = {
 
 }
 
+//action mappers are functions to define actions, just so that you don't have to define them inline (~neater code)
+//the action mapper function will return the action object
 export const locationProfileActionMapper = (locationId:number)=> async (dispatch:any) => {
     
     try{

@@ -1,4 +1,4 @@
-import { ILoginState, state } from "./index";
+import { state, IUserProfileState } from "./index";
 import { AnyAction } from "redux";
 import { newuserTypes } from "../action-mappers/new-user-action-mapper";
 
@@ -6,8 +6,8 @@ import { newuserTypes } from "../action-mappers/new-user-action-mapper";
 
 //when running reducer for the first time this initializes it to null
 //since creating a new user is just logging in as a new object, i left this as loginstate
-const initialState:ILoginState = {
-    currUser:undefined,
+const initialState:IUserProfileState = {
+    profUser:undefined,
     errorMessage:''
 
 }
