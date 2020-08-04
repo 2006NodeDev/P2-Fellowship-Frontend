@@ -1,7 +1,10 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { getAllLocations } from '../../remote/location-service/getAllLocations'
 import { Location } from '../../models/Location'
-import { DisplayLocationCardComponent } from '../Location-Display-Components/LocationCardDisplayComponent'
+import { LocationCardDisplayComponent } from '../Location-Display-Components/LocationCardDisplayComponent'
+import { FullLocationProfileComponent } from '../Location-Display-Components/FullLocationDisplayComponent'
+import { useSelector } from 'react-redux'
+import { IState } from '../../reducers'
 
 export const AllLocationsComponent:FunctionComponent<any> = (props) => {
 
@@ -18,8 +21,17 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
         }
     })  
 
+    // let locationDisplays = allLocations.map((location)=>{
+    //     return <LocationCardDisplayComponent key={'location-key-' + location.locationId} location={location}/>
+    // })
+
     let locationDisplays = allLocations.map((location)=>{
-        return <DisplayLocationCardComponent key={'location-key-' + location.locationId} location={location}/>
+        return (
+            (currUser?.role === 'Admin')?
+            <FullLocationProfileComponent key={'location-key-' + location.locationId} location={location}/>
+            :
+            <LocationCardDisplayComponent key={'location-key-' + location.locationId} location={location}/>            
+        )
     })
 
     return(
@@ -30,3 +42,7 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
         
     )
 }
+
+const currUser = useSelector((state:IState) => {
+    return state.loginState.currUser
+})

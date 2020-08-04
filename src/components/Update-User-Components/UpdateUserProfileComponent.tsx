@@ -79,12 +79,7 @@ export const UpdateUserProfileComponent:FunctionComponent<any> = (props) =>{
             changeEmail(e.currentTarget.value)
         } 
     }
-    const updateRole = (e:any) => {
-        e.preventDefault()
-        if (e.currentTarget.value !== ''){
-            changeRole(e.currentTarget.value)
-        } 
-    }
+  
     const updateImage = (e:any) => {
         e.preventDefault()
         //type file has array called files, since you could upload multiple. Thus we speficy we want only want the first 
@@ -244,21 +239,6 @@ export const UpdateUserProfileComponent:FunctionComponent<any> = (props) =>{
                 />
               </Grid>
               <Grid>
-              <FormControl required className={classes.formControl}>
-                    <InputLabel id="role">Role</InputLabel>
-                    <Select
-                      labelId="role"
-                      id="role"
-                      value={role}
-                      onChange={updateRole}
-                      className={classes.selectEmpty}
-                    >
-                    <MenuItem value={"User"}>User</MenuItem>
-                    <MenuItem value={"Admin"}>Admin</MenuItem>
-                    </Select>
-                    <FormHelperText>Required</FormHelperText>
-                </FormControl>
-              
               </Grid>          
               <Grid item xs={12}>
                 <label htmlFor="file">Change Profile Picture</label> <br/>

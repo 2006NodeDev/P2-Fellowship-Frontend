@@ -1,11 +1,15 @@
 import React, { FunctionComponent, SyntheticEvent } from "react";
 import { fellowshipLogout } from "../../remote/user-service/fellowshipLogout";
-import { Button, makeStyles, CssBaseline, Container, Typography, Grid } from "@material-ui/core";
+import { Button, makeStyles, CssBaseline, Container, Typography, Grid, Link } from "@material-ui/core";
 import { RouteComponentProps } from "react-router";
+import { UserProfileComponent } from "../User-Profile-Component/UserProfileComponent";
+import { useSelector } from "react-redux";
 
 interface ILogoutProps extends RouteComponentProps{
     changeCurrentUser:(newUser:any)=>void
 }
+
+
 
 export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
     const classes = useStyles();
@@ -36,6 +40,7 @@ export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
                   onClick={logoutUser}
                 > Logout
               </Button>
+              
             </Grid>
           </div>
         </Container>

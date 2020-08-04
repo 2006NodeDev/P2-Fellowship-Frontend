@@ -6,6 +6,7 @@ import { userProfileReducer } from "./userProfile-reducer";
 import { locationProfileReducer } from "./locationProfile-reducer";
 
 //login interface
+//user who is currently logged in
 export interface ILoginState{
     currUser:User | undefined,
     errorMessage:string
@@ -13,32 +14,34 @@ export interface ILoginState{
 }
 
 //user interface
-export interface IUserState{
-    currUser:User | undefined,
+//profile that we are viewing/editing (Admin)
+export interface IUserProfileState{
+    profUser:User | undefined,
     errorMessage:string
 
 }
 //location interface
-export interface ILocationState{
-    currLocation:Location | undefined,
+//current Location that we are viewing/editing (Admin)
+export interface ILocationProfileState{
+    profLocation:Location | undefined,
     errorMessage:string
 
 }
 
 
-//type def for state
+//def of the total state i.e. what sub-states it SHOULD have
 export interface IState{
     loginState:ILoginState
-    locationState:ILocationState
-    userState:IUserState
+    locationProfileState:ILocationProfileState
+    userProfileState:IUserProfileState
 
 }
 
-//the whole state of the store
+//the whole state i.e. combination of all the mini states
 export const state = combineReducers <IState>({
     //takes in an object that is all of the reducers
     loginState:loginReducer,
-    locationState:locationProfileReducer,
-    userState:userProfileReducer,
+    locationProfileState:locationProfileReducer,
+    userProfileState:userProfileReducer,
 
 })

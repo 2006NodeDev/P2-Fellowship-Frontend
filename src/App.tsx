@@ -4,16 +4,16 @@ import './App.css';
 import { User } from './models/User';
 import { LoginComponent } from './components/Login-Component/LoginComponent';
 import { NavBarComponent } from './components/Nav-Bar-Component/NavBarComponent';
-import {BrowserRouter as Router, Route} from "react-router-dom";
-import { UserProfileComponent } from './components/User-Display-Components/FullUserDisplayComponent';
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import { UserProfileComponent } from '../src/components/User-Profile-Component/UserProfileComponent';
 import {ToastContainer} from 'react-toastify'
 import { NewUserComponent } from './components/New-User-Component/NewUserComponent';
 import { LogOutComponent } from './components/Logout-Component/LogOutComponent';
-import { AllUsersComponent } from './components/All-Users-Components/AllUsersComponent';
+import { AllUsersComponent } from './components/All-Users-Component/AllUsersComponent';
 import { AllLocationsComponent } from './components/All-Locations-Component/AllLocationsComponent';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { LocationProfileComponent } from './components/Location-Display-Components/FullLocationDisplayComponent';
+import { LocationProfileComponent } from '../src/components/Location-Profile-Component/LocationProfileComponent';
 import { HomeComponent } from './components/Home-Page-Component/HomeComponent';
 
 function App() {

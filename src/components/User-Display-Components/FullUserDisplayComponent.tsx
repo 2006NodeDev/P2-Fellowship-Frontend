@@ -89,10 +89,7 @@ export const FullUserDisplayComponent   :FunctionComponent<any> = (props) => {
             </CardActionArea>
             <CardActions>
                 <Button size="small" color="primary">
-                Contact
-                </Button>
-                <Button size="small" color="primary">
-                Learn More
+                Update Profile
                 </Button>
             </CardActions>
         </Card>
