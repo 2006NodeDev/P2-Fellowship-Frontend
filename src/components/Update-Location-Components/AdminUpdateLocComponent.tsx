@@ -83,11 +83,11 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
         
     }
     const updatedLocation= useSelector((state:IState) => {
-      return state.locationState.currLocation
+      return state.locationProfileState.profLocation
     })
 
     const errorMessage = useSelector((state:IState) => {
-      return state.locationState.errorMessage
+      return state.locationProfileState.errorMessage
     })
 
     useEffect(() => {
