@@ -1,20 +1,12 @@
-import { FunctionComponent } from "react"
-import { Location } from '../../models/Location'
 import { fellowshipClient } from ".."
-
-
 
 export const getLocationProfile = async (locationId:number) => {
     
     try{
-        let response = await fellowshipClient.get(`/users/${locationId}`)
+        let response = await fellowshipClient.get(`/P2-Fellowship-Location-Service/locations/${locationId}`)
         console.log(response)
         return response.data
-
-    }catch(err){
+    } catch(err) {
         console.log(err)
-
     }
-    
-
 }
