@@ -3,7 +3,7 @@ import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid
 import { Link, useParams } from 'react-router-dom';
 import { green, lime } from "@material-ui/core/colors";
 import {toast} from 'react-toastify'
-import { updateLocationErrorReset, updateLocationActionMapper } from "../../action-mappers/update-location-action-mapper";
+import { updateLocationErrorReset, adminUpdateLocationActionMapper } from "../../action-mappers/admin-update-location-action-mapper";
 import { useSelector, useDispatch } from "react-redux";
 import { IState } from "../../reducers/index";
 
@@ -35,30 +35,23 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     }
     const updatePrimaryPopulation = (e:any) => {
         e.preventDefault()
-        if (e.currentTarget.value !== ''){
-            changePrimaryPopulation(e.currentTarget.value)
-        } 
+        changePrimaryPopulation(e.currentTarget.value)
     }
     const updateDescription = (e:any) => {
         e.preventDefault()
-        if (e.currentTarget.value !== ''){
-            changeDescription(e.currentTarget.value)
-        } 
+        changeDescription(e.currentTarget.value)
     } 
+
+    //this stuff should not be doing anything; no fields for input
     const updateRating = (e:any) => {
         e.preventDefault()
-        if (e.currentTarget.value !== ''){
-            changeRating(e.currentTarget.value)
-        } 
+        changeRating(e.currentTarget.value)
     }
     const updateNumVisited = (e:any) => {
         e.preventDefault()
-        if (e.currentTarget.value !== ''){
-            changeNumVisited(e.currentTarget.value)
-        } 
+        changeNumVisited(e.currentTarget.value)
     }
 
-    
     const updateImage = (e:any) => {
         e.preventDefault()
         //type file has array called files, since you could upload multiple. Thus we speficy we want only want the first 
@@ -78,7 +71,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     
     const updateThisLocation = async (e:SyntheticEvent) => {
       e.preventDefault()        
-        let thunk = updateLocationActionMapper(location_Id, name, image, realm, governance, primaryPopulation, description, rating, numVisited)
+        let thunk = adminUpdateLocationActionMapper(location_Id, name, image, realm, governance, primaryPopulation, description, rating, numVisited)
         dispatch(thunk) 
         
     }
@@ -103,40 +96,6 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
 
       }
     })
-    
-    // const updateThisLocation = async (e:SyntheticEvent) => {
-    //     e.preventDefault() // always have to prevent default of refreshing the page
-    //    if (!name){
-    //         name = props.location.name
-    //         let updatedLocation: Location = { //assign values to new user
-    //           locationId:0,
-    //           name,
-    //           image:[],
-    //           realm,
-    //           governance,
-    //           primaryPopulation,
-    //           description,
-    //           rating:0,
-    //           numVisited:0
-    //         }
-    //       let res = await updateLocation(updatedLocation) //make sure endpoint returns new user
-    //       props.history.push(`/locations/profile/${res.locationId}`) //send too profile page (or elsewhere?)
-    //     } else {
-    //         let location: Location = { //assign values to new user
-    //             locationId:0,
-    //             name,
-    //             image:[],
-    //             realm,
-    //             governance,
-    //             primaryPopulation,
-    //             description,
-    //             rating:0,
-    //             numVisited:0 
-    //         }
-    //         let res = await updateLocation(location) //make sure endpoint returns new user
-    //         props.history.push(`/locations/profile/${res.locationId}`) //send too profile page (or elsewhere?)
-    //     }
-    // }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -204,33 +163,6 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
                   value={description}
                   onChange={updateDescription}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="rating"
-                  label="Change Rating"
-                  name="rating"
-                  value={rating}
-                  onChange={updateRating}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="numVisited"
-                  label="Update Number of Users who Visited"
-                  name="numVisited"
-                  value={numVisited}
-                  onChange={updateNumVisited}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <label htmlFor="file">Change Profile Picture</label> <br/>
-                <input type="file" name="file" accept="image/*" onChange={updateImage} />
-                <img src={image} width="100%"/>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <CustomButton

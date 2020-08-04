@@ -1,4 +1,4 @@
-import { ILoginState, state, ILocationProfileState } from "./index";
+import { ILocationProfileState } from "./index";
 import { AnyAction } from "redux";
 import { adminUpdateLocationTypes } from "../action-mappers/admin-update-location-action-mapper";
 
@@ -11,7 +11,7 @@ const initialState:ILocationProfileState = {
 
 }
 
-export const updateLocationReducer=(state = initialState, action:AnyAction) => {
+export const adminUpdateLocationReducer=(state = initialState, action:AnyAction) => {
     switch(action.type){
         case adminUpdateLocationTypes.BAD_CREDENTIALS:{
             return {

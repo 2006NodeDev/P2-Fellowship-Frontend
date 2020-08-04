@@ -7,7 +7,7 @@ import {toast} from 'react-toastify'
 import { Location } from "../../models/Location";
 import { LocationImage } from "../../models/LocationImage";
 import { useDispatch, useSelector } from "react-redux";
-import { updateLocationActionMapper, updateLocationErrorReset } from "../../action-mappers/update-location-action-mapper";
+import { adminUpdateLocationActionMapper, updateLocationErrorReset } from "../../action-mappers/admin-update-location-action-mapper";
 import { IState } from "../../reducers";
 
 // interface ISignInProps extends RouteComponentProps{
@@ -72,7 +72,7 @@ const updateImage = (event:any) => {
     
     const updateThisLocation = async (e:SyntheticEvent) => {
       e.preventDefault()        
-        let thunk = updateLocationActionMapper(location_Id, name, image, realm, governance, primaryPopulation, description, rating, numVisited)
+        let thunk = userUpdateLocationActionMapper(location_Id, name, image, realm, governance, primaryPopulation, description, rating, numVisited)
         dispatch(thunk) 
         
     }
