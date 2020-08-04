@@ -5,7 +5,7 @@ import { User } from './models/User';
 import { LoginComponent } from './components/Login-Component/LoginComponent';
 import { NavBarComponent } from './components/Nav-Bar-Component/NavBarComponent';
 import {BrowserRouter as Router, Route} from "react-router-dom";
-import { UserProfileComponent } from './components/User-Display-Components/FullUserDisplayComponent';
+import { FullUserDisplayComponent } from './components/User-Display-Components/FullUserDisplayComponent';
 import {ToastContainer} from 'react-toastify'
 import { NewUserComponent } from './components/New-User-Component/NewUserComponent';
 import { LogOutComponent } from './components/Logout-Component/LogOutComponent';
@@ -33,7 +33,7 @@ function App() {
         <Route path='/logout' render={(props)=>(<LogOutComponent changeCurrentUser={changeCurrentUser} {...props}/>)}/>
         <Route path='/register' component={NewUserComponent}/>
 
-        <Route path='/users/profile/:userId' component={UserProfileComponent}/>
+        <Route path='/users/profile/:userId' component={FullUserDisplayComponent}/>
         <Route exact path='/users' component={AllUsersComponent}/>
         <Route path = '/users/newuser' render={(props)=>(<NewUserComponent {...props}/>)} />
 

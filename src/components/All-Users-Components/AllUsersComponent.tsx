@@ -31,6 +31,6 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
             {userDisplays}
         </div>
         
-        
+
     )
 }
