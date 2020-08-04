@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { teal, green } from '@material-ui/core/colors';
-import { Card, CardContent, Typography, CardActions } from '@material-ui/core';
+import { Card, CardContent, Typography, CardActions, Paper, CardMedia } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
 
 const SignUpButton = withStyles((theme) => ({
   root: {
@@ -15,6 +14,12 @@ const SignUpButton = withStyles((theme) => ({
     },
   },
 }))(Button);
+
+const styles = {
+  paperContainer: {
+      backgroundImage: `url(${"src/logo.jpg"})`
+  }
+};
 
 const useStyles = makeStyles((theme) => ({
   root: { //figure out spacing for this (so it's relative to screen size and centered)
@@ -40,11 +45,13 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
   const classes = useStyles();
 
   return (
+
     <Card className={classes.root}>
+      
+      
         {/* <CardMedia  /> 
         Insert image of middle earth here! (or slideshow?)*/}
         <br/>
-       {/* <img src={Logo} alt="website logo" height='300' width='200'/> */}
 
         <CardContent>
             <Typography gutterBottom variant="h5" component="h2" className={classes.text}>
