@@ -2,38 +2,36 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { FullUserDisplayComponent } from '../User-Display-Components/FullUserDisplayComponent'
 import { UserCardDisplayComponent } from '../User-Display-Components/UserCardDisplayComponent'
-import { getAllUsers } from '../../remote/user-service/getAllUsers'
 import { User } from '../../models/User'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { IState } from '../../reducers'
+import { getUserProfile } from '../../remote/user-service/getUserProfile'
+import { useParams } from 'react-router'
 
 
 export const UserProfileComponent:FunctionComponent<any> = (props) => {
 
-    let [allUsers, changeAllUsers] = useState<User[]>([])
+    let[userProfile, changeUserProfile] = useState<any>(null)
+    let {userId} = useParams()
+
 
     //query the server
     useEffect(()=>{
 
-        const getUsers = async ()=>{
-            let response = await getAllUsers()
-            changeAllUsers(response)
+        const getUser = async ()=>{
+            let response = await getUserProfile(userId)
+            changeUserProfile(response)
         }
 
-        if(allUsers.length === 0){
-            getUsers()
+        if(userProfile.length === 0){
+            getUser()
         }
     })  
 
-    //if the user's rols is an admin, give them the full display
-    let userDisplays = allUsers.map((user)=>{
-        return (
-            (currUser?.role === 'Admin')?
-            <FullUserDisplayComponent key={'user-key-' + user.userId} user={user}/>
-            :
-            <UserCardDisplayComponent key={'user-key-' + user.userId} user={user}/>            
-        )
+    
+    let userDisplays = userProfile.map((user: User)=>{
+        return <FullUserDisplayComponent key={'user-key-' + user.userId} user={user}/>
     })
     
     
@@ -47,8 +45,5 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
     )
 }
 
-const currUser = useSelector((state:IState) => {
-    return state.loginState.currUser
-})
 
   

@@ -63,6 +63,8 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
             changeNumVisited(e.currentTarget.value)
         } 
     }
+
+    
     const updateImage = (e:any) => {
         e.preventDefault()
         //type file has array called files, since you could upload multiple. Thus we speficy we want only want the first 

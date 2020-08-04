@@ -1,10 +1,15 @@
+//display return from Full User Card Display Component
 import React, { FunctionComponent, useEffect, useState } from 'react'
+import { FullUserDisplayComponent } from '../User-Display-Components/FullUserDisplayComponent'
+import { UserCardDisplayComponent } from '../User-Display-Components/UserCardDisplayComponent'
 import { getAllUsers } from '../../remote/user-service/getAllUsers'
 import { User } from '../../models/User'
-import { DisplayUserCardComponent } from '../User-Display-Components/UserCardDisplayComponent'
+import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import { IState } from '../../reducers'
 
 
-export const AllUsersComponent:FunctionComponent<any> = (props) => {
+export const UserProfileComponent:FunctionComponent<any> = (props) => {
 
     let [allUsers, changeAllUsers] = useState<User[]>([])
 
@@ -21,12 +26,17 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
         }
     })  
 
+    //if the user's rols is an admin, give them the full display
     let userDisplays = allUsers.map((user)=>{
-        return <DisplayUserCardComponent key={'user-key-' + user.userId} user={user}/>
+        return (
+            (currUser?.role === 'Admin')?
+            <FullUserDisplayComponent key={'user-key-' + user.userId} user={user}/>
+            :
+            <UserCardDisplayComponent key={'user-key-' + user.userId} user={user}/>            
+        )
     })
-
+    
     return(
-        //we should turn this into a grid to make it look nicer
         <div>
             {userDisplays}
         </div>
@@ -34,3 +44,9 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
         
     )
 }
+
+const currUser = useSelector((state:IState) => {
+    return state.loginState.currUser
+})
+
+  

@@ -14,7 +14,7 @@ export interface ILoginState{
 
 //user interface
 export interface IUserState{
-    currUser:User | undefined,
+    currUser:User,
     errorMessage:string
 
 }

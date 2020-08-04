@@ -98,6 +98,7 @@ export const LoginComponent: FunctionComponent <any> = (props) => {
 
     return (
         <div>
+          Welcome Back
           <br/>
             <form autoComplete="off" onSubmit={loginSubmit}>
                 <TextField id="username-basic" label="Username" value ={username} onChange = {updateUsername}/>

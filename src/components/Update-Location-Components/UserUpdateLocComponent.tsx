@@ -36,7 +36,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
   const updateRealm = (event:any) => {
     event.preventDefault()
     changeRealm(event.currentTarget.value)
-  }
+  } 
   const updateGovernance = (event:any) => {
     event.preventDefault()
     changeGovernance(event.currentTarget.value)
@@ -70,7 +70,6 @@ const updateImage = (event:any) => {
       changeImage(reader.result)
     }
 }
-
     
     const dispatch = useDispatch()
 
