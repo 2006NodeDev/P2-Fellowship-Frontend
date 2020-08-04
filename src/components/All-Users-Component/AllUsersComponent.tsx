@@ -9,7 +9,13 @@ import { toast } from 'react-toastify'
 import { IState } from '../../reducers'
 
 
+
+
 export const AllUsersComponent:FunctionComponent<any> = (props) => {
+
+    const thisUser = useSelector((state:IState) => {
+        return state.loginState.currUser
+    })
 
     let [allUsers, changeAllUsers] = useState<User[]>([])
 
@@ -29,7 +35,7 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
     //if the user's rols is an admin, give them the full display
     let userDisplays = allUsers.map((user)=>{
         return (
-            (currUser?.role === 'Admin')?
+            (thisUser?.role === 'Admin')?
             <FullUserDisplayComponent key={'user-key-' + user.userId} user={user}/>
             :
             <UserCardDisplayComponent key={'user-key-' + user.userId} user={user}/>            
@@ -45,8 +51,5 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
     )
 }
 
-const currUser = useSelector((state:IState) => {
-    return state.loginState.currUser
-})
 
   

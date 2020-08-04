@@ -7,6 +7,9 @@ import { useSelector } from 'react-redux'
 import { IState } from '../../reducers'
 
 export const AllLocationsComponent:FunctionComponent<any> = (props) => {
+    const thisUser = useSelector((state:IState) => {
+        return state.loginState.currUser
+    })
 
     let [allLocations, changeAllLocations] = useState<Location[]>([])
 
@@ -27,7 +30,7 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
 
     let locationDisplays = allLocations.map((location)=>{
         return (
-            (currUser?.role === 'Admin')?
+            (thisUser?.role === 'Admin')?
             <FullLocationProfileComponent key={'location-key-' + location.locationId} location={location}/>
             :
             <LocationCardDisplayComponent key={'location-key-' + location.locationId} location={location}/>            
@@ -43,6 +46,3 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     )
 }
 
-const currUser = useSelector((state:IState) => {
-    return state.loginState.currUser
-})

@@ -9,7 +9,6 @@ export const loginTypes = {
     SERVER_ERROR:'P2_LOGIN_SERVER',
     USER_NOT_FOUND:'P2_LOGIN_USER_NOT_FOUND',
     RESET_ERROR:'P2_RESET_ERROR'
-
 }
 
 export const loginActionMapper = (username:string, password:string) => async (dispatch:any) => {

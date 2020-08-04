@@ -1,4 +1,4 @@
-import { ILoginState, state, ILocationState } from "./index";
+import { ILoginState, state, ILocationProfileState } from "./index";
 import { AnyAction } from "redux";
 import { updateLocationTypes } from "../action-mappers/update-location-action-mapper";
 
@@ -6,8 +6,8 @@ import { updateLocationTypes } from "../action-mappers/update-location-action-ma
 
 //when running reducer for the first time this initializes it to null
 //since creating a new user is just logging in as a new object, i left this as loginstate
-const initialState:ILocationState = {
-    currLocation:undefined,
+const initialState:ILocationProfileState = {
+    profLocation:undefined,
     errorMessage:''
 
 }
