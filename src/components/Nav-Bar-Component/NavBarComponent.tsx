@@ -147,7 +147,6 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
         )
     }
     
-      //info page? 
   } else {
     menuItems.push(
       <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
@@ -155,7 +154,6 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
       <Link to= "/register" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Sign Up</MenuItem></Link>
     )
   }
-//    if(props.user && props.user.role === 'Admin'){ for get all users (for later)
 
   const theme = useTheme()
   const [open, setOpen] = React.useState(false);

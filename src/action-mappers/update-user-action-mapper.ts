@@ -59,8 +59,6 @@ export const updateUserActionMapper = (userId:number, username:string, password:
 export const updateUserErrorReset = () => {
     return{
         type:updateUserTypes.RESET_ERROR
-
     }
-
 }
 

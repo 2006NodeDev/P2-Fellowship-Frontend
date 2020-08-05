@@ -7,9 +7,6 @@ import { User } from '../../models/User'
 import { useSelector } from 'react-redux'
 import { IState } from '../../reducers'
 
-
-
-
 export const AllUsersComponent:FunctionComponent<any> = (props) => {
 
     const thisUser = useSelector((state:IState) => {
@@ -22,7 +19,8 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
     useEffect(()=>{
 
         const getUsers = async ()=>{
-            let response = await getAllUsers()
+            let response = await getAllUsers() //returning undefined
+            console.log(response);
             changeAllUsers(response)
         }
 
@@ -31,22 +29,24 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
         }
     })  
 
+    console.log(allUsers);
+    
     //if the user's rols is an admin, give them the full display
     let userDisplays = allUsers.map((user)=>{
-        return (
-            (thisUser?.role === 'Admin')?
-            <FullUserDisplayComponent key={'user-key-' + user.userId} user={user}/>
-            :
-            <UserCardDisplayComponent key={'user-key-' + user.userId} user={user}/>            
-        )
+        if (thisUser?.role === "Admin") {
+            return <FullUserDisplayComponent key={'user-key-' + user.userId} user={user}/>
+        } else {
+            return <UserCardDisplayComponent key={'user-key-' + user.userId} user={user}/>   
+        }         
+    })
+
+    let adminUserDisplays = allUsers.map((user) => {
     })
     
     return(
         <div>
             {userDisplays}
         </div>
-        
-        
     )
 }
 

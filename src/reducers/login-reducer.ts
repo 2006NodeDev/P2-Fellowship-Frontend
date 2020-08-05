@@ -3,12 +3,10 @@ import { AnyAction } from "redux";
 import { loginTypes } from "../action-mappers/login-action-mapper";
 
 
-
 //when running reducer for the first time this initializes it to null
 const initialState:ILoginState = {
     currUser:undefined,
     errorMessage:''
-
 }
 
 export const loginReducer=(state = initialState, action:AnyAction) => {

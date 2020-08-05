@@ -3,7 +3,6 @@ import { AnyAction } from "redux";
 import { newuserTypes } from "../action-mappers/new-user-action-mapper";
 
 
-
 //when running reducer for the first time this initializes it to null
 //since creating a new user is just logging in as a new object, i left this as loginstate
 const initialState:IUserProfileState = {

@@ -10,16 +10,19 @@ import { IState } from "../../reducers/index";
 export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     const classes = useStyles();
 
-    let {location_Id} = useParams()
+    let {locationId} = useParams()
 
     const [name, changeName] = useState("") 
-    const [image, changeImage] = useState<any>(undefined)
     const [realm, changeRealm] = useState("")
     const [governance, changeGovernance] = useState("")
     const [primaryPopulation, changePrimaryPopulation] = useState("")
     const [description, changeDescription] = useState("")
+    
+    //need to set these to the location's existing rating, numVisited, and image ARRAY
     const [rating, changeRating] = useState(0)
     const [numVisited, changeNumVisited] = useState(0)
+    const [image, changeImage] = useState<any>(undefined)
+
 
     const updateName = (e:any) => {
         e.preventDefault()
@@ -42,7 +45,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
         changeDescription(e.currentTarget.value)
     } 
 
-    //this stuff should not be doing anything; no fields for input
+    //this stuff should not be doing anything; no fields for input (but how to set....)
     const updateRating = (e:any) => {
         e.preventDefault()
         changeRating(e.currentTarget.value)
@@ -71,7 +74,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     
     const updateThisLocation = async (e:SyntheticEvent) => {
       e.preventDefault()        
-        let thunk = adminUpdateLocationActionMapper(location_Id, name, image, realm, governance, primaryPopulation, description, rating, numVisited)
+        let thunk = adminUpdateLocationActionMapper(locationId, name, image, realm, governance, primaryPopulation, description, rating, numVisited)
         dispatch(thunk) 
         
     }

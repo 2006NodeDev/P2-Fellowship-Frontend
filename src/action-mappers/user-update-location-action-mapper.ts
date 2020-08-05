@@ -1,32 +1,16 @@
-import { Location } from "../models/Location";
-import { LocationImage } from "../models/LocationImage";
-import { adminUpdateLocation } from "../remote/location-service/adminUpdateLocation";
+import { userUpdateLocation } from "../remote/location-service/userUpdateLocation";
 
 export const userUpdateLocationTypes = {
     UPDATE_SUCCESSFUL: 'P2_UPDATE_LOGIN',
-    BAD_CREDENTIALS: 'P2_BAD_CREDENTIALS',
-    NAME_TAKEN:'P2_NAME_TAKEN',
+    NOT_VISITED: 'P2_LOCATION_NOT_VISITED',
     SERVER_ERROR:'P2_LOCATION_SERVER_ERROR',
     RESET_ERROR:'P2_RESET_ERROR'
 }
 
-export const userUpdateLocationActionMapper = (locationId:number, name:string, image:LocationImage[], realm:string, governance:string, primaryPopulation: string, description: string, rating:number, numVisited:number)=> async (dispatch:any) => {
-   
-    let location:Location = {
-        locationId,
-        name,
-        image,
-        realm,
-        governance,
-        primaryPopulation,
-        description,
-        rating,
-        numVisited
-
-    }
+export const userUpdateLocationActionMapper = (locationId:number, userId: number, visited: boolean, rating:number, image:string)=> async (dispatch:any) => {
    
     try{
-        let updateLoc = await adminUpdateLocation(location)
+        let updateLoc = await userUpdateLocation(locationId, userId, visited, rating, image)
         console.log(updateLoc)
         dispatch({
             type:userUpdateLocationTypes.UPDATE_SUCCESSFUL,
@@ -38,11 +22,7 @@ export const userUpdateLocationActionMapper = (locationId:number, name:string, i
         console.log(err.message)
         if(err.message.includes('400')){
             dispatch({
-                type:userUpdateLocationTypes.BAD_CREDENTIALS
-            })
-        }else if (err.message.includes('405')){
-            dispatch({
-                type:userUpdateLocationTypes.NAME_TAKEN
+                type:userUpdateLocationTypes.NOT_VISITED
             })
         } else{
             dispatch({
