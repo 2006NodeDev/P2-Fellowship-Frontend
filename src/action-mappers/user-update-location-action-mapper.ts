@@ -29,7 +29,7 @@ export const userUpdateLocationActionMapper = (locationId:number, name:string, i
         let updateLoc = await adminUpdateLocation(location)
         console.log(updateLoc)
         dispatch({
-            type:updateLocationTypes.UPDATE_SUCCESSFUL,
+            type:userUpdateLocationTypes.UPDATE_SUCCESSFUL,
             payload:{
                 updateLoc
             }
@@ -38,15 +38,15 @@ export const userUpdateLocationActionMapper = (locationId:number, name:string, i
         console.log(err.message)
         if(err.message.includes('400')){
             dispatch({
-                type:updateLocationTypes.BAD_CREDENTIALS
+                type:userUpdateLocationTypes.BAD_CREDENTIALS
             })
         }else if (err.message.includes('405')){
             dispatch({
-                type:updateLocationTypes.NAME_TAKEN
+                type:userUpdateLocationTypes.NAME_TAKEN
             })
         } else{
             dispatch({
-                type:updateLocationTypes.SERVER_ERROR
+                type:userUpdateLocationTypes.SERVER_ERROR
             })
         }        
     }
@@ -55,7 +55,7 @@ export const userUpdateLocationActionMapper = (locationId:number, name:string, i
 
 export const updateLocationErrorReset = () => {
     return{
-        type:updateLocationTypes.RESET_ERROR
+        type:userUpdateLocationTypes.RESET_ERROR
 
     }
 

@@ -27,15 +27,12 @@ function App() {
         <Route exact path='/' component={HomeComponent}/>
         {/*Figure out how to make this the start up screen */}
 
-        <Route path='/users' component={AllUsersComponent}/>
-
         <Route path='/login' render={(props)=>(<LoginComponent changeCurrentUser={changeCurrentUser} {...props} />)} />
         <Route path='/logout' render={(props)=>(<LogOutComponent changeCurrentUser={changeCurrentUser} {...props}/>)}/>
         <Route path='/register' component={NewUserComponent}/>
 
         <Route exact path='/users/profile/:userId' component={UserProfileComponent}/>
         <Route exact path='/users' component={AllUsersComponent}/>
-        <Route path = '/users/newuser' render={(props)=>(<NewUserComponent {...props}/>)} />
 
         <Route path='/locations/profile/:locationId' component={LocationProfileComponent}/>
         <Route exact path='/locations' component={AllLocationsComponent}/>

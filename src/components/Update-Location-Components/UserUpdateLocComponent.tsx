@@ -9,6 +9,7 @@ import { LocationImage } from "../../models/LocationImage";
 import { useDispatch, useSelector } from "react-redux";
 import { adminUpdateLocationActionMapper, updateLocationErrorReset } from "../../action-mappers/admin-update-location-action-mapper";
 import { IState } from "../../reducers";
+import { userUpdateLocationActionMapper } from "../../action-mappers/user-update-location-action-mapper";
 
 // interface ISignInProps extends RouteComponentProps{
 //      user:User
