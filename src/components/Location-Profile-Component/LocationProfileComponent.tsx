@@ -27,15 +27,15 @@ export const LocationProfileComponent:FunctionComponent<any> = (props) => {
     })  
 
     
-    let locationDisplays = locationProfile.map((location: Location)=>{
-        return <FullLocationProfileComponent key={'user-key-' + location.locationId} location={location}/>
-    })
+    // let locationDisplays = locationProfile.map((location: Location)=>{
+    //     return <FullLocationProfileComponent key={'user-key-' + location.locationId} location={location}/>
+    // })
     
     
 
     return(
         <div>
-            {locationDisplays}
+            <FullLocationProfileComponent location={locationProfile} />
         </div>
         
         

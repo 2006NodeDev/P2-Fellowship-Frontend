@@ -191,7 +191,7 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
               {menuItems}
               </Menu>
             <Typography variant="h4" className={classes.title}>
-              Welcome to the Fellowship
+              The Fellowship
             </Typography>
           </Toolbar>
         </AppBar>
