@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   });
 
 
-export const FullUserDisplayComponent   :FunctionComponent<any> = (props) => {
+export const FullUserDisplayComponent :FunctionComponent<any> = (props) => {
     let[userProfile, changeUserProfile] = useState<User|null>(null)
     let {userId} = useParams()
 
@@ -38,6 +38,7 @@ export const FullUserDisplayComponent   :FunctionComponent<any> = (props) => {
         let getUser = async ()=>{
             //we await user info and then call a state updat function with it
             let userInfo = await getUserProfile(userId)
+            console.log("function return: " + userInfo)
             changeUserProfile(userInfo)
         }
         //if we haven't gotten a user profile yet

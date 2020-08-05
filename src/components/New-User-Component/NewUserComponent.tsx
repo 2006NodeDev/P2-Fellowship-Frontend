@@ -2,12 +2,15 @@ import React, { FunctionComponent, useState, SyntheticEvent, useEffect } from 'r
 import TextField from '@material-ui/core/TextField';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { newuserActionMapper } from '../../action-mappers/new-user-action-mapper';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { toast } from 'react-toastify';
+import { loginErrorReset } from '../../action-mappers/login-action-mapper';
+import { IState } from '../../reducers';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,25 +32,31 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const NewUserComponent: FunctionComponent<any> = ((props) => {
-  const classes = useStyles();
+export const NewUserComponent:FunctionComponent<any> = ((props) => {
+    const classes = useStyles();
 
+    const user = useSelector((state:IState) => {
+      return state.loginState.currUser
+    })
 
+    const errorMessage = useSelector((state:IState) => {
+      return state.loginState.errorMessage
+    })
 
-  const [username, changeUsername] = useState('')
-  const [password, changePassword] = useState('')
-  const [firstname, changeFirstName] = useState('')
-  const [lastname, changeLastName] = useState('')
-  const [affiliation, changeAffiliation] = useState('')
-  const [placesVisited, changePlacesVisited] = useState(0)
-  const [address, changeAddress] = useState('')
-  const [email, changeEmail] = useState('')
-  const [role, changeRole] = useState('')
-  const [image, changeImage] = useState<any>(null)
+    const [username, changeUsername] = useState('')
+    const [password, changePassword] = useState('')
+    const [firstname, changeFirstName] = useState('')
+    const [lastname, changeLastName] = useState('')
+    const [affiliation, changeAffiliation] = useState('')
+    const [placesVisited, changePlacesVisited] = useState(0)
+    const [address, changeAddress] = useState('')
+    const [email, changeEmail] = useState('')
+    const [role, changeRole] = useState('')
+    const [image, changeImage] = useState<any>(null)
 
-  const updateUsername = (event: any) => {
-    event.preventDefault()
-    changeUsername(event.currentTarget.value)
+  const updateUsername = (event:any) => {
+      event.preventDefault()
+      changeUsername(event.currentTarget.value)
   }
   const updatePassword = (event: any) => {
     event.preventDefault()
@@ -64,25 +73,18 @@ export const NewUserComponent: FunctionComponent<any> = ((props) => {
   const updateAffiliation = (event: any) => {
     event.preventDefault()
     changeAffiliation(event.currentTarget.value)
-  }
-  const updatePlacesVisited = (event: any) => {
-    event.preventDefault()
-    changePlacesVisited(event.currentTarget.value)
-  }
-  const updateAddress = (event: any) => {
-    event.preventDefault()
-    changeAddress(event.currentTarget.value)
-  }
-  const updateEmail = (event: any) => {
+}
+
+const updateAddress = (event:any) => {
+  event.preventDefault()
+  changeAddress(event.currentTarget.value)
+}
+const updateEmail = (event:any) => {
     event.preventDefault()
     changeEmail(event.currentTarget.value)
-  }
-  const updateRole = (event: any) => {
-    event.preventDefault()
-    changeRole(event.currentTarget.value)
-  }
-  const updateImage = (event: any) => {
-    let file: File = event.currentTarget.files[0]
+}
+const updateImage = (event:any) => {
+    let file:File = event.currentTarget.files[0]
     let reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = () => {
@@ -117,13 +119,28 @@ export const NewUserComponent: FunctionComponent<any> = ((props) => {
   const newUserSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
 
-    //new usr doesnt need a role because they default to "User"
-    let thunk = newuserActionMapper(username, password, firstname, lastname, affiliation, placesVisited, address, email, image)
-    dispatch(thunk)
-  }
+ 
 
   //Note: placesVisited starts at 0 by default so 
   //User is not required to fill in this field of the form below.
+        //new usr doesnt need a role because they default to "User"
+        let thunk = newuserActionMapper(username, password, firstname, lastname, affiliation, placesVisited, address, email, image)
+        dispatch(thunk) 
+    }
+    useEffect(()=>{
+      if(errorMessage){
+          toast.error(errorMessage)
+          dispatch(loginErrorReset())
+      }
+    })
+
+    useEffect(()=>{
+      if(user){
+        props.history.push(`users/profile/${user.userId}`)
+      }
+    })
+//Note: placesVisited starts at 0 by default so 
+//User is not required to fill in this field of the form below.
 
   return (
     <form className={classes.root} autoComplete="off" onSubmit={newUserSubmit}>

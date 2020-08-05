@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { teal, green } from '@material-ui/core/colors';
-import { Card, CardContent, Typography, CardActions } from '@material-ui/core';
+import { Card, CardContent, Typography, CardActions, Paper, CardMedia } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
+import Image from '../../images/home-map.jpg'
 
 const SignUpButton = withStyles((theme) => ({
   root: {
@@ -16,11 +16,25 @@ const SignUpButton = withStyles((theme) => ({
   },
 }))(Button);
 
+const styles = {
+body : { 
+    height: 1000,
+    maxWidth: 20000,
+
+    backgroundImage: `url(${Image})`
+    }
+}
+
+
 const useStyles = makeStyles((theme) => ({
   root: { //figure out spacing for this (so it's relative to screen size and centered)
     margin: "auto",
     maxWidth: 600,
     justifyContent: "center",
+    // height: 1000,
+    // width: 20000,
+    // backgroundImage: `url(${Image})`
+    
   },
   text: {
     fontFamily:"Bookman Old Style",
@@ -40,11 +54,13 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+
+    <div style={styles.body} >
+      <Card className={classes.root}>
+      
         {/* <CardMedia  /> 
         Insert image of middle earth here! (or slideshow?)*/}
         <br/>
-       {/* <img src={Logo} alt="website logo" height='300' width='200'/> */}
 
         <CardContent>
             <Typography gutterBottom variant="h5" component="h2" className={classes.text}>
@@ -73,5 +89,6 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
              
         </CardActions>
     </Card>
+    </div>
   )
 }

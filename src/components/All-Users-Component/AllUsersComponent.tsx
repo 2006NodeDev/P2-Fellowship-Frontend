@@ -29,6 +29,8 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
 
         if(allUsers.length === 0){
             getUsers()
+            console.log("getting users");
+            
         }
     })  
 

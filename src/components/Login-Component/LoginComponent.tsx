@@ -93,16 +93,14 @@ export const LoginComponent: FunctionComponent <any> = (props) => {
 
   useEffect(()=>{
     if(user){
-      // props.history.push(`/users/profile/${user.userId}`)
-      props.history.push(`/`)
-
+      props.history.push(`users/profile/${user.userId}`)
     }
   })
 
     return (
         <div>
-          Welcome Back
-          <br/>
+          <h2>Welcome Back!</h2> 
+            <br/>
             <form autoComplete="off" onSubmit={loginSubmit}>
                 <TextField id="username-basic" label="Username" value ={username} onChange = {updateUsername}/>
                 <br/>
