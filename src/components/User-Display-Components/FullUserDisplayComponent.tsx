@@ -54,6 +54,14 @@ export const FullUserDisplayComponent :FunctionComponent<any> = (props) => {
     return(
         
         (userProfile)?
+        <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '100vh' }}
+      >
         <Card className={classes.root}>
             <CardActionArea>
                <CardMedia
@@ -94,7 +102,7 @@ export const FullUserDisplayComponent :FunctionComponent<any> = (props) => {
                 </Button>
             </CardActions>
         </Card>
-        
+        </Grid>
         :
         <div>
             <h3> User Not Found</h3>

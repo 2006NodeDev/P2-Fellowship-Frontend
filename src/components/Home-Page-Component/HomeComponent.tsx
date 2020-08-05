@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { teal, green } from '@material-ui/core/colors';
-import { Card, CardContent, Typography, CardActions, Paper, CardMedia } from '@material-ui/core';
+import { Card, CardContent, Typography, CardActions, Paper, CardMedia, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Image from '../../images/home-map.jpg'
 
@@ -17,11 +17,11 @@ const SignUpButton = withStyles((theme) => ({
 }))(Button);
 
 const styles = {
-body : { 
+card : { 
     height: 1000,
     maxWidth: 20000,
-
     backgroundImage: `url(${Image})`
+    
     }
 }
 
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     maxWidth: 600,
     justifyContent: "center",
+    alignItems:"center"
     // height: 1000,
     // width: 20000,
     // backgroundImage: `url(${Image})`
@@ -55,7 +56,15 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
 
   return (
 
-    <div style={styles.body} >
+    <div style={styles.card} >
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '100vh' }}
+      >
       <Card className={classes.root}>
       
         {/* <CardMedia  /> 
@@ -89,6 +98,7 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
              
         </CardActions>
     </Card>
+    </Grid>
     </div>
   )
 }

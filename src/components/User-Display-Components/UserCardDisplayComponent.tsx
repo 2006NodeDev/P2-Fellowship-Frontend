@@ -53,6 +53,14 @@ export const UserCardDisplayComponent   :FunctionComponent<any> = (props) => {
     return(
         
         (userProfile)?
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={{ minHeight: '100vh' }}
+        >
         <Card className={classes.root}>
                <CardMedia
                 className={classes.media}
@@ -77,6 +85,7 @@ export const UserCardDisplayComponent   :FunctionComponent<any> = (props) => {
                 </CardContent>
             
         </Card>
+        </Grid>
         
         :
         <div>

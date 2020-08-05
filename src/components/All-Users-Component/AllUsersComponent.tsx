@@ -5,7 +5,6 @@ import { UserCardDisplayComponent } from '../User-Display-Components/UserCardDis
 import { getAllUsers } from '../../remote/user-service/getAllUsers'
 import { User } from '../../models/User'
 import { useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
 import { IState } from '../../reducers'
 
 
