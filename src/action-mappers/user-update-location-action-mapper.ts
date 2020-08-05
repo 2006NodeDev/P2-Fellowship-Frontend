@@ -1,6 +1,6 @@
 import { Location } from "../models/Location";
 import { LocationImage } from "../models/LocationImage";
-import { adminUpdateLocation } from "../remote/location-service/adminUpdateLocation";
+import { userUpdateLocation } from "../remote/location-service/userUpdateLocation";
 
 export const userUpdateLocationTypes = {
     UPDATE_SUCCESSFUL: 'P2_UPDATE_LOGIN',
@@ -10,23 +10,10 @@ export const userUpdateLocationTypes = {
     RESET_ERROR:'P2_RESET_ERROR'
 }
 
-export const userUpdateLocationActionMapper = (locationId:number, name:string, image:LocationImage[], realm:string, governance:string, primaryPopulation: string, description: string, rating:number, numVisited:number)=> async (dispatch:any) => {
-   
-    let location:Location = {
-        locationId,
-        name,
-        image,
-        realm,
-        governance,
-        primaryPopulation,
-        description,
-        rating,
-        numVisited
-
-    }
+export const userUpdateLocationActionMapper = (locationId:number, visited: boolean, rating:number, image:string)=> async (dispatch:any) => {
    
     try{
-        let updateLoc = await adminUpdateLocation(location)
+        let updateLoc = await userUpdateLocation(locationId, visited, rating, image)
         console.log(updateLoc)
         dispatch({
             type:userUpdateLocationTypes.UPDATE_SUCCESSFUL,
