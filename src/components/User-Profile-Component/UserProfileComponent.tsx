@@ -33,9 +33,9 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
 
 
     
-    let userDisplays = userProfile.map((user: User)=>{
-        return <FullUserDisplayComponent key={'user-key-' + user.userId} user={user}/>
-    })
+    // let userDisplays = userProfile.map((user: User)=>{
+    //     return <FullUserDisplayComponent key={'user-key-' + user.userId} user={user}/>
+    // })
     
     
 
