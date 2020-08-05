@@ -112,9 +112,9 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
             
         </CardContent>
         <CardActions className={classes.root}>
-        <Button > 
+        <Typography > 
               {buttonsDisplayed}
-        </Button>
+        </Typography>
              
         </CardActions>
         
