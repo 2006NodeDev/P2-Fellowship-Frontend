@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { teal, green } from '@material-ui/core/colors';
 import { Card, CardContent, Typography, CardActions, Paper, CardMedia } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import Image from '../../images/home-map.jpg'
 
 const SignUpButton = withStyles((theme) => ({
   root: {
@@ -16,16 +17,24 @@ const SignUpButton = withStyles((theme) => ({
 }))(Button);
 
 const styles = {
-  paperContainer: {
-      backgroundImage: `url(${"src/logo.jpg"})`
-  }
-};
+body : { 
+    height: 1000,
+    maxWidth: 20000,
+
+    backgroundImage: `url(${Image})`
+    }
+}
+
 
 const useStyles = makeStyles((theme) => ({
   root: { //figure out spacing for this (so it's relative to screen size and centered)
     margin: "auto",
     maxWidth: 600,
     justifyContent: "center",
+    // height: 1000,
+    // width: 20000,
+    // backgroundImage: `url(${Image})`
+    
   },
   text: {
     fontFamily:"Bookman Old Style",
@@ -46,8 +55,8 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
 
   return (
 
-    <Card className={classes.root}>
-      
+    <div style={styles.body} >
+      <Card className={classes.root}>
       
         {/* <CardMedia  /> 
         Insert image of middle earth here! (or slideshow?)*/}
@@ -80,5 +89,6 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
              
         </CardActions>
     </Card>
+    </div>
   )
 }

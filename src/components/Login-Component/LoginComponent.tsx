@@ -93,7 +93,7 @@ export const LoginComponent: FunctionComponent <any> = (props) => {
 
   useEffect(()=>{
     if(user){
-      props.history.push(`/profile/${user.userId}`)
+      props.history.push(`users/profile/${user.userId}`)
     }
   })
 
