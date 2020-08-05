@@ -1,82 +1,74 @@
 //display a user's profile in partial detail
 
 import 'react-toastify/dist/ReactToastify.css';
-import React, { FunctionComponent, useState, useEffect, SyntheticEvent } from 'react'
+import React, { FunctionComponent } from 'react'
 import { User } from '../../models/User'
-import { useParams } from 'react-router'
-import { getUserProfile } from '../../remote/user-service/getUserProfile'
-import { Grid, makeStyles, CardActions, CardActionArea, Card, CardContent, Typography, CardMedia, Button } from '@material-ui/core'
-import { TitleComponent } from '../Title-Component/TitleComponent';
-import { Link } from 'react-router-dom'
+import {makeStyles, Card, CardContent, Typography, CardMedia, Grid } from '@material-ui/core'
 
+interface IUserDisplayProps {
+  user:User
+}
 
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
-      },
-      media: {
-        height: 140,
-      },
-    card: {
-      display: 'flex',
-    },
-    cardDetails: {
-      flex: 1,
-    },
-    cardMedia: {
-      width: 160,
-    },
-  });
+const useStyles = makeStyles({ //customize this more!
+  root: {
+    margin: "auto",
+    minWidth: 275,
+    maxWidth:500
+  },
+  media: {
+    height:"auto",
+    width: "100%",
+    margin: "auto",
+  },
+  name: {
+    fontSize: 20,
+    fontFamily: "Bookman Old Style"
+  },
+  userInfo: {
+    color: "textSecondary",
+    fontFamily: "Bookman Old Style"
+  },
+})
 
-
-export const UserCardDisplayComponent   :FunctionComponent<any> = (props) => {
-    let[userProfile, changeUserProfile] = useState<User|null>(null)
-    let {userId} = useParams()
-
-    useEffect(()=>{
-        //we define an async operation we want to run
-        let getUser = async ()=>{
-            //we await user info and then call a state updat function with it
-            let userInfo = await getUserProfile(userId)
-            changeUserProfile(userInfo)
-        }
-        //if we haven't gotten a user profile yet
-        if(!userProfile || userProfile.userId !== +userId){
-            //go get the user
-            getUser()
-        }
-        //else do nothing
-    })
-   
+export const UserCardDisplayComponent : FunctionComponent<IUserDisplayProps> = (props) => {
     const classes = useStyles(); 
  
     return(
+
         
-        (userProfile)?
+        (props.user)?
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={{ minHeight: '100vh' }}
+        >
+        
+
         <Card className={classes.root}>
                <CardMedia
                 className={classes.media}
-                image={userProfile.image}
+                image={props.user.image}
                />
                 <CardContent>
-                    {/* Name of User: */}
-                <Typography gutterBottom variant="h5" component="h2">
-                    {userProfile.firstName} {userProfile.lastName}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    AFFILIATION: {userProfile.affiliation}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    ROLE: {userProfile.role}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    PLACES VISITED: {userProfile.placesVisited}
-                </Typography>
-
-
+                  <Typography className={classes.name} gutterBottom >
+                      NAME: {`${props.user.firstName}  ${props.user.lastName}`}
+                  </Typography>
+                  <Typography className={classes.userInfo} >
+                      AFFILIATION: {props.user.affiliation}
+                  </Typography>
+                  <Typography className={classes.userInfo} >
+                      ROLE: {props.user.role}
+                  </Typography>
+                  <Typography className={classes.userInfo} >
+                      PLACES VISITED: {props.user.placesVisited}
+                  </Typography>
                 </CardContent>
             
         </Card>
+        </Grid>
         
         :
         <div>

@@ -1,104 +1,108 @@
 //display a user's profile in full detail -ADMIN
 
 import 'react-toastify/dist/ReactToastify.css';
-import React, { FunctionComponent, useState, useEffect, SyntheticEvent } from 'react'
+import React, { FunctionComponent } from 'react'
 import { User } from '../../models/User'
-import { useParams } from 'react-router'
-import { getUserProfile } from '../../remote/user-service/getUserProfile'
-import { Grid, makeStyles, CardActions, CardActionArea, Card, CardContent, Typography, CardMedia, Button } from '@material-ui/core'
-import { TitleComponent } from '../Title-Component/TitleComponent';
-import { Link } from 'react-router-dom'
+import { makeStyles, CardActions, Card, CardContent, Typography, CardMedia, Button, withStyles, Grid } from '@material-ui/core'
+import { teal } from '@material-ui/core/colors';
+import { Link } from 'react-router-dom';
 
+interface IUserDisplayProps {
+    user:User
+}
 
-const useStyles = makeStyles({
+const useStyles = makeStyles({ //customize this more!
     root: {
-        maxWidth: 345,
-      },
-      media: {
-        height: 140,
-      },
-    card: {
-      display: 'flex',
+      margin: "auto",
+      minWidth: 275,
+      maxWidth:500
     },
-    cardDetails: {
-      flex: 1,
+    media: {
+      height:"auto",
+      width: "100%",
+      margin: "auto",
     },
-    cardMedia: {
-      width: 160,
+    username: {
+      fontSize: 20,
+      fontFamily: "Bookman Old Style"
     },
-  });
+    userInfo: {
+      color: "textSecondary",
+      fontFamily: "Bookman Old Style"
+    },
+  })
 
-
-export const FullUserDisplayComponent :FunctionComponent<any> = (props) => {
-    let[userProfile, changeUserProfile] = useState<User|null>(null)
-    let {userId} = useParams()
-
-    useEffect(()=>{
-        //we define an async operation we want to run
-        let getUser = async ()=>{
-            //we await user info and then call a state updat function with it
-            let userInfo = await getUserProfile(userId)
-            console.log("function return: " + userInfo)
-            changeUserProfile(userInfo)
-        }
-        //if we haven't gotten a user profile yet
-        if(!userProfile || userProfile.userId !== +userId){
-            //go get the user
-            getUser()
-        }
-        //else do nothing
-    })
-   
+export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (props) => {
     const classes = useStyles(); 
  
     return(
+
         
-        (userProfile)?
+        (props.user)?
+        <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '100vh' }}
+      >
+
         <Card className={classes.root}>
-            <CardActionArea>
-               <CardMedia
+            <CardMedia
                 className={classes.media}
-                image={userProfile.image}
-               />
-                <CardContent>
+                image={props.user.image}
+            />
+            <CardContent>
                     {/* Name of User: */}
-                <Typography gutterBottom variant="h5" component="h2">
-                    {userProfile.firstName} {userProfile.lastName}
+                <Typography className={classes.username} gutterBottom>
+                    {props.user.firstName} {props.user.lastName}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                   ID: {userProfile.userId} 
-                   USERNAME: {userProfile.username}
+                <Typography className={classes.userInfo}>
+                   ID: {props.user.userId}    
+                      USERNAME: {props.user.username}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    ROLE: {userProfile.role}
+                <Typography className={classes.userInfo}>
+                    ROLE: {props.user.role}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    AFFILIATION: {userProfile.affiliation}
+                <Typography className={classes.userInfo}>
+                    AFFILIATION: {props.user.affiliation}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    ADDRESS: {userProfile.address}
+                <Typography className={classes.userInfo}>
+                    ADDRESS: {props.user.address}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    EMAIL: {userProfile.email}
+                <Typography className={classes.userInfo}>
+                    EMAIL: {props.user.email}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    PLACES VISITED: {userProfile.placesVisited}
+                <Typography className={classes.userInfo}>
+                    PLACES VISITED: {props.user.placesVisited}
                 </Typography>
-
-
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                Update Profile
-                </Button>
+            </CardContent>
+            <CardActions className={classes.root}>
+                <Link to= "/users/profile/:userId/update" style={{ textDecoration:"none"}}>
+                    <CustomButton size="small" color="primary">
+                        Update Profile
+                    </CustomButton>
+                </Link>
             </CardActions>
         </Card>
-        
+
+        </Grid>
         :
         <div>
             <h3> User Not Found</h3>
         </div>
-    )
 
+    )
 }
+
+const CustomButton = withStyles((theme) => ({
+    root: {
+        color: theme.palette.getContrastText(teal[700]),
+        backgroundColor: "teal[700]",
+        '&:hover': {
+          backgroundColor: teal[800],
+        },
+    },
+  }))(Button);
+  
