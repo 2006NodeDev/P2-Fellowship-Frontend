@@ -1,12 +1,12 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
 import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles, FormControlLabel, Checkbox } from "@material-ui/core";
-import { Link, useParams, RouteComponentProps } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { green, lime } from "@material-ui/core/colors";
 import {toast} from 'react-toastify'
 import { useDispatch, useSelector } from "react-redux";
 import { userUpdateLocationActionMapper, updateLocationErrorReset } from "../../action-mappers/user-update-location-action-mapper";
 import { IState } from "../../reducers";
-import { userUpdateLocationActionMapper } from "../../action-mappers/user-update-location-action-mapper";
+import Rating from "@material-ui/lab/Rating";
 
 
 export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
@@ -17,8 +17,8 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     //clearly this doesn't work, but we need to get the userId somehow
     
     const [image, changeImage] = useState<any>(null)
-    const [rating, changeRating] = useState(0)
-    const [visited, changeVisited] = useState({checkBox:false})
+    const [rating, changeRating] = useState(0) //set to what the location is rated already
+    const [visitedCheck, changeVisited] = useState({visited:false})
 
     const updateRating = (event:any) => {
         event.preventDefault()
@@ -26,7 +26,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     }
     const updateVisited = (event:any) => {
         event.preventDefault()
-        changeVisited(event.currentTarget.value)
+        changeVisited({ ...visitedCheck, [event.target.name]: event.target.checked })
     }
 
     const updateImage = (event:any) => {
@@ -37,15 +37,18 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
           changeImage(reader.result)
         }
     }
-      
+    
+    const currUser = useSelector((state:IState) => {
+        return state.loginState.currUser
+    })
+    const userId = currUser?.userId
+
     const dispatch = useDispatch()
 
-    
     const updateThisLocation = async (e:SyntheticEvent) => {
-      e.preventDefault()        
-        let thunk = userUpdateLocationActionMapper(locationId, visited, rating, image)
+      e.preventDefault()                                        //dirty trick
+        let thunk = userUpdateLocationActionMapper(locationId, (userId||1), visitedCheck.visited, rating, image)
         dispatch(thunk) 
-        
     }
     const updatedLocation= useSelector((state:IState) => {
       return state.locationProfileState.profLocation
@@ -79,12 +82,21 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
           <form autoComplete="off" onSubmit={updateThisLocation} className={classes.form} noValidate>
             <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
+                <Typography component="legend">Have you visited?</Typography>
                 <FormControlLabel
-                  control= {<GreenCheckbox checked={visited.checkBox} onChange={updateVisited} name="checkBox" />}
+                  control= {<GreenCheckbox required checked={visitedCheck.visited} onChange={updateVisited} name="visited" />}
                   label="Yes"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
+                  <Typography component="legend">Rating</Typography>
+                  <Rating
+                    name="simple-controlled"
+                    getLabelText={(value) => `${rating} Heart${rating !== 1 ? 's' : ''}`}
+                    onChange={(event, newValue) => {
+                      updateRating(newValue);
+                    }}
+                  />
                 <TextField
                   variant="outlined"
                   fullWidth
@@ -140,7 +152,7 @@ const CustomButton = withStyles((theme) => ({
 }))(Button);
 
 //checkbox
-const GreenCheckbox = withStyles({
+const GreenCheckbox = withStyles((theme) => ({
   root: {
     color: green[400],
     '&$checked': {
@@ -148,7 +160,7 @@ const GreenCheckbox = withStyles({
     },
   },
   checked: {},
-})((props) => <Checkbox color="default" {...props} />);
+}))(Checkbox);
 
 //styles at the bottom because closer to html return
 const useStyles = makeStyles((theme) => ({

@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { LocationProfileComponent } from '../src/components/Location-Profile-Component/LocationProfileComponent';
 import { HomeComponent } from './components/Home-Page-Component/HomeComponent';
+import { UpdateUserProfileComponent } from './components/Update-User-Components/AdminUpdateUserComponent';
 
 function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)
@@ -33,6 +34,8 @@ function App() {
 
         <Route exact path='/users/profile/:userId' component={UserProfileComponent}/>
         <Route exact path='/users' component={AllUsersComponent}/>
+        <Route exact path='/users/profile/:userId/update' component={UpdateUserProfileComponent}/>
+
 
         <Route path='/locations/profile/:locationId' component={LocationProfileComponent}/>
         <Route exact path='/locations' component={AllLocationsComponent}/>

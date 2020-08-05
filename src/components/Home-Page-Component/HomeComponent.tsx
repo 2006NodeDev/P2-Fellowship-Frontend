@@ -1,18 +1,21 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { teal, green } from '@material-ui/core/colors';
 import { Card, CardContent, Typography, CardActions, Paper, CardMedia } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Image from '../../images/home-map.jpg'
+import { useSelector } from 'react-redux';
+import { IState } from '../../reducers';
 
-const SignUpButton = withStyles((theme) => ({
+const CustomButton = withStyles((theme) => ({
   root: {
     color: theme.palette.getContrastText(teal[700]),
     backgroundColor: "teal[700]",
     '&:hover': {
       backgroundColor: teal[800],
     },
+    
   },
 }))(Button);
 
@@ -53,6 +56,26 @@ const useStyles = makeStyles((theme) => ({
 export const HomeComponent:FunctionComponent<any> = (props) =>{
   const classes = useStyles();
 
+  const currUser = useSelector((state:IState) => {
+    return state.loginState.currUser
+  })
+  let buttonsDisplayed=[]
+  useEffect(()=>{
+    if (!currUser){
+      buttonsDisplayed.push(
+        <Link to= "/register" style={{ textDecoration:"none"}}>
+          <CustomButton variant="contained" className={classes.submit}>
+            Register Now!
+          </CustomButton>
+        </Link>,
+        <Link to="/login" style={{ textDecoration:"none"}} >
+          <CustomButton variant="contained" className={classes.submit}>
+            Login
+          </CustomButton> 
+        </Link>
+      )}
+})
+
   return (
 
     <div style={styles.body} >
@@ -75,17 +98,7 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
             </Typography>
         </CardContent>
         <CardActions className={classes.root}>
-            <Link to= "/register" style={{ textDecoration:"none"}}>
-              <SignUpButton variant="contained" className={classes.submit}>
-                Register Now!
-              </SignUpButton>
-            </Link>
-            <Link to="/login" style={{ textDecoration:"none"}} >
-             <SignUpButton variant="contained" className={classes.submit}>
-                Login
-             </SignUpButton> 
-            </Link>
-   
+           
              
         </CardActions>
     </Card>
