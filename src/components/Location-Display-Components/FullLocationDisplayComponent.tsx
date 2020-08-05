@@ -3,18 +3,19 @@
 import 'react-toastify/dist/ReactToastify.css';
 import React, { FunctionComponent, useState, useEffect, SyntheticEvent } from 'react'
 import { useParams, Redirect } from 'react-router'
-import { Grid, Paper, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia, Button } from '@material-ui/core'
+import { Grid, Paper, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia, Button, Box } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { Location } from '../../models/Location';
 import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
+import Rating from '@material-ui/lab/Rating';
 
 //rough suggestion of how to grab images form LocationImage[]:
 // while(x<length(image array)){
 //     if(image[x]){
 //         display image
-        
+
 //     }
-    
+
 // }
 
 
@@ -37,7 +38,7 @@ const useStyles = makeStyles({
         fontSize: 20,
         fontFamily: "Bookman Old Style"
     },
-    info: {
+    locationInfo: {
         color: "textSecondary",
         fontFamily: "Bookman Old Style"
     },
@@ -53,34 +54,21 @@ const useStyles = makeStyles({
 });
 
 
-export const FullLocationProfileComponent: FunctionComponent<ILocationDisplayProps> = (props) => {
-    const [locationProfile, changelocationProfile] = useState<Location | null>(null)
-    let { location_Id } = useParams()
-
+export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayProps> = (props) => {
     const classes = useStyles();
 
-    useEffect(() => {
-        //we define an async operation we want to run
-        let getLocation = async () => {
-            //we await user info and then call a state updat function with it
-            let locationInfo = await getLocationProfile(location_Id)
-            changelocationProfile(locationInfo)
-        }
-        //if we haven't gotten a user profile yet
-        if (!locationProfile || locationProfile.locationId !== +location_Id) {
-            //go get the user
-            getLocation()
-        }
-        //else do nothing
-    })
-    //use a grid display instead? 
     return (
-
-        (locationProfile) ?
-            <div>
-
-                <Grid item xs={12} md={6}>
-                    <CardActionArea component="a" href="#">
+        (props.location) ?
+          
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    style={{ minHeight: '100vh' }}
+                >
+                    <CardActionArea className={classes.root} component="a" href="#">
 
                         <Card className={classes.card}>
                             <div className={classes.cardDetails}>
@@ -88,25 +76,26 @@ export const FullLocationProfileComponent: FunctionComponent<ILocationDisplayPro
                                     {/*insert image array somewhere here */}
 
                                     <Typography component="h2" variant="h5">
-                                        NAME: {locationProfile?.name}
+                                        NAME: {props.location?.name}
                                     </Typography>
                                     <Typography variant="subtitle1" color="textSecondary">
-                                        REALM: {locationProfile.realm}
+                                        REALM: {props.location.realm}
                                     </Typography>
                                     <Typography variant="subtitle1" paragraph>
-                                        GOVERNANCE: {locationProfile.governance}
+                                        GOVERNANCE: {props.location.governance}
                                     </Typography>
-                                    <Link to='/contact'>
-                                        PRIMARY POPULATION: {locationProfile.primaryPopulation}
-                                    </Link>
+                                        PRIMARY POPULATION: {props.location.primaryPopulation}
                                     <Typography variant="subtitle1" color="textSecondary">
-                                        DESCRIPTION: {locationProfile.description}
+                                        DESCRIPTION: {props.location.description}
                                     </Typography>
                                     <Typography variant="subtitle1" color="textSecondary">
-                                        RATING: {locationProfile.rating}
+                                        <Box component="fieldset" mb={3} borderColor="transparent">
+                                            <Typography component="legend">RATING</Typography>
+                                            <Rating name="read-only" value={props.location.rating} readOnly />
+                                        </Box>
                                     </Typography>
                                     <Typography variant="subtitle1" color="textSecondary">
-                                        NUMBER OF VISITORS: {locationProfile.numVisited}
+                                        NUMBER OF VISITORS: {props.location.numVisited}
                                     </Typography>
                                 </CardContent>
                             </div>
@@ -115,12 +104,9 @@ export const FullLocationProfileComponent: FunctionComponent<ILocationDisplayPro
                     </CardActionArea>
                 </Grid>
 
-
-            </div>
-
             :
             <div>
-                <h3> Location Not Found</h3>
+                <h3> Location Doesn't Exist (yet.)</h3>
             </div>
     )
 

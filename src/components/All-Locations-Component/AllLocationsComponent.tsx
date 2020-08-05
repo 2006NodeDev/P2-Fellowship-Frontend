@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import { getAllLocations } from '../../remote/location-service/getAllLocations'
 import { Location } from '../../models/Location'
 import { LocationCardDisplayComponent } from '../Location-Display-Components/LocationCardDisplayComponent'
-import { FullLocationProfileComponent } from '../Location-Display-Components/FullLocationDisplayComponent'
+import { FullLocationDisplayComponent } from '../Location-Display-Components/FullLocationDisplayComponent'
 import { useSelector } from 'react-redux'
 import { IState } from '../../reducers'
 
@@ -31,7 +31,7 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     let locationDisplays = allLocations.map((location)=>{
         return (
             (thisUser?.role === 'Admin')?
-            <FullLocationProfileComponent key={'location-key-' + location.locationId} location={location}/>
+            <FullLocationDisplayComponent key={'location-key-' + location.locationId} location={location}/>
             :
             <LocationCardDisplayComponent key={'location-key-' + location.locationId} location={location}/>            
         )
