@@ -59,7 +59,6 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
                     {props.user.firstName} {props.user.lastName}
                 </Typography>
                 <Typography className={classes.userInfo}>
-                   ID: {props.user.userId}    
                       USERNAME: {props.user.username}
                 </Typography>
                 <Typography className={classes.userInfo}>
