@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react"
 import { fellowshipClient } from ".."
 
-export const createNewUser = async (username:string, password:string, firstName:string, lastName:string,  affiliation:string, address:string, email:string, role:string, image:string) => {
+export const createNewUser = async (username:string, password:string, firstName:string, lastName:string,  affiliation:string, placesVisited:number, address:string, email:string, role:string, image:string) => {
     
     let credentials = {
         username,
@@ -16,7 +16,7 @@ export const createNewUser = async (username:string, password:string, firstName:
         image 
     } 
     try{
-        let response = await fellowshipClient.put('/P2-Fellowship-User-Service/users/newuser', credentials)
+        let response = await fellowshipClient.post('/P2-Fellowship-User-Service/register', credentials)
         return response.data
         
     } catch(err){

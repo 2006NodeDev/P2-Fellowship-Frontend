@@ -7,7 +7,7 @@ import {toast} from 'react-toastify'
 import { Location } from "../../models/Location";
 import { LocationImage } from "../../models/LocationImage";
 import { useDispatch, useSelector } from "react-redux";
-import { updateLocationActionMapper, updateLocationErrorReset } from "../../action-mappers/update-location-action-mapper";
+import { adminUpdateLocationActionMapper, updateLocationErrorReset } from "../../action-mappers/admin-update-location-action-mapper";
 import { IState } from "../../reducers";
 
 // interface ISignInProps extends RouteComponentProps{
@@ -24,7 +24,6 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     const [realm, changeRealm] = useState('')
     const [governance, changeGovernance] = useState('')
     const [primaryPopulation, changePrimaryPopulation] = useState('')
-    const [type, changeType] = useState('')
     const [description, changeDescription] = useState('')
     const [rating, changeRating] = useState(0)
     const [numVisited, changeNumVisited] = useState(0)
@@ -36,7 +35,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
   const updateRealm = (event:any) => {
     event.preventDefault()
     changeRealm(event.currentTarget.value)
-  }
+  } 
   const updateGovernance = (event:any) => {
     event.preventDefault()
     changeGovernance(event.currentTarget.value)
@@ -45,10 +44,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
       event.preventDefault()
       changePrimaryPopulation(event.currentTarget.value)
   }
-  const updateType = (event:any) => {
-      event.preventDefault()
-      changeType(event.currentTarget.value)
-  }
+  
   const updateDescription = (event:any) => {
     event.preventDefault()
     changeDescription(event.currentTarget.value)
@@ -70,23 +66,22 @@ const updateImage = (event:any) => {
       changeImage(reader.result)
     }
 }
-
     
     const dispatch = useDispatch()
 
     
     const updateThisLocation = async (e:SyntheticEvent) => {
       e.preventDefault()        
-        let thunk = updateLocationActionMapper(location_Id, name, image, realm, governance, primaryPopulation, description, rating, numVisited)
+        let thunk = userUpdateLocationActionMapper(location_Id, name, image, realm, governance, primaryPopulation, description, rating, numVisited)
         dispatch(thunk) 
         
     }
     const updatedLocation= useSelector((state:IState) => {
-      return state.locationState.currLocation
+      return state.locationProfileState.profLocation
     })
 
     const errorMessage = useSelector((state:IState) => {
-      return state.locationState.errorMessage
+      return state.locationProfileState.errorMessage
     })
 
     useEffect(() => {

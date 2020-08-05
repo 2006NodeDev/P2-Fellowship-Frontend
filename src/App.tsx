@@ -9,12 +9,13 @@ import { FullUserDisplayComponent } from './components/User-Display-Components/F
 import {ToastContainer} from 'react-toastify'
 import { NewUserComponent } from './components/New-User-Component/NewUserComponent';
 import { LogOutComponent } from './components/Logout-Component/LogOutComponent';
-import { AllUsersComponent } from './components/All-Users-Components/AllUsersComponent';
+import { AllUsersComponent } from './components/All-Users-Component/AllUsersComponent';
 import { AllLocationsComponent } from './components/All-Locations-Component/AllLocationsComponent';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { LocationProfileComponent } from './components/Location-Display-Components/FullLocationDisplayComponent';
+import { LocationProfileComponent } from '../src/components/Location-Profile-Component/LocationProfileComponent';
 import { HomeComponent } from './components/Home-Page-Component/HomeComponent';
+import { UserProfileComponent } from './components/User-Profile-Component/UserProfileComponent';
 
 function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)
@@ -33,7 +34,7 @@ function App() {
         <Route path='/logout' render={(props)=>(<LogOutComponent changeCurrentUser={changeCurrentUser} {...props}/>)}/>
         <Route path='/register' component={NewUserComponent}/>
 
-        <Route path='/users/profile/:userId' component={FullUserDisplayComponent}/>
+        <Route path='/users/profile/:userId' component={UserProfileComponent}/>
         <Route exact path='/users' component={AllUsersComponent}/>
         <Route path = '/users/newuser' render={(props)=>(<NewUserComponent {...props}/>)} />
 

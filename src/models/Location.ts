@@ -12,3 +12,6 @@ export interface Location{
     numVisited:number
 
 }
+
+
+

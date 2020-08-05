@@ -43,10 +43,10 @@ export const LoginComponent: FunctionComponent <any> = (props) => {
 
     const classes = useStyles();
 
+    //this hook is how you get the state from the store and give it to the component
     const user = useSelector((state:IState) => {
       return state.loginState.currUser
     })
-   
 
     const errorMessage = useSelector((state:IState) => {
       return state.loginState.errorMessage
@@ -74,7 +74,8 @@ export const LoginComponent: FunctionComponent <any> = (props) => {
         changePassword(event.currentTarget.value)
     }
 
-
+    //dispatch is the function that takes an action as an argument and gives it to the reducer
+    //you get the action from the action mapper
     const dispatch = useDispatch()
 
     const loginSubmit = async (e:SyntheticEvent) => {
@@ -92,12 +93,15 @@ export const LoginComponent: FunctionComponent <any> = (props) => {
 
   useEffect(()=>{
     if(user){
-      props.history.push(`/profile/${user.userId}`)
+      // props.history.push(`/users/profile/${user.userId}`)
+      props.history.push(`/`)
+
     }
   })
 
     return (
         <div>
+          Welcome Back
           <br/>
             <form autoComplete="off" onSubmit={loginSubmit}>
                 <TextField id="username-basic" label="Username" value ={username} onChange = {updateUsername}/>

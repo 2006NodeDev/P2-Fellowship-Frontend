@@ -54,7 +54,6 @@ export const UserCardDisplayComponent   :FunctionComponent<any> = (props) => {
         
         (userProfile)?
         <Card className={classes.root}>
-            <CardActionArea>
                <CardMedia
                 className={classes.media}
                 image={userProfile.image}
@@ -76,15 +75,7 @@ export const UserCardDisplayComponent   :FunctionComponent<any> = (props) => {
 
 
                 </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                Contact
-                </Button>
-                <Button size="small" color="primary">
-                Learn More
-                </Button>
-            </CardActions>
+            
         </Card>
         
         :

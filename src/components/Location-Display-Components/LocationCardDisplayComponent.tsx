@@ -2,8 +2,12 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Location } from '../../models/Location'
 import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from '@material-ui/core'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { teal } from '@material-ui/core/colors';
+import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
+import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
+import { FullLocationProfileComponent } from './FullLocationDisplayComponent';
 
 interface ILocationDisplayProps {
     location: Location
@@ -40,38 +44,64 @@ const useStyles = makeStyles({ //customize this more!
     }
 })
 
-export const DisplayLocationCardComponent: FunctionComponent<ILocationDisplayProps> = (props) =>{ 
+
+export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayProps> = (props) =>{ 
     let classes = useStyles();
+    const [locationProfile, changeLocationProfile] = useState<any>(null);
+    
+    let {locationId} = useParams()
+
+    useEffect(()=>{
+        //we define an async operation we want to run
+        let getLocation = async ()=>{
+            //we await user info and then call a state updat function with it
+            let locationInfo = await getLocationProfile(locationId)
+            changeLocationProfile(locationInfo)
+        }
+        //if we haven't gotten a user profile yet
+        if(!locationProfile || locationProfile.locationId !== +locationId){
+            //go get the user
+            getLocation()
+        }
+        //else do nothing
+    })
+   
+
     return (
+      (locationProfile)?
       <Card className={classes.root} >
         <CardContent>
-        <CardMedia
-        //   component = "img"
-        //   className={classes.media}
-        //   alt="Profile Picture"
-        //   image={props.location.image} 
-        //   THIS WILL JUST BE THE FIRST IMAGE OF THE LOCATION
-        />
+               <CardMedia
+                className={classes.media}
+                image={locationProfile.image}
+               />
           <Typography className={classes.name} gutterBottom>
-            Place: {props.location.name}
+            {locationProfile.name}
           </Typography>
           <Typography className={classes.info}>
-            Realm : {props.location.realm}
+            REALM : {locationProfile.realm}
           </Typography>
+          <Box component="fieldset" mb={3} borderColor="transparent">
+            <Typography component="legend">RATING</Typography>
+            <Rating name="read-only" value={locationProfile.rating} readOnly />
+          </Box>
           <Typography className={classes.info}>
-            Rating : {props.location.rating} {/*Figure out a way to display the stars here */}
-          </Typography>
-          <Typography className={classes.info}>
-            {props.location.numVisited} people have visited this location
+            {locationProfile.numVisited} people have visited this location.
           </Typography>
         </CardContent>
         <CardActions>
-        <Link to= "/locationprofile link" style={{ textDecoration:"none"}}>
-          <FancyButton variant="contained">
-            View Info
+          <FancyButton>
+            <Link to='/locations/profile/:locationId' >
+              Details
+            </Link>
           </FancyButton>
-        </Link>
         </CardActions> 
       </Card>
+
+    :
+
+    <div>
+      <h3> Location Doesn't Exist (yet.)</h3>
+    </div>
     );
 }
