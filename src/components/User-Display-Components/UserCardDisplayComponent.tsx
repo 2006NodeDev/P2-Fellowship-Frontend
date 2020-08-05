@@ -3,7 +3,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 import React, { FunctionComponent } from 'react'
 import { User } from '../../models/User'
-import {makeStyles, Card, CardContent, Typography, CardMedia } from '@material-ui/core'
+import {makeStyles, Card, CardContent, Typography, CardMedia, Grid } from '@material-ui/core'
 
 interface IUserDisplayProps {
   user:User

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect } from 'react';
 import { withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { teal, green } from '@material-ui/core/colors';
-import { Card, CardContent, Typography, CardActions, Paper, CardMedia, Grid } from '@material-ui/core';
+import { Card, CardContent, Typography, CardActions, Paper, CardMedia, Grid, Menu } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Image from '../../images/home-map.jpg'
 import { useSelector } from 'react-redux';
@@ -56,12 +56,16 @@ const useStyles = makeStyles((theme) => ({
 
 export const HomeComponent:FunctionComponent<any> = (props) =>{
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
 
   const currUser = useSelector((state:IState) => {
     return state.loginState.currUser
   })
-  let buttonsDisplayed=[]
-  useEffect(()=>{
+
+  let buttonsDisplayed:any[] = []
+  
+  // useEffect(()=>{
     if (!currUser){
       buttonsDisplayed.push(
         <Link to= "/register" style={{ textDecoration:"none"}}>
@@ -75,7 +79,7 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
           </CustomButton> 
         </Link>
       )}
-})
+// })
 
   return (
 
@@ -105,11 +109,15 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
                 earn their places in the history books. 
                 There’s only an 11% chance of dying!
             </Typography>
+            
         </CardContent>
         <CardActions className={classes.root}>
-           
+        <Button > 
+              {buttonsDisplayed}
+        </Button>
              
         </CardActions>
+        
     </Card>
     </Grid>
     </div>

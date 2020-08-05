@@ -3,7 +3,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 import React, { FunctionComponent } from 'react'
 import { User } from '../../models/User'
-import { makeStyles, CardActions, Card, CardContent, Typography, CardMedia, Button, withStyles } from '@material-ui/core'
+import { makeStyles, CardActions, Card, CardContent, Typography, CardMedia, Button, withStyles, Grid } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
 
