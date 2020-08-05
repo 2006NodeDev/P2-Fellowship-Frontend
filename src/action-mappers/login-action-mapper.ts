@@ -14,7 +14,7 @@ export const loginTypes = {
 export const loginActionMapper = (username:string, password:string) => async (dispatch:any) => {
     try{
         let currUser = await fellowshipLogin(username, password)
-        console.log(currUser)
+        console.log("current User is noe: " + currUser)
         
         dispatch({
             type:loginTypes.LOGIN_SUCCESSFUL,

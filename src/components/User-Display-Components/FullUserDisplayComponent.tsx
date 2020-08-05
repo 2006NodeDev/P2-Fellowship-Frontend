@@ -36,6 +36,18 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
     const classes = useStyles(); 
  
     return(
+
+        
+        (props.user)?
+        <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '100vh' }}
+      >
+
         <Card className={classes.root}>
             <CardMedia
                 className={classes.media}
@@ -74,6 +86,13 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
                 </Link>
             </CardActions>
         </Card>
+
+        </Grid>
+        :
+        <div>
+            <h3> User Not Found</h3>
+        </div>
+
     )
 }
 

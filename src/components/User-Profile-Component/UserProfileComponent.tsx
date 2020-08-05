@@ -14,7 +14,7 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
 
     let[userProfile, changeUserProfile] = useState<any>(null)
     let {userId} = useParams()
-    console.log("user Id at profile comp = " + userId)
+    console.log("user Id of profile comp = " + userId)
 
 
     //query the server
@@ -22,7 +22,7 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
 
         const getUser = async ()=>{
             let response = await getUserProfile(userId)
-            console.log("getUsers respone: " + response)
+            console.log("getUsers response: " + response)
             changeUserProfile(response)
         }
 
@@ -30,16 +30,22 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
             getUser()
         }
     })  
-    // let userDisplays = userProfile.map((user: User)=>{
-    //     return <FullUserDisplayComponent key={'user-key-' + user.userId} user={user}/>
-    // })
+
+
+    
+    let userDisplays = userProfile.map((user: User)=>{
+        return <FullUserDisplayComponent key={'user-key-' + user.userId} user={user}/>
+    })
+    
+    
+
 
     return(
         (userProfile)? 
         <FullUserDisplayComponent user={userProfile} />
         :
         <div>
-            <h3> User not found </h3>
+           <h3> User not found </h3>
         </div>
         
         
