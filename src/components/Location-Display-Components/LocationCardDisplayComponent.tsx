@@ -7,9 +7,11 @@ import { teal } from '@material-ui/core/colors';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
+import { ImageDisplay } from './ImageDisplay';
+import { FullLocationDisplayComponent } from './FullLocationDisplayComponent';
 
 interface ILocationDisplayProps {
-    location: Location
+  location: Location
 }
 
 const FancyButton = withStyles((theme) => ({
@@ -23,75 +25,96 @@ const FancyButton = withStyles((theme) => ({
 }))(Button);
 
 const useStyles = makeStyles({ //customize this more!
-    root: {
-      margin: "auto",
-      minWidth: 275,
-      maxWidth:500
-    },
-    media: {
-      height:"auto",
-      width: "100%",
-      margin: "auto",
-    },
-    name: {
-      fontSize: 20,
-      fontFamily: "Bookman Old Style"
-    },
-    info : {
-      color: "textSecondary",
-      fontFamily: "Bookman Old Style"
-    }
+  root: {
+    margin: "auto",
+    minWidth: 275,
+    maxWidth: 500
+  },
+  media: {
+    height: "auto",
+    width: "100%",
+    margin: "auto",
+  },
+  name: {
+    fontSize: 20,
+    fontFamily: "Bookman Old Style"
+  },
+  info: {
+    color: "textSecondary",
+    fontFamily: "Bookman Old Style"
+  }
 })
 
 
-export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayProps> = (props) =>{ 
-    let classes = useStyles();
-   
-    return (
-      (props.location)?
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        justify="center"
-        style={{ minHeight: '100vh' }}
-      >
-      <Card className={classes.root} >
-        <CardContent>
-             {/* go with one image only fof this one  
-             <CardMedia
-                className={classes.media}
-                image={props.location.image}
-             /> */}
-          <Typography className={classes.name} gutterBottom>
-            {props.location.name}
-          </Typography>
-          <Typography className={classes.info}>
-            REALM : {props.location.realm}
-          </Typography>
-          <Box component="fieldset" mb={3} borderColor="transparent">
-            <Typography component="legend">RATING</Typography>
-            <Rating name="read-only" size="large" value={props.location.rating} readOnly />
-          </Box>
-          <Typography className={classes.info}>
-            {props.location.numVisited} people have visited this location.
-          </Typography>
-          
-        </CardContent>
-        <CardActions>
-        <FancyButton>
-          <Link to={`/locations/profile/${props.location.locationId}`}>
-            Details
-          </Link>
-        </FancyButton>
-        </CardActions> 
-      </Card>
-      </Grid>
+export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayProps> = (props) => {
+  let classes = useStyles();
 
-    :
+  // const imageDisp = (() => {
+  //   let i = 0
+  //   if (props.location.image?.length) {
+  //     return (props.location.image[1].image)
+  //   } else {
+  //     return null
 
-    <div>
-      <h3> Location Doesn't Exist (yet.)</h3>
-    </div>
-    );
+  //   }
+
+  // })
+
+
+
+
+
+  return (
+
+    (props.location) ?
+      <div>
+
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={{ minHeight: '100vh' }}
+        >
+          <Card className={classes.root} >
+            {/* <CardMedia
+              className={classes.media}
+              image={imageDisp}
+              component="img"
+              title="Profile Picture"
+            /> */}
+            <CardContent>
+
+              <Typography className={classes.name} gutterBottom>
+                {props.location.name}
+              </Typography>
+              <Typography className={classes.info}>
+                REALM : {props.location.realm}
+              </Typography>
+              <Box component="fieldset" mb={3} borderColor="transparent">
+                <Typography component="legend">RATING</Typography>
+                <Rating name="read-only" size="large" value={props.location.rating} readOnly />
+              </Box>
+              <Typography className={classes.info}>
+                {props.location.numVisited} people have visited this location.
+          </Typography>
+
+            </CardContent>
+            <CardActions>
+              <FancyButton>
+                <Link to={`/locations/profile/${props.location.locationId}`}>
+                  Details
+              </Link>
+              </FancyButton>
+            </CardActions>
+          </Card>
+        </Grid>
+      </div>
+
+      :
+
+      <div>
+        <h3> Location Doesn't Exist (yet.)</h3>
+      </div>
+  );
 }

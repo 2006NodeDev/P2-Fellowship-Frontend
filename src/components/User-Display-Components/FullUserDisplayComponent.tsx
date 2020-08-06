@@ -6,6 +6,7 @@ import { User } from '../../models/User'
 import { makeStyles, CardActions, Card, CardContent, Typography, CardMedia, Button, withStyles, Grid } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
+import Image from '../../images/Gandalf.jpg'
 
 interface IUserDisplayProps {
     user:User
@@ -40,18 +41,20 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
         
         (props.user)?
         <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justify="center"
-        style={{ minHeight: '100vh' }}
-      >
-
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100vh' }}
+        >
+          <br/>
         <Card className={classes.root}>
             <CardMedia
                 className={classes.media}
-                image={props.user.image}
+                src={Image}
+                component="img"
+                title="Profile Picture"
             />
             <CardContent>
                     {/* Name of User: */}
@@ -78,10 +81,10 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
                 </Typography>
             </CardContent>
             <CardActions className={classes.root}>
-                <Link to= "/users/profile/:userId/update" style={{ textDecoration:"none"}}>
-                    <CustomButton size="small" color="primary">
+                <Link to= {`/users/profile/${props.user.userId}/update`} style={{ textDecoration:"none"}}>
+                    <Button color="primary">
                         Update Profile
-                    </CustomButton>
+                    </Button>
                 </Link>
             </CardActions>
         </Card>

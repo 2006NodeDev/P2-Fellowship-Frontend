@@ -30,9 +30,9 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
 
     let locationDisplays = allLocations.map((location)=>{
         return (
-            (thisUser?.role === 'Admin')?
-            <FullLocationDisplayComponent key={'location-key-' + location.locationId} location={location}/>
-            :
+            // (thisUser?.role === 'Admin')?
+            // <FullLocationDisplayComponent key={'location-key-' + location.locationId} location={location}/>
+            // :
             <LocationCardDisplayComponent key={'location-key-' + location.locationId} location={location}/>            
         )
     })
