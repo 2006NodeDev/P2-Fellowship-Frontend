@@ -110,14 +110,23 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     setAnchorEl(null);
   };
 
+    const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   let menuItems = []
   //changes the nav bar back after logout for when the there is no currenUser
   useEffect(() => {
     if (!currUser) {
+      menuItems = []
       menuItems.push(
-        <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose} >Login</MenuItem></Link>,
-        <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Sign Up</MenuItem></Link>,
-        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Home</MenuItem></Link>)
+        <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose} >Login</MenuItem></Link>,
+        <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Sign Up</MenuItem></Link>,
+        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>)
     }
   })
 
@@ -127,12 +136,13 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
         <ListItem button component={Link} key="listItem1" to={`users/profile/${(currUser) ? currUser.userId : '0'}`}>
           <ListItemText >Hello, {currUser.firstName}!</ListItemText>
         </ListItem>,
-        <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
-        <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
-        <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>My Profile</MenuItem></Link>,
-        <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
+        <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>,
+        <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Users</MenuItem></Link>,
+        <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>My Profile</MenuItem></Link>,
+        <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Locations</MenuItem></Link>,
+
   
-        <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
+        <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Logout</MenuItem></Link>
         )
 
     } else {
@@ -140,12 +150,12 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
         <ListItem button component={Link} key="listItem1" to={`users/profile/${(currUser) ? currUser.userId : '0'}`}>
           <ListItemText >Hello, {currUser.firstName}!</ListItemText>
         </ListItem>,
-        <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
-        <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
-        <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>My Profile</MenuItem></Link>,
-        <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
+        <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>,
+        <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Users</MenuItem></Link>,
+        <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>My Profile</MenuItem></Link>,
+        <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Locations</MenuItem></Link>,
         <Link to="/map">Map</Link>,
-        <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
+        <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Logout</MenuItem></Link>
         )
 
     }
@@ -153,22 +163,16 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     //info page? 
   } else {
     menuItems.push(
-      <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
-      <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Login</MenuItem></Link>,
-      <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Sign Up</MenuItem></Link>
+      <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>,
+      <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Login</MenuItem></Link>,
+      <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Sign Up</MenuItem></Link>
     )
   }
 
   const theme = useTheme()
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
   return (
     <nav>
 
