@@ -4,8 +4,8 @@ import './App.css';
 import { User } from './models/User';
 import { LoginComponent } from './components/Login-Component/LoginComponent';
 import { NavBarComponent } from './components/Nav-Bar-Component/NavBarComponent';
-import { BrowserRouter as Router, Route} from "react-router-dom";
-import { UserProfileComponent } from '../src/components/User-Profile-Component/UserProfileComponent';
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import { FullUserDisplayComponent } from './components/User-Display-Components/FullUserDisplayComponent';
 import {ToastContainer} from 'react-toastify'
 import { NewUserComponent } from './components/New-User-Component/NewUserComponent';
 import { LogOutComponent } from './components/Logout-Component/LogOutComponent';
@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { LocationProfileComponent } from '../src/components/Location-Profile-Component/LocationProfileComponent';
 import { HomeComponent } from './components/Home-Page-Component/HomeComponent';
+import { UserProfileComponent } from './components/User-Profile-Component/UserProfileComponent';
 import { UpdateUserProfileComponent } from './components/Update-User-Components/AdminUpdateUserComponent';
 
 function App() {

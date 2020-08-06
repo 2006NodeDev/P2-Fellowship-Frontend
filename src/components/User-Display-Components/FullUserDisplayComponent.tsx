@@ -37,8 +37,6 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
     const classes = useStyles(); 
  
     return(
-
-        
         (props.user)?
         <Grid
             container

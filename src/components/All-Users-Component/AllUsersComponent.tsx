@@ -26,6 +26,8 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
 
         if(allUsers.length === 0){
             getUsers()
+            console.log("getting users");
+            
         }
     })  
 
@@ -38,9 +40,6 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
         } else {
             return <UserCardDisplayComponent key={'user-key-' + user.userId} user={user}/>   
         }         
-    })
-
-    let adminUserDisplays = allUsers.map((user) => {
     })
     
     return(
