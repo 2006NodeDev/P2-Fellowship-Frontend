@@ -39,9 +39,6 @@ export const AllUsersComponent:FunctionComponent<any> = (props) => {
             return <UserCardDisplayComponent key={'user-key-' + user.userId} user={user}/>   
         }         
     })
-
-    let adminUserDisplays = allUsers.map((user) => {
-    })
     
     return(
         <div>
