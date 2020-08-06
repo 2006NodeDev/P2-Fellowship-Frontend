@@ -4,7 +4,8 @@ import { Location } from "../../models/Location"
 import { useState, FunctionComponent, useEffect } from "react"
 import { useParams } from "react-router"
 import { getLocationProfile } from "../../remote/location-service/getLocationProfile"
-import { FullLocationProfileComponent } from '../Location-Display-Components/FullLocationDisplayComponent'
+import { FullLocationDisplayComponent } from '../Location-Display-Components/FullLocationDisplayComponent'
+import { FullUserDisplayComponent } from "../User-Display-Components/FullUserDisplayComponent"
 
 
 export const LocationProfileComponent:FunctionComponent<any> = (props) => {
@@ -21,7 +22,7 @@ export const LocationProfileComponent:FunctionComponent<any> = (props) => {
             changeLocationProfile(response)
         }
 
-        if(locationProfile.length === 0){
+        if(!locationProfile){
             getUser()
         }
     })  
@@ -34,8 +35,13 @@ export const LocationProfileComponent:FunctionComponent<any> = (props) => {
     
 
     return(
+        (locationProfile)?
         <div>
-            <FullLocationProfileComponent location={locationProfile} />
+            <FullLocationDisplayComponent location={locationProfile} />
+        </div>
+        :
+        <div>
+            Location Not Found
         </div>
         
         

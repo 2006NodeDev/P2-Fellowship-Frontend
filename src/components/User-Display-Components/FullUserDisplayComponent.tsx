@@ -36,8 +36,6 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
     const classes = useStyles(); 
  
     return(
-
-        
         (props.user)?
         <Grid
         container
@@ -59,7 +57,6 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
                     {props.user.firstName} {props.user.lastName}
                 </Typography>
                 <Typography className={classes.userInfo}>
-                   ID: {props.user.userId}    
                       USERNAME: {props.user.username}
                 </Typography>
                 <Typography className={classes.userInfo}>
