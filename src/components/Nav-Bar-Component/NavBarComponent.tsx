@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme} from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -88,21 +88,21 @@ const useStyles = makeStyles((theme) => ({ //change color too
     flexGrow: 1,
     fontFamily: "Bookman Old Style"
   },
-  
+
 }));
 
 
 
-export const NavBarComponent:FunctionComponent<any> = (props) => {
+export const NavBarComponent: FunctionComponent<any> = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   //const open = Boolean(anchorEl);
 
-  const currUser = useSelector((state:IState) => {
+  const currUser = useSelector((state: IState) => {
     return state.loginState.currUser
   })
 
-  const handleClick = (event:any) => {
+  const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -111,47 +111,54 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
   };
 
   let menuItems = []
- //changes the nav bar back after logout for when the there is no currenUser
-  useEffect(()=>{
-      if (!currUser){
-        menuItems.push(
-         <Link to= "/login" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose} >Login</MenuItem></Link>,
-         <Link to= "/register" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Sign Up</MenuItem></Link>,
-         <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>)
-      }
+  //changes the nav bar back after logout for when the there is no currenUser
+  useEffect(() => {
+    if (!currUser) {
+      menuItems.push(
+        <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose} >Login</MenuItem></Link>,
+        <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Sign Up</MenuItem></Link>,
+        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Home</MenuItem></Link>)
+    }
   })
 
   if (currUser) {
-    if(currUser.role === 'Admin'){
+    if (currUser.role === 'Admin') {
       menuItems.push(
-        <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
-        <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
-        <Link to ={`/users/update/${(props.user)?props.user.userId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Access All Account Details</MenuItem></Link>,
-        <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
-        <Link to ={`/locations/profile/${(props.location)?props.location.locationId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Location Profile</MenuItem></Link>,
-        <Link to ={`/locations/update/${(props.location)?props.location.locationId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
-  
-        <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
-        )
+        <ListItem button component={Link} key="listItem1" to={`users/profile/${(currUser) ? currUser.userId : '0'}`}>
+          <ListItemText >Hello, {currUser.firstName}!</ListItemText>
+        </ListItem>,
+        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
+        <Link to={`/users`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
+        <Link to={`/users/update/${(props.user) ? props.user.userId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
+        <Link to={`/locations`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
+        <Link to={`/locations/profile/${(props.location) ? props.location.locationId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Location Profile</MenuItem></Link>,
+        <Link to={`/locations/update/${(props.location) ? props.location.locationId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
+
+        <Link to="/logout" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
+      )
 
     } else {
       menuItems.push(
-        <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
-        <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
-        <Link to ={`/users/update/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Access Your User Details</MenuItem></Link>,
-        <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
-        <Link to ={`/locations/profile/${(props.location)?props.location.locationId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Location Profile</MenuItem></Link>,
-        <Link to ={`/locations/update/${(props.location)?props.location.locationId : '0' }`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
-  
-        <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
-        )
+        <ListItem button component={Link} key="listItem1" to={`users/profile/${(currUser) ? currUser.userId : '0'}`}>
+          <ListItemText >Hello, {currUser.firstName}!</ListItemText>
+        </ListItem>,
+        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
+        // <Link to={`/users`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
+        <Link to={`/users/update/${currUser.userId}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
+        <Link to={`/locations`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
+        <Link to={`/locations/profile/${(props.location) ? props.location.locationId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Location Profile</MenuItem></Link>,
+        <Link to={`/locations/update/${(props.location) ? props.location.locationId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
+
+        <Link to="/logout" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
+      )
     }
-    
+
+    //info page? 
   } else {
     menuItems.push(
-      <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
-      <Link to= "/login" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Login</MenuItem></Link>,
-      <Link to= "/register" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Sign Up</MenuItem></Link>
+      <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
+      <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Login</MenuItem></Link>,
+      <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Sign Up</MenuItem></Link>
     )
   }
 
@@ -165,18 +172,18 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-    return (
-      <nav>
+  return (
+    <nav>
 
       <CssBaseline />
-        <AppBar
-          position="static"
-          className={ clsx(classes.root,classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
-        >
-          <Toolbar>
-            <IconButton color="inherit"
+      <AppBar
+        position="fixed"
+        className={clsx(classes.root, classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
+        <Toolbar>
+          <IconButton color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -193,19 +200,19 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
             <Typography variant="h4" className={classes.title}>
               The Fellowship
             </Typography>
-          </Toolbar>
-        </AppBar>
+        </Toolbar>
+      </AppBar>
 
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="left"
+        open={open}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
@@ -214,15 +221,15 @@ export const NavBarComponent:FunctionComponent<any> = (props) => {
         <List>
           {menuItems.map((text, index) => (
             <ListItem>
-              
+
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
         <Divider />
-       
-        </Drawer>
-      </nav>
-      
+
+      </Drawer>
+    </nav>
+
   );
 }

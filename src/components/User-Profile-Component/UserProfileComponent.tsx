@@ -38,8 +38,6 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
     // })
     
     
-
-
     return(
         (userProfile)? 
         <FullUserDisplayComponent user={userProfile} />
@@ -47,7 +45,6 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
         <div>
            <h3> User not found </h3>
         </div>
-        
         
     )
 }
