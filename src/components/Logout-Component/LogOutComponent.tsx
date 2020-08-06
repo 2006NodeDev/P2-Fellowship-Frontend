@@ -4,16 +4,21 @@ import { Button, makeStyles, CssBaseline, Container, Typography, Grid, Link } fr
 import { RouteComponentProps } from "react-router";
 import { UserProfileComponent } from "../User-Profile-Component/UserProfileComponent";
 import { useSelector } from "react-redux";
+import { IState } from "../../reducers";
 
 interface ILogoutProps extends RouteComponentProps{
     changeCurrentUser:(newUser:any)=>void
 }
 
-
-
 export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
     const classes = useStyles();
 
+
+    const currUser = useSelector((state: IState) => {
+      return state.loginState.currUser
+    })
+
+    
     const logoutUser = async (e: SyntheticEvent) => {
         e.preventDefault()
 
@@ -22,6 +27,7 @@ export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
         props.changeCurrentUser(res)
         props.history.push(`/`)
     } 
+
 
     return (
         <Container component="main" maxWidth="xs">
