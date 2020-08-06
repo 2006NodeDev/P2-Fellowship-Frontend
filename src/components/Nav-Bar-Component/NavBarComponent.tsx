@@ -126,7 +126,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
       menuItems.push(
         <ListItem button component={Link} key="listItem1" to={`users/profile/${(currUser) ? currUser.userId : '0'}`}>
           <ListItemText >Hello, {currUser.firstName}!</ListItemText>
-        </ListItem>
+        </ListItem>,
         <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
         <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
         <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>My Profile</MenuItem></Link>,
@@ -139,7 +139,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
       menuItems.push(
         <ListItem button component={Link} key="listItem1" to={`users/profile/${(currUser) ? currUser.userId : '0'}`}>
           <ListItemText >Hello, {currUser.firstName}!</ListItemText>
-        </ListItem>
+        </ListItem>,
         <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
         <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
         <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>My Profile</MenuItem></Link>,
@@ -218,7 +218,6 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
         <List>
           {menuItems.map((text, index) => (
             <ListItem>
-
               <ListItemText primary={text} />
             </ListItem>
           ))}

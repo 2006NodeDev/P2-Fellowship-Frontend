@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import { Location } from '../../models/Location';
 import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
 import Rating from '@material-ui/lab/Rating';
-import { ImageDisplay } from './ImageDisplay';
+import {LocImageDisplayComponent}  from './ImageDisplay';
 
 
 //rough suggestion of how to grab images form LocationImage[]:
@@ -72,7 +72,7 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
 
         (props.location) ?
             <div>
-                <ImageDisplay />
+                <LocImageDisplayComponent />
 
                 <Grid
                     container
