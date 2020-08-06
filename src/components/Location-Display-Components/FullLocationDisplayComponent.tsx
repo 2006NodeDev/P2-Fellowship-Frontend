@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 import { Location } from '../../models/Location';
 import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
 import Rating from '@material-ui/lab/Rating';
+import { ImageDisplay } from './ImageDisplay';
+
 
 //rough suggestion of how to grab images form LocationImage[]:
 // while(x<length(image array)){
@@ -53,13 +55,25 @@ const useStyles = makeStyles({
     },
 });
 
+const styles =
+{
+
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9,
+        marginTop: '30'
+    }
+};
 
 export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayProps> = (props) => {
     const classes = useStyles();
 
     return (
+
         (props.location) ?
-          
+            <div>
+                <ImageDisplay />
+
                 <Grid
                     container
                     spacing={0}
@@ -72,8 +86,9 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
 
                         <Card className={classes.card}>
                             <div className={classes.cardDetails}>
+
                                 <CardContent>
-                                    {/*insert image array somewhere here */}
+
 
                                     <Typography component="h2" variant="h5">
                                         NAME: {props.location?.name}
@@ -103,6 +118,7 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                         </Card>
                     </CardActionArea>
                 </Grid>
+            </div>
 
             :
             <div>

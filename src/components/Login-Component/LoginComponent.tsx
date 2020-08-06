@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       '& > *': {
         margin: theme.spacing(1),
-        width: '25ch',
+        width: '50ch',
+        height:'30ch',
+        alignItems:'center'
       },
     },
     submit: {
@@ -41,8 +43,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const styles = {
   card: {
-    height: 1000,
-    maxWidth: 20000,
+    height: '100%',
+    maxWidth: '100%',
     backgroundImage: `url(${Image})`
 
   }
@@ -118,8 +120,8 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
         justify="center"
         style={{ minHeight: '100vh' }}
       >
-        <Card className={classes.root}>
-        <h2>Welcome Back!</h2>
+        <Card className={classes.root} >
+        
         <br />
           <form autoComplete="off" onSubmit={loginSubmit}>
             <TextField id="username-basic" label="Username" value={username} onChange={updateUsername} />

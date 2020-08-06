@@ -126,31 +126,28 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
       menuItems.push(
         <ListItem button component={Link} key="listItem1" to={`users/profile/${(currUser) ? currUser.userId : '0'}`}>
           <ListItemText >Hello, {currUser.firstName}!</ListItemText>
-        </ListItem>,
-        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
-        <Link to={`/users`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
-        <Link to={`/users/update/${(props.user) ? props.user.userId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
-        <Link to={`/locations`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
-        <Link to={`/locations/profile/${(props.location) ? props.location.locationId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Location Profile</MenuItem></Link>,
-        <Link to={`/locations/update/${(props.location) ? props.location.locationId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
-
-        <Link to="/logout" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
-      )
+        </ListItem>
+        <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
+        <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
+        <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>My Profile</MenuItem></Link>,
+        <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
+  
+        <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
+        )
 
     } else {
       menuItems.push(
         <ListItem button component={Link} key="listItem1" to={`users/profile/${(currUser) ? currUser.userId : '0'}`}>
           <ListItemText >Hello, {currUser.firstName}!</ListItemText>
-        </ListItem>,
-        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
-        // <Link to={`/users`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
-        <Link to={`/users/update/${currUser.userId}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
-        <Link to={`/locations`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
-        <Link to={`/locations/profile/${(props.location) ? props.location.locationId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Location Profile</MenuItem></Link>,
-        <Link to={`/locations/update/${(props.location) ? props.location.locationId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
+        </ListItem>
+        <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
+        <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
+        <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>My Profile</MenuItem></Link>,
+        <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
+        <Link to="/map">Map</Link>,
+        <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
+        )
 
-        <Link to="/logout" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
-      )
     }
 
     //info page? 
