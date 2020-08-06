@@ -7,7 +7,6 @@ import { teal } from '@material-ui/core/colors';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
-import { ImageDisplay } from './ImageDisplay';
 import { FullLocationDisplayComponent } from './FullLocationDisplayComponent';
 
 interface ILocationDisplayProps {
