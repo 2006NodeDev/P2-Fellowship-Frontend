@@ -143,7 +143,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
           <ListItemText >Hello, {currUser.firstName}!</ListItemText>
         </ListItem>,
         <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Home</MenuItem></Link>,
-        <Link to={`/users`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
+        // <Link to={`/users`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Users</MenuItem></Link>,
         <Link to={`/users/update/${currUser.userId}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Edit Account Details</MenuItem></Link>,
         <Link to={`/locations`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Locations</MenuItem></Link>,
         <Link to={`/locations/profile/${(props.location) ? props.location.locationId : '0'}`} style={{ textDecoration: "none" }}><MenuItem onClick={handleClose}>Location Profile</MenuItem></Link>,
@@ -188,17 +188,17 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}>
-            <MenuIcon />
-          </IconButton>
-          <Menu id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}>
-            {menuItems}
-          </Menu>
-          <Typography variant="h4" className={classes.title}>
-            Welcome to the Fellowship
+              <MenuIcon />
+            </IconButton>
+              <Menu id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}> 
+              {menuItems}
+              </Menu>
+            <Typography variant="h4" className={classes.title}>
+              The Fellowship
             </Typography>
         </Toolbar>
       </AppBar>

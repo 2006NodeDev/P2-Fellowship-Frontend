@@ -100,7 +100,7 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
 
         <CardContent>
             <Typography gutterBottom variant="h5" component="h2" className={classes.text}>
-                Explore the unknown territories of the world!                 
+               Explore the unknown territories of the world!                 
             </Typography>
             <Typography variant="body1" component="p" className={classes.text}>
                 Join the Fellowship of the Ring, a selective, diverse 
