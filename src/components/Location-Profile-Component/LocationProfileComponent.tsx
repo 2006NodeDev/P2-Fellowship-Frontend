@@ -5,7 +5,6 @@ import { useState, FunctionComponent, useEffect } from "react"
 import { useParams } from "react-router"
 import { getLocationProfile } from "../../remote/location-service/getLocationProfile"
 import { FullLocationDisplayComponent } from '../Location-Display-Components/FullLocationDisplayComponent'
-import { FullUserDisplayComponent } from "../User-Display-Components/FullUserDisplayComponent"
 
 
 export const LocationProfileComponent:FunctionComponent<any> = (props) => {
@@ -26,13 +25,7 @@ export const LocationProfileComponent:FunctionComponent<any> = (props) => {
             getUser()
         }
     })  
-
-    
-    // let locationDisplays = locationProfile.map((location: Location)=>{
-    //     return <FullLocationProfileComponent key={'user-key-' + location.locationId} location={location}/>
-    // })
-    
-    
+   
 
     return(
         (locationProfile)?

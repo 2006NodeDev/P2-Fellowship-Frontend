@@ -15,9 +15,13 @@
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
     "axios": "^0.19.2",
+    "lodash.range": "^3.2.0",
+    "mdbreact": "^4.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-items-carousel": "^2.8.0",
     "react-redux": "^7.2.1",
+    "react-responsive-carousel": "^3.2.9",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
@@ -47,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.159",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9"
   }
