@@ -77,7 +77,7 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
             </Typography>
             <Box component="fieldset" mb={3} borderColor="transparent">
               <Typography component="legend">RATING</Typography>
-              <Rating name="read-only" size="large" value={props.location.rating} readOnly />
+              <Rating name="read-only" size="large" value={props.location.rating} precision={0.5} readOnly />
             </Box>
             <Typography className={classes.info}>
               {props.location.numVisited || 0} people have visited this location.

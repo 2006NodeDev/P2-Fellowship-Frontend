@@ -98,6 +98,8 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                     justify="center"
                     style={{ minHeight: '100vh' }}
                 >
+                <GridImageDisplay location={props.location} />
+
                     <Card className={classes.root}>
                         <CardContent>
                             <Typography className={classes.locationName}>
@@ -116,7 +118,7 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                             <Typography className={classes.locationDetails}>
                                 {`Primary Population: ${props.location.primaryPopulation || `not applicable`}`}
                             </Typography>
-                                <Rating name="read-only" value={props.location.rating} readOnly />
+                                <Rating name="read-only" value={props.location.rating} precision={0.5} readOnly />
                                 <Typography className={classes.locationDetails}>Average Rating</Typography>
                             <Divider className={classes.divider}/>
                             <Typography className={classes.locationDetails}>
@@ -131,7 +133,6 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                           </Typography>
                         </CardActions>
                     </Card>
-                    <GridImageDisplay location={props.location} />
                 </Grid>
             </div>
 
