@@ -23,16 +23,15 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
     },
     gridList: {
-      flexWrap: 'nowrap',
-      // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-      transform: 'translateZ(0)',
+      width: 300,
+      height: 173,
     },
     title: {
       color: theme.palette.primary.light,
     },
     titleBar: {
       background:
-        'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+        'linear-gradient(to top, rgba(0,0,0,0.2) 10%, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0) 10%)',
     },
   }),
 );
@@ -59,7 +58,7 @@ export const SingleImageDisplay:FunctionComponent<ILocationProps> = (props) => {
   return (
     (tileData)?
     <div className={classes.root}>
-      <GridList className={classes.gridList}>
+      <GridList cellHeight={160} className={classes.gridList} cols={1}>
         {tileData.map((tile) => (
           
             <img src={tile.img} height='100%' width='100%' />
