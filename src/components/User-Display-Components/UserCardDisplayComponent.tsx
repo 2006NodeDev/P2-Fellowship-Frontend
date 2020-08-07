@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import React, { FunctionComponent } from 'react'
 import { User } from '../../models/User'
 import { makeStyles, Card, CardContent, Typography, CardMedia, Grid } from '@material-ui/core'
-import Image from '../../images/Gandalf.jpg'
+// import Image from '../../images/Gandalf.jpg'
 interface IUserDisplayProps {
   user: User
 }
@@ -64,7 +64,8 @@ export const UserCardDisplayComponent: FunctionComponent<IUserDisplayProps> = (p
 
           <CardMedia
             className={classes.media}
-            src={Image}
+            // src={Image}
+            image={props.user.image}
             component="img"
             title="Profile Picture"
           />

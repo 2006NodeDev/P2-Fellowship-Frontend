@@ -6,7 +6,7 @@ import { User } from '../../models/User'
 import { makeStyles, CardActions, Card, CardContent, Typography, CardMedia, Button, withStyles, Grid } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
-import Image from '../../images/Gandalf.jpg'
+// import Image from '../../images/Gandalf.jpg'
 
 interface IUserDisplayProps {
     user:User
@@ -50,9 +50,11 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
         <Card className={classes.root}>
             <CardMedia
                 className={classes.media}
-                src={Image}
+                image={props.user.image}
+                // src={Image}
                 component="img"
                 title="Profile Picture"
+                
             />
             <CardContent>
                     {/* Name of User: */}
