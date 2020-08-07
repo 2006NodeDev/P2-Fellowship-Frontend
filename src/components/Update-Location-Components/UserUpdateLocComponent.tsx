@@ -53,7 +53,7 @@ import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "r
 
 //     const updateThisLocation = async (e: SyntheticEvent) => {
 //         e.preventDefault()
-//         let thunk = userUpdateLocationActionMapper(locationId, user.userId, visited, rating, image)
+//         let thunk = userUpdateLocationActionMapper(locationId, user.userId, visited.checkBox, rating, image)
 //         dispatch(thunk)
 
 //     }
