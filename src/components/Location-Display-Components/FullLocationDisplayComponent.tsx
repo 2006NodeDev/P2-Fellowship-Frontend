@@ -55,7 +55,8 @@ const useStyles = makeStyles({
     divider: {
         marginTop: 10,
         marginBottom: 10,
-    },    
+    },  
+      
     submit: {
         backgroundColor: teal[700],
         color: 'white',

@@ -17,15 +17,27 @@ interface ILocationProps{
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      
       display: 'flex',
       flexWrap: 'wrap',
-      justifyContent: 'space-around',
+      //justifyContent: 'space-around', //?
       overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper,
+      //backgroundColor: theme.palette.background.paper, //del this
+      //alignItems: 'center',
+    //justifyContent: 'center',
+      
+       
+      
     },
     gridList: {
       width:1000,
-      height: 300
+      height: 300, 
+      alignItems: 'center',
+    justifyContent: 'center',
+      
+
+     
+     
     
     },
     title: {
@@ -63,6 +75,7 @@ export const GridImageDisplay:FunctionComponent<ILocationProps> = (props) => {
       <br/>
 
       <GridList cellHeight={160} className={classes.gridList} cols={3}>
+        
         {tileData.map((tile:LocationImage) => (
           <GridListTile key={tile.image} cols={1}>
             <img src={tile.image}/>
