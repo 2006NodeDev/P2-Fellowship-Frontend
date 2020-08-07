@@ -45,7 +45,7 @@ function App() {
 
         <Route exact path='/users/profile/:userId' component={UserProfileComponent}/>
         <Route exact path='/users' component={AllUsersComponent}/>
-        <Route exact path='/users/profile/:userId/update' component={UpdateUserProfileComponent}/>
+        <Route exact path='/users/profile/update/:userId' component={UpdateUserProfileComponent}/>
 
 
         <Route path='/locations/profile/:locationId' component={LocationProfileComponent}/>

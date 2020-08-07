@@ -1,4 +1,4 @@
-import { state, IUserProfileState } from "./index";
+import { IUserProfileState } from "./index";
 import { AnyAction } from "redux";
 import { newuserTypes } from "../action-mappers/new-user-action-mapper";
 

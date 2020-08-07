@@ -50,8 +50,5 @@ export const loginReducer=(state = initialState, action:AnyAction) => {
         default:{
             return state
         }
-
-    }
- 
-    
+    } 
 }

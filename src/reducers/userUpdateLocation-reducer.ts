@@ -33,7 +33,7 @@ export const userUpdateLocationReducer=(state = initialState, action:AnyAction) 
         case userUpdateLocationTypes.UPDATE_SUCCESSFUL:{
             return {
                 ...state,
-                currUser:action.payload.currUser
+                profLocation:action.payload.updateLoc
             }
         }
         default:{
