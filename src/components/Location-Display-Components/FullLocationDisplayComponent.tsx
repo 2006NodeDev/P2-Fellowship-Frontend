@@ -1,23 +1,11 @@
 //display a location's profile in detail
 
 import 'react-toastify/dist/ReactToastify.css';
-<<<<<<< HEAD
-import React, { FunctionComponent } from 'react'
-//import { useParams, Redirect } from 'react-router'
-import { Grid, makeStyles, CardActionArea, Card, CardContent, Typography, Box } from '@material-ui/core'
-//import { Link } from 'react-router-dom'
-import { Location } from '../../models/Location';
-//import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
-=======
 import React, { FunctionComponent, useState, useEffect, SyntheticEvent } from 'react'
 import { useParams, Redirect } from 'react-router'
 import { Grid, Paper, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia, Button, Box, Divider, withStyles, CardActions } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { Location } from '../../models/Location';
-<<<<<<< HEAD
->>>>>>> 0893cba92d46f0ba7be300315aa42060e2f092aa
-=======
->>>>>>> 0893cba92d46f0ba7be300315aa42060e2f092aa
 import Rating from '@material-ui/lab/Rating';
 import { grey, teal } from '@material-ui/core/colors';
 import { GridImageDisplay } from './GridImageDisplay';
