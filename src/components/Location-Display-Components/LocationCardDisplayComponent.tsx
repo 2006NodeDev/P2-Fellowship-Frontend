@@ -54,17 +54,6 @@ const CustomButton = withStyles((theme) => ({
 export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayProps> = (props) => {
   const classes = useStyles();
 
-  // const imageDisp = (() => {
-  //   let i = 0
-  //   if (props.location.image?.length) {
-  //     return (props.location.image[1].image)
-  //   } else {
-  //     return null
-
-  //   }
-
-  // })
-
   return (
     (props.location) ?
       <div>
@@ -96,11 +85,11 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
 
           </CardContent>
           <CardActions className={classes.root}>
-            <CustomButton variant="contained" className={classes.submit}>
+            <Button variant="contained" className={classes.submit}>
               <Link to={`/locations/profile/${props.location.locationId}`} style={{ textDecoration:"none"}}>
                 Details
               </Link>
-            </CustomButton>
+            </Button>
           </CardActions>
 
           </Card>
