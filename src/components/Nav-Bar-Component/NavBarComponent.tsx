@@ -126,7 +126,8 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
       menuItems.push(
         <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose} >Login</MenuItem></Link>,
         <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Sign Up</MenuItem></Link>,
-        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>)
+        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>,
+        <Link to="/map" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Map</MenuItem></Link>)
     }
   })
 

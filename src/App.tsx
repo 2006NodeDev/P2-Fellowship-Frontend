@@ -17,6 +17,8 @@ import { LocationProfileComponent } from '../src/components/Location-Profile-Com
 import { HomeComponent } from './components/Home-Page-Component/HomeComponent';
 import { UserProfileComponent } from './components/User-Profile-Component/UserProfileComponent';
 import { UpdateUserProfileComponent } from './components/Update-User-Components/AdminUpdateUserComponent';
+import { TitleComponent } from './components/Title-Component/TitleComponent';
+import SimpleMap from './components/MapComponent/simpleMap';
 
 function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)
@@ -40,6 +42,7 @@ function App() {
 
         <Route path='/locations/profile/:locationId' component={LocationProfileComponent}/>
         <Route exact path='/locations' component={AllLocationsComponent}/>
+        <Route exact path='/map' component={SimpleMap}/>
 
         <br/>
       </Router>
