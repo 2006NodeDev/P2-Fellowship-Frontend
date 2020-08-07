@@ -64,6 +64,12 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
         <Card className={classes.root} >
           <CardContent> 
               <SingleImageDisplay location={props.location} />
+              {/* <CardMedia
+                className={classes.media}
+                src={props.location.image[0]}
+                component="img"
+                title="Profile Picture"
+              /> */}
 
               <Typography className={classes.name} gutterBottom>
                 {props.location.name}
