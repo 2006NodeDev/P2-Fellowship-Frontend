@@ -125,8 +125,8 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                         </CardContent>
                         <CardActions className={classes.root}>
                             <Typography>
-                                <Link to="/locations" style={{textDecoration:"none"}}>
-                                    <CustomButton variant="contained" className={classes.submit}>Record your visit!</CustomButton>
+                                <Link to={`/locations/profile/${props.location.locationId}/update`} style={{textDecoration:"none"}}>
+                                    <Button variant="contained" className={classes.submit}>Record your visit!</Button>
                                 </Link>
                           </Typography>
                         </CardActions>
