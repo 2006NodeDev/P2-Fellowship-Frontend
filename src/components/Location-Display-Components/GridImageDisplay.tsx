@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
     },
     gridList: {
-      flexWrap: 'nowrap',
-      // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-      transform: 'translateZ(0)',
+      width:1000,
+      height: 300
+    
     },
     title: {
       color: theme.palette.primary.light,
@@ -59,10 +59,14 @@ export const GridImageDisplay:FunctionComponent<ILocationProps> = (props) => {
 
   return (
     (tileData)?
-    <div className={classes.root}>
-      <GridList className={classes.gridList}>
+    <div className={classes.root} style={{marginTop: 20}}>
+      <br/>
+
+      <GridList cellHeight={160} className={classes.gridList} cols={3}>
         {tileData.map((tile:LocationImage) => (
-            <img src={tile.image} height='100%' width='100%' />
+          <GridListTile key={tile.image} cols={1}>
+            <img src={tile.image}/>
+          </GridListTile>
         ))}
       </GridList>
     </div>
