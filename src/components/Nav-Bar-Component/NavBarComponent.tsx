@@ -93,6 +93,7 @@ const useStyles = makeStyles((theme) => ({ //change color too
 
 
 
+
 export const NavBarComponent: FunctionComponent<any> = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -110,7 +111,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     setAnchorEl(null);
   };
 
-    const handleDrawerOpen = () => {
+  const handleDrawerOpen = () => {
     setOpen(true);
   };
 
@@ -124,50 +125,54 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     if (!currUser) {
       menuItems = []
       menuItems.push(
+<<<<<<< HEAD
         <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose} >Login</MenuItem></Link>,
         <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Sign Up</MenuItem></Link>,
         <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>,
         <Link to="/map" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Map</MenuItem></Link>)
     }
+=======
+        <ListItem button component={Link} key="listeItem3" to="/login" ><ListItemText onClick={handleDrawerClose}>Login</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem4" to="/register" ><ListItemText onClick={handleDrawerClose}>Register</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem5" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
+      )}
+>>>>>>> 0893cba92d46f0ba7be300315aa42060e2f092aa
   })
 
   if (currUser) {
     if (currUser.role === 'Admin') {
       menuItems.push(
-        <ListItem button component={Link} key="listItem1" to={`users/profile/${(currUser) ? currUser.userId : '0'}`}>
-          <ListItemText >Hello, {currUser.firstName}!</ListItemText>
+        <ListItem button component={Link} key="listItem1" to={`users/profile/${currUser.userId}`}>
+          <ListItemText >Hello {currUser.firstName}!</ListItemText>
         </ListItem>,
-        <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>,
-        <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Users</MenuItem></Link>,
-        <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>My Profile</MenuItem></Link>,
-        <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Locations</MenuItem></Link>,
+        <ListItem button component={Link} key="listeItem2" to="/" ><ListItemText onClick={handleDrawerClose}>Home</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem3" to={`/users/profile/${currUser.userId}`} ><ListItemText onClick={handleDrawerClose}>My Profile</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem4" to="/users" ><ListItemText onClick={handleDrawerClose}>All Users</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem5" to="/locations" ><ListItemText onClick={handleDrawerClose}>All Locations</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem6" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
 
-  
-        <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Logout</MenuItem></Link>
-        )
+      )
 
     } else {
       menuItems.push(
-        <ListItem button component={Link} key="listItem1" to={`users/profile/${(currUser) ? currUser.userId : '0'}`}>
-          <ListItemText >Hello, {currUser.firstName}!</ListItemText>
+        <ListItem button component={Link} key="listItem1" to={`users/profile/${currUser.userId}`}>
+          <ListItemText >Hello {currUser.firstName}!</ListItemText>
         </ListItem>,
-        <Link to= "/" style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>,
-        <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Users</MenuItem></Link>,
-        <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>My Profile</MenuItem></Link>,
-        <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Locations</MenuItem></Link>,
-        <Link to="/map">Map</Link>,
-        <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Logout</MenuItem></Link>
-        )
-
+        <ListItem button component={Link} key="listeItem2" to="/" ><ListItemText onClick={handleDrawerClose}>Home</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem3" to={`/users/profile/${currUser.userId}`} ><ListItemText onClick={handleDrawerClose}>My Profile</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem4" to="/locations" ><ListItemText onClick={handleDrawerClose}>All Locations</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem5" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
+      
+      )
     }
 
     //info page? 
   } else {
     menuItems.push(
-      <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>,
-      <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Login</MenuItem></Link>,
-      <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Sign Up</MenuItem></Link>
-    )
+      <ListItem button component={Link} key="listeItem3" to="/login" ><ListItemText onClick={handleDrawerClose}>Login</ListItemText></ListItem>,
+      <ListItem button component={Link} key="listeItem4" to="/register" ><ListItemText onClick={handleDrawerClose}>Register</ListItemText></ListItem>,
+      <ListItem button component={Link} key="listeItem5" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
+        )
   }
 
   const theme = useTheme()
@@ -179,7 +184,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
 
       <CssBaseline />
       <AppBar
-        position="fixed"
+        position="static"
         className={clsx(classes.root, classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -190,17 +195,17 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}>
-              <MenuIcon />
-            </IconButton>
-              <Menu id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}> 
-              {menuItems}
-              </Menu>
-            <Typography variant="h4" className={classes.title}>
-              The Fellowship
+            <MenuIcon />
+          </IconButton>
+          <Menu id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}>
+            {menuItems}
+          </Menu>
+          <Typography variant="h4" className={classes.title}>
+            The Fellowship
             </Typography>
         </Toolbar>
       </AppBar>
@@ -228,7 +233,6 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
           ))}
         </List>
         <Divider />
-
       </Drawer>
     </nav>
 

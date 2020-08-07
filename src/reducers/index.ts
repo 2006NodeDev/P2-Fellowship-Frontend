@@ -29,6 +29,8 @@ export interface ILocationProfileState{
 }
 
 
+
+
 //def of the total state i.e. what sub-states it SHOULD have
 export interface IState{
     loginState:ILoginState
@@ -42,6 +44,5 @@ export const state = combineReducers <IState>({
     //takes in an object that is all of the reducers
     loginState:loginReducer,
     locationProfileState:locationProfileReducer,
-    userProfileState:userProfileReducer,
-
+    userProfileState:userProfileReducer
 })
