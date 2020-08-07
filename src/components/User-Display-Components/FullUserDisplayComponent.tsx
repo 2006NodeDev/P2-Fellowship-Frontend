@@ -56,6 +56,7 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
  
     return(
         (props.user)?
+        
         <Grid
             container
             spacing={0}
@@ -64,7 +65,7 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
             justify="center"
             style={{ minHeight: '100vh' }}
         >
-          <br/>
+       
         <Card className={classes.root}>
             <CardMedia
                 className={classes.media}

@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 import { Location } from '../../models/Location';
 import Rating from '@material-ui/lab/Rating';
 import { grey, teal } from '@material-ui/core/colors';
+import { GridImageDisplay } from './GridImageDisplay';
+
 
 //rough suggestion of how to grab images form LocationImage[]:
 // while(x<length(image array)){
@@ -129,6 +131,7 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                           </Typography>
                         </CardActions>
                     </Card>
+                    <GridImageDisplay location={props.location} />
                 </Grid>
             </div>
 

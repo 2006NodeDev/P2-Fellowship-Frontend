@@ -140,6 +140,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
         <Link to={`/users`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Users</MenuItem></Link>,
         <Link to ={`/users/profile/${currUser.userId}`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>My Profile</MenuItem></Link>,
         <Link to={`/locations`} style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Locations</MenuItem></Link>,
+
   
         <Link to="/logout" style={{ textDecoration:"none"}}><MenuItem onClick={handleDrawerClose}>Logout</MenuItem></Link>
         )
@@ -177,7 +178,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
 
       <CssBaseline />
       <AppBar
-        position="fixed"
+        position="static"
         className={clsx(classes.root, classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -221,13 +222,11 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
         <List>
           {menuItems.map((text, index) => (
             <ListItem>
-
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
         <Divider />
-
       </Drawer>
     </nav>
 

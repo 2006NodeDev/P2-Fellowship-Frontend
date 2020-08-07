@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { teal } from '@material-ui/core/colors';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import { SingleImageDisplay } from './SingleImageDisplay';
 
 interface ILocationDisplayProps {
   location: Location
@@ -65,24 +66,19 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
   // })
 
   return (
-
     (props.location) ?
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justify="center"
-        style={{ minHeight: '100vh' }}
-      >
+      <div>
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={{ minHeight: '100vh' }}
+        >
+          
         <Card className={classes.root} >
-          {/* <CardMedia
-            className={classes.media}
-            image={imageDisp}
-            component="img"
-            title="Profile Picture"
-          /> */}
-          <CardContent>
+          <CardContent> 
+            <SingleImageDisplay location={props.location} />
             <Typography className={classes.name} gutterBottom>
               {props.location.name}
             </Typography>
@@ -104,8 +100,11 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
               </Link>
             </CustomButton>
           </CardActions>
-        </Card>
-      </Grid>
+
+          </Card>
+        </Grid>
+      </div>
+
       :
       <div>
         <h3> Location Doesn't Exist</h3>
