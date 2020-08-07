@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, SyntheticEvent, useEffect } from 'react'
-import { TextField, makeStyles, createStyles, Theme, Button, FormControlLabel, Checkbox, CheckboxProps, withStyles, Card, Grid } from '@material-ui/core'
+import { TextField, makeStyles, createStyles, Theme, Button, FormControlLabel, Checkbox, CheckboxProps, withStyles, Card, Grid, Typography, CardContent, CardActionArea } from '@material-ui/core'
 import { Route, Router, Redirect, RouteComponentProps } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { ILoginState, IState } from '../../reducers';
@@ -30,9 +30,15 @@ const useStyles = makeStyles((theme: Theme) =>
         alignItems:'center'
       },
     },
+    loginMessage: {
+      margin: theme.spacing(1),
+      fontSize: 20,
+      fontFamily: "Bookman Old Style",
+      alignItems:'center'
+    },
     submit: {
       margin: theme.spacing(1),
-      backgroundColor: green[600],
+      backgroundColor: teal[600],
       color: 'white',
       //background color? for when hovering/submitting?
       fontFamily: "Bookman Old Style",
@@ -41,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const styles = {
+const background = {
   card: {
     height: '100%',
     maxWidth: '100%',
@@ -63,18 +69,8 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
     return state.loginState.errorMessage
   })
 
-
   const [username, changeUsername] = useState('')
   const [password, changePassword] = useState('')
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  const [state, setState] = React.useState({
-    checkedA: true,
-  });
-
 
   const updateUsername = (event: any) => {
     event.preventDefault()
@@ -108,9 +104,8 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
     }
   })
 
-
   return (
-    <div style={styles.card}>
+    <div style={background.card}>
      
       <Grid
         container
@@ -121,33 +116,20 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
         style={{ minHeight: '100vh' }}
       >
         <Card className={classes.root} >
-        
-        <br />
           <form autoComplete="off" onSubmit={loginSubmit}>
+              <br />
+            <Typography className={classes.loginMessage}>
+              Please login:
+            </Typography>
             <TextField id="username-basic" label="Username" value={username} onChange={updateUsername} />
-            <br />
+              <br />
             <TextField id="password-basic" label="Password" type='password' value={password} onChange={updatePassword} />
-            <br />
-            <br />
-            <LoginButton type='submit' variant='contained' onClick={loginSubmit} className={classes.submit}> Submit </LoginButton>
-            <br />
-            <br />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={state.checkedA}
-                  onChange={handleChange}
-                  name="checkedA"
-                  color="primary"
-                />
-              }
-
-              label="Keep Me Logged In"
-            />
-
+              <br />
+              <br />
+            <LoginButton type='submit' variant='contained' onClick={loginSubmit} className={classes.submit}> Submit </LoginButton>          
           </form>
         </Card>
-        </Grid>
+      </Grid>
             
         </div>
     )

@@ -3,11 +3,11 @@
 import 'react-toastify/dist/ReactToastify.css';
 import React, { FunctionComponent, useState, useEffect, SyntheticEvent } from 'react'
 import { useParams, Redirect } from 'react-router'
-import { Grid, Paper, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia, Button, Box } from '@material-ui/core'
+import { Grid, Paper, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia, Button, Box, Divider, withStyles, CardActions } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { Location } from '../../models/Location';
-import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
 import Rating from '@material-ui/lab/Rating';
+import { grey, teal } from '@material-ui/core/colors';
 import { GridImageDisplay } from './GridImageDisplay';
 
 
@@ -29,35 +29,53 @@ const useStyles = makeStyles({
     root: {
         margin: "auto",
         minWidth: 275,
-        maxWidth: 500
+        maxWidth: 500,
+        justifyContent: "center",
+        alignItems:"center"
     },
     media: {
         height: "auto",
         width: "100%",
         margin: "auto",
     },
-    name: {
+    locationName: {
         fontSize: 20,
         fontFamily: "Bookman Old Style"
     },
-    locationInfo: {
-        color: "textSecondary",
+    locationDetails: {
+        color: grey[700],
+        fontSize: 14,
         fontFamily: "Bookman Old Style"
     },
-    card: {
-        display: 'flex',
+    locationDescription: {
+        marginTop: 10, 
+        fontSize: 16,
+        fontFamily: "Bookman Old Style"
     },
-    cardDetails: {
-        flex: 1,
-    },
-    cardMedia: {
-        width: 160,
-    },
+    divider: {
+        marginTop: 10,
+        marginBottom: 10,
+    },    
+    submit: {
+        backgroundColor: teal[700],
+        color: 'white',
+        fontFamily: "Bookman Old Style",
+        fontSize: 16,
+    } 
 });
 
+const CustomButton = withStyles((theme) => ({
+    root: {
+      color: theme.palette.getContrastText(teal[700]),
+      backgroundColor: "teal[700]",
+      '&:hover': {
+        backgroundColor: teal[800],
+       }
+    }
+}))(Button);
+  
 const styles =
 {
-
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9,
@@ -80,41 +98,39 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                     justify="center"
                     style={{ minHeight: '100vh' }}
                 >
-                    {/* <CardActionArea className={classes.root} component="a" href="#"> */}
-
-                        <Paper className={classes.card}>
-                            <div className={classes.cardDetails}>
-
-                                <CardContent>
-                                    <Typography component="h2" variant="h5">
-                                        {props.location?.name}
-                                    </Typography>
-                                    <Typography variant="subtitle1" >
-                                        REALM: {props.location.realm}
-                                    </Typography>
-                                    <Typography variant="subtitle1" >
-                                        GOVERNANCE: {props.location.governance}
-                                    </Typography>
-                                    <Typography variant="subtitle1">
-                                        PRIMARY POPULATION: {props.location.primaryPopulation}
-                                    </Typography>
-                                    <Typography variant="subtitle1" paragraph>
-                                        DESCRIPTION: {props.location.description}
-                                    </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">
-                                        <Box component="fieldset" mb={3} borderColor="transparent">
-                                            <Typography component="legend">RATING</Typography>
-                                            <Rating name="read-only" value={props.location.rating} readOnly />
-                                        </Box>
-                                    </Typography>
-                                    <Typography variant="subtitle1">
-                                        NUMBER OF VISITORS: {props.location.numVisited}
-                                    </Typography>
-                                </CardContent>
-                            </div>
-
-                        </Paper>
-                    {/* </CardActionArea> */}
+                    <Card className={classes.root}>
+                        <CardContent>
+                            <Typography className={classes.locationName}>
+                                {props.location?.name}
+                            </Typography>
+                            <Typography className={classes.locationDetails} gutterBottom>
+                                {props.location.realm}
+                            </Typography>
+                            <Divider className={classes.divider}/>
+                            <Typography className={classes.locationDescription}>
+                                {props.location.description || ""}
+                            </Typography>
+                            <Typography className={classes.locationDetails}>
+                                {`Governance: ${props.location.governance || `not applicable`}`}
+                            </Typography >
+                            <Typography className={classes.locationDetails}>
+                                {`Primary Population: ${props.location.primaryPopulation || `not applicable`}`}
+                            </Typography>
+                                <Rating name="read-only" value={props.location.rating} readOnly />
+                                <Typography className={classes.locationDetails}>Average Rating</Typography>
+                            <Divider className={classes.divider}/>
+                            <Typography className={classes.locationDetails}>
+                                {props.location.numVisited || 0} People have visited this location 
+                            </Typography>
+                        </CardContent>
+                        <CardActions className={classes.root}>
+                            <Typography>
+                                <Link to="/locations" style={{textDecoration:"none"}}>
+                                    <CustomButton variant="contained" className={classes.submit}>Record your visit!</CustomButton>
+                                </Link>
+                          </Typography>
+                        </CardActions>
+                    </Card>
                     <GridImageDisplay location={props.location} />
                 </Grid>
             </div>
