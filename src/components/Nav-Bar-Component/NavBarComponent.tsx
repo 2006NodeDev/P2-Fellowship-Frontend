@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
-import { green, teal } from '@material-ui/core/colors';
+import { teal } from '@material-ui/core/colors';
 import { useSelector } from 'react-redux';
 import { IState } from '../../reducers';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,9 +19,7 @@ import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button';
 
 
 const drawerWidth = 240;
@@ -125,11 +123,13 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     if (!currUser) {
       menuItems = []
       menuItems.push(
-        <ListItem button component={Link} key="listeItem3" to="/login" ><ListItemText onClick={handleDrawerClose}>Login</ListItemText></ListItem>,
-        <ListItem button component={Link} key="listeItem4" to="/register" ><ListItemText onClick={handleDrawerClose}>Register</ListItemText></ListItem>,
-        <ListItem button component={Link} key="listeItem5" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
-      )}
-  })
+        <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose} >Login</MenuItem></Link>,
+        <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Sign Up</MenuItem></Link>,
+        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>,
+        <Link to="/map" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Map</MenuItem></Link>
+        )
+      }
+  });
 
   if (currUser) {
     if (currUser.role === 'Admin') {

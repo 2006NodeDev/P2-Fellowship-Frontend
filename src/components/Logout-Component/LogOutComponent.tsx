@@ -1,10 +1,13 @@
-import React, { FunctionComponent, SyntheticEvent } from "react";
+import React, { FunctionComponent, SyntheticEvent, useEffect } from "react";
 import { fellowshipLogout } from "../../remote/user-service/fellowshipLogout";
-import { Button, makeStyles, CssBaseline, Container, Typography, Grid, Link } from "@material-ui/core";
+import { Button, makeStyles, CssBaseline, Container, Typography, Grid, Link, withStyles } from "@material-ui/core";
 import { RouteComponentProps } from "react-router";
 import { UserProfileComponent } from "../User-Profile-Component/UserProfileComponent";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { IState } from "../../reducers";
+import { teal } from "@material-ui/core/colors";
+import { logoutActionMapper, logoutErrorReset } from "../../action-mappers/logout-action-mapper";
+import { toast } from "react-toastify";
 
 interface ILogoutProps extends RouteComponentProps{
     changeCurrentUser:(newUser:any)=>void
@@ -13,21 +16,40 @@ interface ILogoutProps extends RouteComponentProps{
 export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
     const classes = useStyles();
 
+    // const currUser = useSelector((state: IState) => {
+    //   return state.loginState.currUser
+    // })
 
-    const currUser = useSelector((state: IState) => {
-      return state.loginState.currUser
+    const user = useSelector((state: IState) => {
+      return state.logoutOutState.noUser
+    })
+  
+    const errorMessage = useSelector((state: IState) => {
+      return state.logoutOutState.errorMessage
     })
 
-    
+    const dispatch = useDispatch()
+
+    // let userId = currUser?.userId
+
     const logoutUser = async (e: SyntheticEvent) => {
         e.preventDefault()
-
-        let res = await fellowshipLogout()
-        console.log(res)
-        props.changeCurrentUser(res)
+        let thunk = logoutActionMapper()
+        dispatch(thunk)
+    }
+  
+    useEffect(() =>{
+      if (errorMessage) {
+        toast.error(errorMessage)
+        dispatch(logoutErrorReset())
+      }
+    })
+    
+    useEffect(() => {
+      if (!user) { //if user is null, logout was successful
         props.history.push(`/`)
-    } 
-
+      }
+    })
 
     return (
         <Container component="main" maxWidth="xs">
@@ -37,15 +59,14 @@ export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
                 Are you sure you want to log out?
             </Typography>
             <Grid item xs={12}>
-               <Button
+               <LogoutButton
                   type="submit"
                   fullWidth
                   variant="contained"
-                  color="primary"
                   className={classes.submit}
                   onClick={logoutUser}
                 > Logout
-              </Button>
+              </LogoutButton>
               
             </Grid>
           </div>
@@ -53,6 +74,16 @@ export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
 
     )
 }
+
+const LogoutButton = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText(teal[700]),
+    backgroundColor: "teal[700]",
+    '&:hover': {
+      backgroundColor: teal[800],
+    },
+  },
+}))(Button);
 
 //styles at the bottom because closer to html return
 const useStyles = makeStyles((theme) => ({
@@ -62,21 +93,11 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
       alignItems: 'center',
     },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: '100%',
-      marginTop: theme.spacing(3),
-    },
     submit: {
-      margin: theme.spacing(3, 0, 2),
-      backgroundColor: 'green',
+      margin: theme.spacing(1),
+      backgroundColor: teal[600],
       color: 'white',
-      //background color?
-      //fontFamily: '',
+      fontFamily: "Bookman Old Style",
       fontSize: 16,
-    },
-
+    }
 }));

@@ -41,7 +41,7 @@ export const locationProfileReducer=(state = initialState, action:AnyAction) => 
         case locationProfileTypes.PROFILE_FOUND:{
             return {
                 ...state,
-                currUser:action.payload.currUser
+                profLocation:action.payload.currLocation
             }
         }
         default:{

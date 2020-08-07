@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, SyntheticEvent, useEffect } from 'react'
 import { TextField, makeStyles, createStyles, Theme, Button, FormControlLabel, Checkbox, CheckboxProps, withStyles, Card, Grid, Typography, CardContent, CardActionArea } from '@material-ui/core'
-import { Route, Router, Redirect, RouteComponentProps } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { ILoginState, IState } from '../../reducers';
 import { loginActionMapper, loginErrorReset } from '../../action-mappers/login-action-mapper';
@@ -40,7 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       backgroundColor: teal[600],
       color: 'white',
-      //background color? for when hovering/submitting?
       fontFamily: "Bookman Old Style",
       fontSize: 16,
     }

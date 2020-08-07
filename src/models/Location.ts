@@ -10,6 +10,7 @@ export interface Location{
     description:string
     rating:number
     numVisited:number
+   
 
 }
 

@@ -40,7 +40,7 @@ export const updateLocationReducer=(state = initialState, action:AnyAction) => {
         case adminUpdateLocationTypes.UPDATE_SUCCESSFUL:{
             return {
                 ...state,
-                currUser:action.payload.currUser
+                profLocation:action.payload.updateLoc
             }
         }
         default:{

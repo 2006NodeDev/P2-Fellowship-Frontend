@@ -55,7 +55,6 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
  
     return(
         (props.user)?
-        
         <Grid
             container
             spacing={0}
