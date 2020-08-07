@@ -17,6 +17,16 @@ import { LocationProfileComponent } from '../src/components/Location-Profile-Com
 import { HomeComponent } from './components/Home-Page-Component/HomeComponent';
 import { UserProfileComponent } from './components/User-Profile-Component/UserProfileComponent';
 import { UpdateUserProfileComponent } from './components/Update-User-Components/AdminUpdateUserComponent';
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { TitleComponent } from './components/Title-Component/TitleComponent';
+import SimpleMap from './components/MapComponent/simpleMap';
+=======
+import { UpdateLocationProfileComponent } from './components/Update-Location-Components/AdminUpdateLocComponent';
+>>>>>>> 0893cba92d46f0ba7be300315aa42060e2f092aa
+=======
+import { UpdateLocationProfileComponent } from './components/Update-Location-Components/AdminUpdateLocComponent';
+>>>>>>> 0893cba92d46f0ba7be300315aa42060e2f092aa
 
 function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)
@@ -40,6 +50,17 @@ function App() {
 
         <Route path='/locations/profile/:locationId' component={LocationProfileComponent}/>
         <Route exact path='/locations' component={AllLocationsComponent}/>
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <Route exact path='/map' component={SimpleMap}/>
+=======
+        <Route exact path='/locations/profile/:locationId/update' component={UpdateLocationProfileComponent}/>
+
+>>>>>>> 0893cba92d46f0ba7be300315aa42060e2f092aa
+=======
+        <Route exact path='/locations/profile/:locationId/update' component={UpdateLocationProfileComponent}/>
+
+>>>>>>> 0893cba92d46f0ba7be300315aa42060e2f092aa
 
         <br/>
       </Router>

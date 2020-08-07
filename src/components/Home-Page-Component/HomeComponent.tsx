@@ -15,19 +15,16 @@ const CustomButton = withStyles((theme) => ({
     '&:hover': {
       backgroundColor: teal[800],
     },
-    
   },
 }))(Button);
 
-const styles = {
+const background = {
 card : { 
     height: 1000,
     maxWidth: 20000,
     backgroundImage: `url(${Image})`
-    
     }
 }
-
 
 const useStyles = makeStyles((theme) => ({
   root: { //figure out spacing for this (so it's relative to screen size and centered)
@@ -35,10 +32,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 600,
     justifyContent: "center",
     alignItems:"center"
-    // height: 1000,
-    // width: 20000,
-    // backgroundImage: `url(${Image})`
-    
+
   },
   text: {
     fontFamily:"Bookman Old Style",
@@ -46,9 +40,8 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(1),
-    backgroundColor: green[600],
+    backgroundColor: teal[700],
     color: 'white',
-    //background color? for when hovering/submitting?
     fontFamily: "Bookman Old Style",
     fontSize: 16,
   }
@@ -83,7 +76,7 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
 
   return (
 
-    <div style={styles.card} >
+    <div style={background.card} >
       <Grid
         container
         spacing={0}
@@ -108,14 +101,12 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
                 the legendary, luscious landscape of Middle-Earth to 
                 earn their places in the history books. 
                 There’s only an 11% chance of dying!
-            </Typography>
-            
+            </Typography>  
         </CardContent>
         <CardActions className={classes.root}>
-        <Typography > 
-              {buttonsDisplayed}
-        </Typography>
-             
+          <Typography > 
+            {buttonsDisplayed}
+          </Typography>
         </CardActions>
         
     </Card>

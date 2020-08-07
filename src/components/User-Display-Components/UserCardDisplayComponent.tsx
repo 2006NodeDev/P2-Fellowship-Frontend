@@ -61,10 +61,9 @@ export const UserCardDisplayComponent: FunctionComponent<IUserDisplayProps> = (p
                 className={classes.media}
                 image={props.user.image}
                /> */}
-
+          <br />
           <CardMedia
             className={classes.media}
-            // src={Image}
             image={props.user.image}
             component="img"
             title="Profile Picture"

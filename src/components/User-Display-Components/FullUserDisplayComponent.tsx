@@ -16,7 +16,9 @@ const useStyles = makeStyles({ //customize this more!
     root: {
       margin: "auto",
       minWidth: 275,
-      maxWidth:500
+      maxWidth:500,
+      justifyContent: "center",
+      alignItems:"center"
     },
     media: {
       height:"auto",
@@ -31,13 +33,30 @@ const useStyles = makeStyles({ //customize this more!
       color: "textSecondary",
       fontFamily: "Bookman Old Style"
     },
+    submit: {
+        backgroundColor: teal[700],
+        color: 'white',
+        fontFamily: "Bookman Old Style",
+        fontSize: 16,
+    } 
   })
+
+const CustomButton = withStyles((theme) => ({
+    root: {
+      color: theme.palette.getContrastText(teal[700]),
+      backgroundColor: "teal[700]",
+      '&:hover': {
+        backgroundColor: teal[800],
+       }
+    }
+}))(Button);
 
 export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (props) => {
     const classes = useStyles(); 
  
     return(
         (props.user)?
+        
         <Grid
             container
             spacing={0}
@@ -46,12 +65,11 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
             justify="center"
             style={{ minHeight: '100vh' }}
         >
-          <br/>
+       
         <Card className={classes.root}>
             <CardMedia
                 className={classes.media}
                 image={props.user.image}
-                // src={Image}
                 component="img"
                 title="Profile Picture"
                 
@@ -82,9 +100,9 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
             </CardContent>
             <CardActions className={classes.root}>
                 <Link to= {`/users/profile/${props.user.userId}/update`} style={{ textDecoration:"none"}}>
-                    <Button color="primary">
+                    <CustomButton variant="contained" className={classes.submit}>
                         Update Profile
-                    </Button>
+                    </CustomButton>
                 </Link>
             </CardActions>
         </Card>
@@ -98,13 +116,4 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
     )
 }
 
-const CustomButton = withStyles((theme) => ({
-    root: {
-        color: theme.palette.getContrastText(teal[700]),
-        backgroundColor: "teal[700]",
-        '&:hover': {
-          backgroundColor: teal[800],
-        },
-    },
-  }))(Button);
   
