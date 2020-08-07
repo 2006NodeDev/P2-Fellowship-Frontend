@@ -6,6 +6,13 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import image from '../../images/bag-end.jpg';
+import { Location } from '../../models/Location';
+import { LocationImage } from '../../models/LocationImage';
+
+
+interface ILocationProps{
+  location:Location
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,32 +39,36 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const tileData = [
-  {
-    img: image,
-    author: 'author',
-  },
+// const tileData = [
+//   //add the image array here
+//   {
+//     img: image,
+//     author: 'author',
+//   },
 
-];
+// ];
 
-export const LocImageDisplayComponent:FunctionComponent = (props) => {
+
+
+export const GridImageDisplay:FunctionComponent<ILocationProps> = (props) => {
   const classes = useStyles();
+  
+  const tileData = props.location.image
+
+  //tileData is first image in the images array
 
   return (
+    (tileData)?
     <div className={classes.root}>
-      <GridList className={classes.gridList} cols={2.5}>
-        {tileData.map((tile) => (
-          <GridListTile key={tile.img}>
-            <img src={tile.img} />
-            <GridListTileBar
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-            />
-          </GridListTile>
+      <GridList className={classes.gridList}>
+        {tileData.map((tile:LocationImage) => (
+            <img src={tile.image} height='100%' width='100%' />
         ))}
       </GridList>
+    </div>
+    :
+    <div>
+      No Image
     </div>
   );
 }
