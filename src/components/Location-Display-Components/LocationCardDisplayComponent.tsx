@@ -8,6 +8,7 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
 import { FullLocationDisplayComponent } from './FullLocationDisplayComponent';
+import { SingleImageDisplay } from './SingleImageDisplay';
 
 interface ILocationDisplayProps {
   location: Location
@@ -48,26 +49,10 @@ const useStyles = makeStyles({ //customize this more!
 export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayProps> = (props) => {
   let classes = useStyles();
 
-  // const imageDisp = (() => {
-  //   let i = 0
-  //   if (props.location.image?.length) {
-  //     return (props.location.image[1].image)
-  //   } else {
-  //     return null
-
-  //   }
-
-  // })
-
-
-
-
-
   return (
 
     (props.location) ?
       <div>
-
         <Grid
           container
           direction="column"
@@ -75,14 +60,10 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
           justify="center"
           style={{ minHeight: '100vh' }}
         >
-          <Card className={classes.root} >
-            {/* <CardMedia
-              className={classes.media}
-              image={imageDisp}
-              component="img"
-              title="Profile Picture"
-            /> */}
-            <CardContent>
+          
+        <Card className={classes.root} >
+          <CardContent> 
+              <SingleImageDisplay location={props.location} />
 
               <Typography className={classes.name} gutterBottom>
                 {props.location.name}
@@ -96,9 +77,9 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
               </Box>
               <Typography className={classes.info}>
                 {props.location.numVisited} people have visited this location.
-          </Typography>
+              </Typography>
+          </CardContent>
 
-            </CardContent>
             <CardActions>
               <FancyButton>
                 <Link to={`/locations/profile/${props.location.locationId}`}>
@@ -106,6 +87,7 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
               </Link>
               </FancyButton>
             </CardActions>
+
           </Card>
         </Grid>
       </div>

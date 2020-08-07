@@ -178,7 +178,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
 
       <CssBaseline />
       <AppBar
-        position="fixed"
+        position="static"
         className={clsx(classes.root, classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -227,7 +227,6 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
           ))}
         </List>
         <Divider />
-
       </Drawer>
     </nav>
 

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import { Location } from '../../models/Location';
 import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
 import Rating from '@material-ui/lab/Rating';
-import {LocImageDisplayComponent}  from './ImageDisplay';
+import { GridImageDisplay } from './GridImageDisplay';
 
 
 //rough suggestion of how to grab images form LocationImage[]:
@@ -72,8 +72,6 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
 
         (props.location) ?
             <div>
-                <LocImageDisplayComponent />
-
                 <Grid
                     container
                     spacing={0}
@@ -82,25 +80,25 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                     justify="center"
                     style={{ minHeight: '100vh' }}
                 >
-                    <CardActionArea className={classes.root} component="a" href="#">
+                    {/* <CardActionArea className={classes.root} component="a" href="#"> */}
 
-                        <Card className={classes.card}>
+                        <Paper className={classes.card}>
                             <div className={classes.cardDetails}>
 
                                 <CardContent>
-
-
                                     <Typography component="h2" variant="h5">
-                                        NAME: {props.location?.name}
+                                        {props.location?.name}
                                     </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">
+                                    <Typography variant="subtitle1" >
                                         REALM: {props.location.realm}
                                     </Typography>
-                                    <Typography variant="subtitle1" paragraph>
+                                    <Typography variant="subtitle1" >
                                         GOVERNANCE: {props.location.governance}
                                     </Typography>
+                                    <Typography variant="subtitle1">
                                         PRIMARY POPULATION: {props.location.primaryPopulation}
-                                    <Typography variant="subtitle1" color="textSecondary">
+                                    </Typography>
+                                    <Typography variant="subtitle1" paragraph>
                                         DESCRIPTION: {props.location.description}
                                     </Typography>
                                     <Typography variant="subtitle1" color="textSecondary">
@@ -109,14 +107,15 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                                             <Rating name="read-only" value={props.location.rating} readOnly />
                                         </Box>
                                     </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">
+                                    <Typography variant="subtitle1">
                                         NUMBER OF VISITORS: {props.location.numVisited}
                                     </Typography>
                                 </CardContent>
                             </div>
 
-                        </Card>
-                    </CardActionArea>
+                        </Paper>
+                    {/* </CardActionArea> */}
+                    <GridImageDisplay location={props.location} />
                 </Grid>
             </div>
 
