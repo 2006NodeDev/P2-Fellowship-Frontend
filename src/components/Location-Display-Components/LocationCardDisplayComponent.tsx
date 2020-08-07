@@ -78,6 +78,7 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
           
         <Card className={classes.root} >
           <CardContent> 
+
             <SingleImageDisplay location={props.location} />
             <Typography className={classes.name} gutterBottom>
               {props.location.name}
@@ -92,6 +93,7 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
             <Typography className={classes.info}>
               {props.location.numVisited || 0} people have visited this location.
             </Typography>
+
           </CardContent>
           <CardActions className={classes.root}>
             <CustomButton variant="contained" className={classes.submit}>
