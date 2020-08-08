@@ -15,7 +15,7 @@ const useStyles = makeStyles({ //customize this more!
     root: {
       margin: "auto",
       minWidth: 275,
-      maxWidth:500,
+      maxWidth: 500,
       justifyContent: "center",
       alignItems:"center"
     },
@@ -52,7 +52,6 @@ const CustomButton = withStyles((theme) => ({
 
 
 
-
 export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (props) => {
     const classes = useStyles(); 
  
@@ -67,7 +66,7 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
             style={{ minHeight: '100vh' }}
         >
        
-        <Card className={classes.root}  style={{marginTop: 20}}>
+        <Card className={classes.root}>
             <CardMedia
                 className={classes.media}
                 image={props.user.image}
@@ -76,6 +75,7 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
                 
             />
             <CardContent>
+                    {/* Name of User: */}
                 <Typography className={classes.username} gutterBottom>
                     {props.user.firstName} {props.user.lastName}
                 </Typography>

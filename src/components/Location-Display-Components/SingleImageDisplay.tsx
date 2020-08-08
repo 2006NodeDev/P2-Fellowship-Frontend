@@ -54,7 +54,24 @@ const useStyles = makeStyles((theme: Theme) =>
 export const SingleImageDisplay: FunctionComponent<ILocationProps> = (props) => {
   const classes = useStyles();
 
-  const tileData = props.location.image?.pop()
+  let locationImageLinks: string[]
+  let tileData = undefined
+
+  if (props.location.image){
+    let imageObjectArray = props.location.image
+
+    locationImageLinks = imageObjectArray.filter(function(obj) {
+      if ('image' in obj) {
+        return true
+      } else {
+        return false;
+      }
+    }).map(function(obj) { return obj["image"]});
+    console.log(locationImageLinks);
+
+    tileData = locationImageLinks[0]
+  }
+ 
 
   //tileData is first image in the images array
 
@@ -64,7 +81,7 @@ export const SingleImageDisplay: FunctionComponent<ILocationProps> = (props) => 
 
 
         <GridList>
-          <img src={tileData.image} className={classes.image} />
+          <img src={tileData} className={classes.image} />
         </GridList>
 
 

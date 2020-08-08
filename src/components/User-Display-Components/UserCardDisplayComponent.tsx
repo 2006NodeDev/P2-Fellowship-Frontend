@@ -65,7 +65,7 @@ export const UserCardDisplayComponent: FunctionComponent<IUserDisplayProps> = (p
           />
           <CardContent>
             <Typography className={classes.name} gutterBottom >
-              NAME: {`${props.user.firstName}  ${props.user.lastName}`}
+              NAME: {props.user.firstName}
             </Typography>
             <Typography className={classes.userInfo} >
               AFFILIATION: {props.user.affiliation}
