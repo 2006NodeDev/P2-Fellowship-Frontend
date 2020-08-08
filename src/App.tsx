@@ -40,8 +40,8 @@ function App() {
 
         <Route exact path='/users' component={AllUsersComponent}/>
         <Route exact path='/users/profile/:userId' component={UserProfileComponent}/>
-        <Route exact path='/users/profile/:userId/update'render={(props)=>(<UpdateUserProfileComponent user={currentUser} {...props}/>)}/>
-        <Route exact path='/users/profile/:userId/update/admin' component={AdminUpdateUserProfileComponent}/>
+        <Route exact path='/users/profile/update/:userId'render={(props)=>(<UpdateUserProfileComponent user={currentUser} {...props}/>)}/>
+        <Route exact path='/users/profile/admin/update/:userId/' component={AdminUpdateUserProfileComponent}/>
 
         <Route exact path='/locations' component={AllLocationsComponent}/>
         <Route exact path='/locations/profile/:locationId' component={LocationProfileComponent}/>
