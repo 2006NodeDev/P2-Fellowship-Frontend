@@ -20,6 +20,7 @@ import SimpleMap from './components/MapComponent/simpleMap';
 import { AdminUpdateLocationProfileComponent } from './components/Update-Location-Components/AdminUpdateLocComponent';
 import { Location } from './models/Location';
 import { UpdateUserProfileComponent } from './components/Update-User-Components/UpdateUserProfileComponent';
+import { UserUpdateLocationComponent } from './components/Update-Location-Components/UserUpdateLocComponent';
 
 
 function App() {
@@ -44,10 +45,8 @@ function App() {
 
         <Route exact path='/locations' component={AllLocationsComponent}/>
         <Route path='/locations/profile/:locationId' component={LocationProfileComponent}/>
-        {/* <Route exact path='/locations/profile/:locationId/update' component={UserUpdate}/> */}
         <Route exact path='/locations/profile/:locationId/admin/update' component={AdminUpdateLocationProfileComponent}/>
-
-        {/* <Route exact path='/locations/profile/:locationId/admin/update' render={(props) =>(<AdminUpdateLocationProfileComponent location={currentLocation} {...props}/>)}/> */}
+        <Route exact path='/locations/profile/:locationId/user/update' component={UserUpdateLocationComponent}/>
 
 
         <Route exact path='/map' component={SimpleMap}/>

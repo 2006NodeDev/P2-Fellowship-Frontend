@@ -43,7 +43,7 @@ export const SimpleMap: FunctionComponent<any> = (props: any) => {
     return (
         <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: '' }}
+          bootstrapURLKeys={{ key: 'AIzaSyDLNGQ9PmSweVI-1SLDlpS_4C-aQEu4w30' }}
           defaultCenter={center}
           defaultZoom={zoom}
           options={getMapOptions}

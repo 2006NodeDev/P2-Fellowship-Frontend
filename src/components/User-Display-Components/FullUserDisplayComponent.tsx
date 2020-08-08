@@ -52,6 +52,7 @@ const CustomButton = withStyles((theme) => ({
 
 
 
+
 export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (props) => {
     const classes = useStyles(); 
  
@@ -66,7 +67,7 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
             style={{ minHeight: '100vh' }}
         >
        
-        <Card className={classes.root}>
+        <Card className={classes.root}  style={{marginTop: 20}}>
             <CardMedia
                 className={classes.media}
                 image={props.user.image}

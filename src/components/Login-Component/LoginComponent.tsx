@@ -46,9 +46,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const background = {
   card: {
-    height: '100%',
-    maxWidth: '100%',
-    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/Project-Images/login.png"})`
+    // height: '100%',
+    // maxWidth: '100%',
+    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/Project-Images/login.jpg"})`
 
   }
 }
