@@ -68,7 +68,6 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
 
           <Card className={classes.root} >
             <CardContent>
-
               <SingleImageDisplay location={props.location} />
               <Typography className={classes.name} gutterBottom>
                 {props.location.name}
