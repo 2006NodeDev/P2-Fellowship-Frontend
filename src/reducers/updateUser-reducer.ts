@@ -17,7 +17,7 @@ export const updateuserReducer=(state = initialState, action:AnyAction) => {
         case updateUserTypes.BAD_CREDENTIALS:{
             return {
                 ...state,
-                errorMessage:'Please Fill Out All Fields'
+                errorMessage:'Please fill out the required fields'
             }
         }
         case updateUserTypes.USERNAME_TAKEN:{

@@ -7,16 +7,9 @@ import { teal } from "@material-ui/core/colors";
 import { logoutActionMapper, logoutErrorReset } from "../../action-mappers/logout-action-mapper";
 import { toast } from "react-toastify";
 
-interface ILogoutProps extends RouteComponentProps{
-    changeCurrentUser:(newUser:any)=>void
-}
 
-export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
+export const LogOutComponent: FunctionComponent<any> = (props)=>{
     const classes = useStyles();
-
-    // const currUser = useSelector((state: IState) => {
-    //   return state.loginState.currUser
-    // })
 
     const user = useSelector((state: IState) => {
       return state.loginState.currUser

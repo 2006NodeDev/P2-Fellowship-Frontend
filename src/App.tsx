@@ -40,14 +40,13 @@ function App() {
 
         <Route exact path='/users' component={AllUsersComponent}/>
         <Route exact path='/users/profile/:userId' component={UserProfileComponent}/>
-        <Route exact path='/users/profile/:userId/update' component={UpdateUserProfileComponent}/>
+        <Route exact path='/users/profile/:userId/update'render={(props)=>(<UpdateUserProfileComponent user={currentUser} {...props}/>)}/>
         <Route exact path='/users/profile/:userId/update/admin' component={AdminUpdateUserProfileComponent}/>
 
         <Route exact path='/locations' component={AllLocationsComponent}/>
-        <Route path='/locations/profile/:locationId' component={LocationProfileComponent}/>
-        <Route exact path='/locations/profile/:locationId/admin/update' component={AdminUpdateLocationProfileComponent}/>
-        <Route exact path='/locations/profile/:locationId/user/update' component={UserUpdateLocationComponent}/>
-
+        <Route exact path='/locations/profile/:locationId' component={LocationProfileComponent}/>
+        <Route exact path='/locations/profile/:locationId/update' component={UserUpdateLocationComponent}/>
+        <Route exact path='/locations/profile/:locationId/update/admin' component={AdminUpdateLocationProfileComponent}/>
 
         <Route exact path='/map' component={SimpleMap}/>
         <br/>

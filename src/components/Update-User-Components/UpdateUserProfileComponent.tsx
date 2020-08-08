@@ -9,10 +9,6 @@ import { createStyles, Theme } from '@material-ui/core/styles';
 import { IState } from "../../reducers";
 import { User } from "../../models/User";
 
-interface IUpdateUserState {
-  user: User
-}
-
 const CustomButton = withStyles((theme) => ({
   root: {
     color: theme.palette.getContrastText(teal[700]),
@@ -70,10 +66,18 @@ const useStyles = makeStyles((theme) =>
 
   }));
 
-export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (props) => {
+export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
   const classes = useStyles();
 
   let { userId } = useParams()
+  
+  const currentUser = useSelector((state: IState) => {
+    return state.loginState.currUser
+  })
+
+  const errorMessage = useSelector((state: IState) => {
+    return state.loginState.errorMessage
+  })
 
   let [username, changeUsername] = useState("")
   let [password, changePassword] = useState("")
@@ -81,10 +85,10 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
   let [firstName, changeFirstName] = useState("")
   let [lastName, changeLastName] = useState("")
   let [affiliation, changeAffiliation] = useState("")
-  let [placesVisited, changePlacesVisited] = useState(0)
+  let [placesVisited, changePlacesVisited] = useState(currentUser?.placesVisited)
   let [address, changeAddress] = useState("")
   let [email, changeEmail] = useState("")
-  let [role, changeRole] = useState("")
+  let [role, changeRole] = useState(currentUser?.role)
   let [image, changeImage] = useState<any>(null)
 
   const updateUsername = (e: any) => {
@@ -115,12 +119,6 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
     e.preventDefault()
     if (e.currentTarget.value !== '') {
       changeAffiliation(e.currentTarget.value)
-    }
-  }
-  const updatePlacesVisited = (e: any) => {
-    e.preventDefault()
-    if (e.currentTarget.value !== '') {
-      changePlacesVisited(e.currentTarget.value)
     }
   }
   const updateAddress = (e: any) => {
@@ -155,17 +153,10 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
 
   const updateThisUser = async (e: SyntheticEvent) => {
     e.preventDefault()
-    let thunk = updateUserActionMapper(userId, username, password, firstName, lastName, affiliation, placesVisited, address, email, role, image)
+    let thunk = updateUserActionMapper(userId, username, password, firstName, lastName, affiliation, (placesVisited || 0), address, email, (role || "User"), image)
     dispatch(thunk)
   }
-  const updatedUser = useSelector((state: IState) => {
-    return state.loginState.currUser
-  })
-
-  const errorMessage = useSelector((state: IState) => {
-    return state.loginState.errorMessage
-  })
-
+  
   useEffect(() => {
     if (errorMessage) {
       toast.error(errorMessage)
@@ -173,9 +164,13 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
     }
   })
 
+  useEffect(() =>{
+    if (currentUser){ 
+      props.history.push(`users/profile/${currentUser.userId}`)
+    }
+  })
  
   return (
-    (updatedUser) ?
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -285,16 +280,15 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
                 <img src={image} width="100%" />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Link to={`/profile/${updatedUser.userId}`} style={{ textDecoration: "none" }}>
                   <CustomButton
                     type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
+                    onClick={updateThisUser} 
                     className={classes.submit}
                   > Update
                 </CustomButton>
-                </Link>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Link to="/" style={{ textDecoration: "none" }}>
@@ -312,12 +306,5 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
           </form>
         </div>
       </Container>
-      :
-      <div>
-        <Card className={classes.noUser}>
-          Begone. You are not a Member.
-        </Card>
-
-      </div>
   )
 }

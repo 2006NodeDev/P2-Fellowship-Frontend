@@ -69,6 +69,10 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
   const [username, changeUsername] = useState('')
   const [password, changePassword] = useState('')
 
+  //dispatch is the function that takes an action as an argument and gives it to the reducer
+  //you get the action from the action mapper
+  const dispatch = useDispatch()
+
   const updateUsername = (event: any) => {
     event.preventDefault()
     changeUsername(event.currentTarget.value)
@@ -77,10 +81,6 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
     event.preventDefault()
     changePassword(event.currentTarget.value)
   }
-
-  //dispatch is the function that takes an action as an argument and gives it to the reducer
-  //you get the action from the action mapper
-  const dispatch = useDispatch()
 
   const loginSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()

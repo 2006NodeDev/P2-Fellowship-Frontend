@@ -25,7 +25,6 @@ export const updateUserActionMapper = (userId:number, username:string, password:
         email,
         role,
         image
-
     }
    
     try{

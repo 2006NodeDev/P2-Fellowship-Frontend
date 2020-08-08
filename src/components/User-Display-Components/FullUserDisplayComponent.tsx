@@ -66,7 +66,7 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
             style={{ minHeight: '100vh' }}
         >
        
-        <Card className={classes.root}>
+        <Card className={classes.root} >
             <CardMedia
                 className={classes.media}
                 style={{marginTop: 20}}
@@ -99,8 +99,8 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
                     PLACES VISITED: {props.user.placesVisited}
                 </Typography>
             </CardContent>
-            <CardActions className={classes.root}>
-                <Link to={`/users/profile/${props.user.userId}/update`} style={{ textDecoration:"none"}}>
+            <CardActions className={classes.root}> {/**issue with the props.userId */}
+                <Link to={`/users/profile/update/${props.user.userId}`} style={{ textDecoration:"none"}}>
                     <CustomButton variant="contained" className={classes.submit}>
                         Update Profile
                     </CustomButton>
