@@ -41,7 +41,7 @@ export const userProfileReducer=(state = initialState, action:AnyAction) => {
         case userProfileTypes.PROFILE_FOUND:{
             return {
                 ...state,
-                profUser:action.payload.currUser
+                profUser:action.payload.profUser
             }
         }
         default:{

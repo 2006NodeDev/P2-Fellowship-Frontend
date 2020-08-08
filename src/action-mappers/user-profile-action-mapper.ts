@@ -14,12 +14,12 @@ export const userProfileTypes = {
 export const userProfileActionMapper = (userId:number)=> async (dispatch:any) => {
     
     try{
-        let currUser = await getUserProfile(userId)
-        console.log(currUser)
+        let profUser = await getUserProfile(userId)
+        console.log(profUser)
         dispatch({
             type:userProfileTypes.PROFILE_FOUND,
             payload:{
-                currUser
+                profUser
             }
         })
     }catch (err) {
@@ -32,7 +32,7 @@ export const userProfileActionMapper = (userId:number)=> async (dispatch:any) =>
             dispatch({
                 type:userProfileTypes.PROFILE_NOT_FOUND
             })
-        } else{
+        } else {
             dispatch({
                 type:userProfileTypes.SERVER_ERROR
             })

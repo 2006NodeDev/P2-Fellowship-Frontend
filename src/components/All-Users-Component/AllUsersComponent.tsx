@@ -1,14 +1,41 @@
 //display return from Full User Card Display Component
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { FullUserDisplayComponent } from '../User-Display-Components/FullUserDisplayComponent'
-import { UserCardDisplayComponent} from '../User-Display-Components/UserCardDisplayComponent'
 import { getAllUsers } from '../../remote/user-service/getAllUsers'
 import { User } from '../../models/User'
 import { useSelector } from 'react-redux'
 import { IState } from '../../reducers'
-import { Card } from '@material-ui/core'
+import { Card, makeStyles, GridList, GridListTile, ListSubheader, GridListTileBar, IconButton } from '@material-ui/core'
+import InfoIcon from '@material-ui/icons/Info';
+import { Link } from 'react-router-dom'
+import { userProfileActionMapper } from '../../action-mappers/user-profile-action-mapper'
 
+
+const useStyles = makeStyles((theme)=>({ //customize this more!
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      width: "100%",
+      justifyContent: 'space-around',
+      overflow: 'hidden',
+      backgroundColor: theme.palette.background.paper,
+    },
+    label: {
+        fontSize: 30,
+        color: 'black',
+        fontFamily: "Bookman Old Style"
+    },
+    gridList: {
+      width: "100%",
+      height: "100%",
+    },
+    icon: {
+      color: 'rgba(255, 255, 255, 0.54)',
+    },
+  }))
+  
 export const AllUsersComponent: FunctionComponent<any> = (props) => {
+    const classes = useStyles();
 
     const thisUser = useSelector((state: IState) => {
         return state.loginState.currUser
@@ -25,7 +52,7 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
             changeAllUsers(response)
         }
 
-        if (!allUsers) {
+        if (allUsers.length === 0) {
             getUsers()
         }
     })
@@ -35,10 +62,26 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
     if (thisUser && thisUser.role==="Admin"){ 
         return (
             (allUsers) ?
-            <div>
-                {allUsers.map((user) => {
-                    return <FullUserDisplayComponent key={'user-key-' + user.userId} user={user} />
-                })}
+            <div className={classes.root}>
+                <GridList cellHeight={300} cols={3} className={classes.gridList}>
+                <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
+                    <ListSubheader className={classes.label}>All Users</ListSubheader>
+                </GridListTile>
+                {allUsers.map((tile) => (
+                    <GridListTile key={tile.userId}>
+                    <img src={tile.image} alt={"Profile Picture"}/>
+                    <GridListTileBar
+                        title={tile.firstName}
+                        subtitle={<span>Affiliation: {tile.affiliation}<br/> Places Visted:{tile.placesVisited} </span>}
+                        actionIcon={
+                            <IconButton aria-label={`View full user profile`} component={Link} to={`/users/profile/${tile.userId}`} className={classes.icon}>
+                              <InfoIcon/>
+                            </IconButton>
+                          }
+                    />
+                    </GridListTile>
+                ))}
+                </GridList>
             </div>
             :
             <div>
@@ -48,10 +91,21 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
     } else if (thisUser){
         return (
             (allUsers) ?
-            <div>
-                {allUsers.map((user) => {
-                    return <UserCardDisplayComponent key={'user-key-' + user.userId} user={user} />
-                })}
+            <div className={classes.root}>
+                <GridList cellHeight={300} cols={3} className={classes.gridList}>
+                <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
+                    <ListSubheader className={classes.label}>All Users</ListSubheader>
+                </GridListTile>
+                {allUsers.map((tile) => (
+                    <GridListTile key={tile.userId}>
+                    <img src={tile.image} alt={"Profile Picture"}/>
+                    <GridListTileBar
+                        title={tile.firstName}
+                        subtitle={<span>Affiliation: {tile.affiliation} <br/> Places Visted:{tile.placesVisited} </span>}
+                    />
+                    </GridListTile>
+                ))}
+                </GridList>
             </div>
             :
             <div>
