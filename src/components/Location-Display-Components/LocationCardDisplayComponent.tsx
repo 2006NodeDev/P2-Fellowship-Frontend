@@ -16,9 +16,10 @@ const useStyles = makeStyles({ //customize this more!
   root: {
     margin: "auto",
     minWidth: 275,
-    maxWidth: 500, 
+    maxWidth: 500,
     justifyContent: "center",
-    alignItems:"center"
+    alignItems: "center",
+
   },
   media: {
     height: "auto",
@@ -64,32 +65,35 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
           justify="center"
           style={{ minHeight: '100vh' }}
         >
-          
-        <Card className={classes.root} >
-          <CardContent> 
 
-            <SingleImageDisplay location={props.location} />
-            <Typography className={classes.name} gutterBottom>
-              {props.location.name}
-            </Typography>
-            <Typography className={classes.info}>
-              REALM : {props.location.realm}
-            </Typography>
-            <Box component="fieldset" mb={3} borderColor="transparent">
-              <Typography component="legend">RATING</Typography>
-              <Rating name="read-only" size="large" value={props.location.rating} precision={0.5} readOnly />
-            </Box>
-            <Typography className={classes.info}>
-              {props.location.numVisited || 0} people have visited this location.
+          <Card className={classes.root} >
+            <CardContent>
+
+              <SingleImageDisplay location={props.location} />
+              <Typography className={classes.name} gutterBottom>
+                {props.location.name}
+              </Typography>
+              <Typography className={classes.info}>
+                REALM : {props.location.realm}
+              </Typography>
+              <Box component="fieldset" mb={3} borderColor="transparent">
+                <Typography component="legend">RATING</Typography>
+                <Rating name="read-only" size="large" value={props.location.rating} precision={0.5} readOnly />
+              </Box>
+              <Typography className={classes.info}>
+                {props.location.numVisited || 0} people have visited this location.
             </Typography>
 
-          </CardContent>
-          <CardActions className={classes.root}>
-            <Button variant="contained" className={classes.submit}>
-              <Link to={`/locations/profile/${props.location.locationId}`} style={{ textDecoration:"none"}}/>
-                Details
-            </Button>
-          </CardActions>
+            </CardContent>
+            <CardActions className={classes.root}>
+
+              <Link to={`/locations/profile/${props.location.locationId}`} style={{ textDecoration: "none" }} >
+                <CustomButton variant="contained" className={classes.submit}>
+                  Details
+              </CustomButton>
+
+              </Link>
+            </CardActions>
 
 
           

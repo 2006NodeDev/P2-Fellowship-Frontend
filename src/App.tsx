@@ -17,13 +17,14 @@ import { LocationProfileComponent } from '../src/components/Location-Profile-Com
 import { HomeComponent } from './components/Home-Page-Component/HomeComponent';
 import { UserProfileComponent } from './components/User-Profile-Component/UserProfileComponent';
 import { UpdateUserProfileComponent } from './components/Update-User-Components/AdminUpdateUserComponent';
-
 import SimpleMap from './components/MapComponent/simpleMap';
+import { AdminUpdateLocationProfileComponent } from './components/Update-Location-Components/AdminUpdateLocComponent';
+import { Location } from './models/Location';
 
 
 function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)
-
+  const [currentLocation, changeCurrentLocation] = useState<null | Location>(null)
   return (
     <div className="App">
       <Provider store={store}>
@@ -38,9 +39,15 @@ function App() {
 
         <Route exact path='/users/profile/:userId' component={UserProfileComponent}/>
         <Route exact path='/users' component={AllUsersComponent}/>
-        <Route exact path='/users/profile/update/:userId' component={UpdateUserProfileComponent}/>
+        <Route exact path='/users/profile/:userId/update' render={(props) =>(<UpdateUserProfileComponent user={currentUser}/>)}/>
+
+
         <Route path='/locations/profile/:locationId' component={LocationProfileComponent}/>
         <Route exact path='/locations' component={AllLocationsComponent}/>
+        <Route path='/locations/profile/:locationId/update' component={AdminUpdateLocationProfileComponent}/>
+
+        {/* <Route exact path='/locations/profile/:locationId/update' render={(props) =>(<AdminUpdateLocationProfileComponent location={currentLocation}/>)}/> */}
+
 
         <Route exact path='/map' component={SimpleMap}/>
         <br/>

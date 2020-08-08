@@ -97,7 +97,7 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
                 </Typography>
             </CardContent>
             <CardActions className={classes.root}>
-                <Link to= {`/users/profile/${props.user.userId}/update`} style={{ textDecoration:"none"}}>
+                <Link to= {`/users/profile/${props.user.userId}/update`}>
                     <CustomButton variant="contained" className={classes.submit}>
                         Update Profile
                     </CustomButton>

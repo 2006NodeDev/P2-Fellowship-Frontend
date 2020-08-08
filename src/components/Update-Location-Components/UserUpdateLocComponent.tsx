@@ -14,6 +14,13 @@ import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "r
 //     const user = useSelector((state: IState) => {
 //         return state.loginState.currUser
 //     })
+//      const updatedLocation = useSelector((state: IState) => {
+    //         return state.locationProfileState.profLocation
+    //     })
+
+    //     const errorMessage = useSelector((state: IState) => {
+    //         return state.locationProfileState.errorMessage
+    //     })
 
 
 //     let { locationId } = useParams()
@@ -23,6 +30,11 @@ import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "r
 //     const [image, changeImage] = useState<any>(null)
 //     const [rating, changeRating] = useState(0)
 //     const [visited, changeVisited] = useState({ checkBox: false })
+
+//     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //  event.preventDefault()
+//     changeVisited({ ...visited, [event.target.name]: event.target.checked });
+//     };
 
 //     const updateRating = (event: any) => {
 //         event.preventDefault()
@@ -50,20 +62,13 @@ import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "r
 //     }
 //     const dispatch = useDispatch()
 
-
 //     const updateThisLocation = async (e: SyntheticEvent) => {
 //         e.preventDefault()
-//         let thunk = userUpdateLocationActionMapper(locationId, user.userId, visited, rating, image)
+//         let thunk = userUpdateLocationActionMapper(locationId, user.userId, visited.checkBox, rating, image)
 //         dispatch(thunk)
 
 //     }
-//     const updatedLocation = useSelector((state: IState) => {
-//         return state.locationProfileState.profLocation
-//     })
-
-//     const errorMessage = useSelector((state: IState) => {
-//         return state.locationProfileState.errorMessage
-//     })
+//    
 
 //     useEffect(() => {
 //         if (errorMessage) {
@@ -90,7 +95,7 @@ import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "r
 //                     <Grid container spacing={2}>
 //                         <Grid item xs={12} sm={6}>
 //                             <FormControlLabel
-//                                 control={<GreenCheckbox checked={visited.checkBox} onChange={updateVisited} name="checkBox" />}
+//                                 control={<GreenCheckbox checked={visited.checkBox} onChange={handleChange} name="checkBox" />}
 //                                 label="Yes"
 //                             />
 //                         </Grid>
@@ -106,7 +111,7 @@ import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "r
 //                             />
 //                         </Grid>
 //                         <Grid item xs={12}>
-//                             <label htmlFor="file">Change Profile Picture</label> <br />
+//                             <label htmlFor="file">Upload Image</label> <br />
 //                             <input type="file" name="file" accept="image/*" onChange={updateImage} />
 //                             <img src={image} width="100%" />
 //                         </Grid>

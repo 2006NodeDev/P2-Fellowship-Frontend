@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import { teal, green } from '@material-ui/core/colors';
 import { Card, CardContent, Typography, CardActions, Paper, CardMedia, Grid, Menu } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Image from '../../images/home-map.jpg'
 import { useSelector } from 'react-redux';
 import { IState } from '../../reducers';
 
@@ -22,7 +21,7 @@ const background = {
 card : { 
     height: 1000,
     maxWidth: 20000,
-    backgroundImage: `url(${Image})`
+    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/Project-Images/home-map.jpg"})`
     }
 }
 

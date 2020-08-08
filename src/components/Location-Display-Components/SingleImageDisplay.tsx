@@ -5,12 +5,12 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import image from '../../images/bag-end-1.jpg';
 import { Location } from '../../models/Location';
+import { LocationImage } from '../../models/LocationImage';
 
 
-interface ILocationProps{
-  location:Location
+interface ILocationProps {
+  location: Location
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,11 +21,13 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'space-around',
       overflow: 'hidden',
       backgroundColor: theme.palette.background.paper,
+
     },
-    gridList: {
-      flexWrap: 'nowrap',
-      // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-      transform: 'translateZ(0)',
+    image: {
+      width: 600,
+      height: 500,
+      margin: 'auto'
+
     },
     title: {
       color: theme.palette.primary.light,
@@ -38,38 +40,38 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const tileData = [
-  //add the image array here
-  {
-    img: image,
-    author: 'author',
-  },
+// const tileData = [
+//   //add the image array here
+//   {
+//     img: image,
+//     author: 'author',
+//   },
 
-];
+// ];
 
 
 
-export const SingleImageDisplay:FunctionComponent<ILocationProps> = (props) => {
+export const SingleImageDisplay: FunctionComponent<ILocationProps> = (props) => {
   const classes = useStyles();
-  
- // const tileData = props.location.image?.pop()
+
+  const tileData = props.location.image?.pop()
 
   //tileData is first image in the images array
 
   return (
-    (tileData)?
-    <div className={classes.root}>
-      <GridList className={classes.gridList}>
-        {tileData.map((tile) => (
-          
-            <img src={tile.img} height='100%' width='100%' />
-            
-        ))}
-      </GridList>
-    </div>
-    :
-    <div>
-      No Image
+    (tileData) ?
+      <div className={classes.root}>
+
+
+        <GridList>
+          <img src={tileData.image} className={classes.image} />
+        </GridList>
+
+
+      </div>
+      :
+      <div>
+        No Image
     </div>
   );
 }

@@ -5,7 +5,6 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import image from '../../images/bag-end.jpg';
 import { Location } from '../../models/Location';
 import { LocationImage } from '../../models/LocationImage';
 
@@ -17,16 +16,28 @@ interface ILocationProps{
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      
       display: 'flex',
       flexWrap: 'wrap',
-      justifyContent: 'space-around',
+      //justifyContent: 'space-around', //?
       overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper,
+      //backgroundColor: theme.palette.background.paper, //del this
+      //alignItems: 'center',
+    //justifyContent: 'center',
+      
+       
+      
     },
     gridList: {
-      flexWrap: 'nowrap',
-      // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-      transform: 'translateZ(0)',
+      width:1000,
+      height: 300, 
+      alignItems: 'center',
+    justifyContent: 'center',
+      
+
+     
+     
+    
     },
     title: {
       color: theme.palette.primary.light,
@@ -59,10 +70,15 @@ export const GridImageDisplay:FunctionComponent<ILocationProps> = (props) => {
 
   return (
     (tileData)?
-    <div className={classes.root}>
-      <GridList className={classes.gridList}>
+    <div className={classes.root} style={{marginTop: 20}}>
+      <br/>
+
+      <GridList cellHeight={160} className={classes.gridList} cols={3}>
+        
         {tileData.map((tile:LocationImage) => (
-            <img src={tile.image} height='100%' width='100%' />
+          <GridListTile key={tile.image} cols={1}>
+            <img src={tile.image}/>
+          </GridListTile>
         ))}
       </GridList>
     </div>
