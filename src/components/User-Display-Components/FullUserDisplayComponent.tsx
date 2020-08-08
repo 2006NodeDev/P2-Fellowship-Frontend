@@ -70,6 +70,7 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
                 image={props.user.image}
                 component="img"
                 title="Profile Picture"
+                
             />
             <CardContent>
                     {/* Name of User: */}

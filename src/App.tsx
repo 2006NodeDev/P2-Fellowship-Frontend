@@ -50,10 +50,6 @@ function App() {
 
 
         <Route exact path='/map' component={SimpleMap}/>
-
-       
-
-
         <br/>
       </Router>
       </Provider>
