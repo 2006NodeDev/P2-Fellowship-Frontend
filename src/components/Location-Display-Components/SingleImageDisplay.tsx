@@ -5,7 +5,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import image from '../../images/bag-end.jpg';
+import image from '../../images/bag-end-1.jpg';
 import { Location } from '../../models/Location';
 
 

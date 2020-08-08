@@ -11,6 +11,7 @@ import { useParams } from 'react-router'
 
 //navbar - admin update location 
 export const UserProfileComponent:FunctionComponent<any> = (props) => {
+    
 
     let[userProfile, changeUserProfile] = useState<any>(null)
     let {userId} = useParams()

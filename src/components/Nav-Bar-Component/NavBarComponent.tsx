@@ -9,7 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
-import { green, teal } from '@material-ui/core/colors';
+import { teal } from '@material-ui/core/colors';
 import { useSelector } from 'react-redux';
 import { IState } from '../../reducers';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,9 +19,7 @@ import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button';
 
 
 const drawerWidth = 240;

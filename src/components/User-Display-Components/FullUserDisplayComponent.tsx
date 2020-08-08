@@ -6,7 +6,6 @@ import { User } from '../../models/User'
 import { makeStyles, CardActions, Card, CardContent, Typography, CardMedia, Button, withStyles, Grid } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
-// import Image from '../../images/Gandalf.jpg'
 
 interface IUserDisplayProps {
     user:User
@@ -56,7 +55,6 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
  
     return(
         (props.user)?
-        
         <Grid
             container
             spacing={0}

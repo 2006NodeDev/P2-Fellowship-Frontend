@@ -77,7 +77,7 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
             </Typography>
             <Box component="fieldset" mb={3} borderColor="transparent">
               <Typography component="legend">RATING</Typography>
-              <Rating name="read-only" size="large" value={props.location.rating} readOnly />
+              <Rating name="read-only" size="large" value={props.location.rating} precision={0.5} readOnly />
             </Box>
             <Typography className={classes.info}>
               {props.location.numVisited || 0} people have visited this location.
@@ -86,11 +86,13 @@ export const LocationCardDisplayComponent: FunctionComponent<ILocationDisplayPro
           </CardContent>
           <CardActions className={classes.root}>
             <Button variant="contained" className={classes.submit}>
-              <Link to={`/locations/profile/${props.location.locationId}`} style={{ textDecoration:"none"}}>
+              <Link to={`/locations/profile/${props.location.locationId}`} style={{ textDecoration:"none"}}/>
                 Details
-              </Link>
             </Button>
           </CardActions>
+
+
+          
 
           </Card>
         </Grid>

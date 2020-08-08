@@ -1,14 +1,11 @@
 //display a location's profile in detail
 
 import 'react-toastify/dist/ReactToastify.css';
-import React, { FunctionComponent } from 'react'
-//import { useParams, Redirect } from 'react-router'
-//import { Link } from 'react-router-dom'
-import { Location } from '../../models/Location';
-//import { getLocationProfile } from '../../remote/location-service/getLocationProfile';
+import React, { FunctionComponent, useState, useEffect, SyntheticEvent } from 'react'
 import { useParams, Redirect } from 'react-router'
 import { Grid, Paper, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia, Button, Box, Divider, withStyles, CardActions } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import { Location } from '../../models/Location';
 import Rating from '@material-ui/lab/Rating';
 import { grey, teal } from '@material-ui/core/colors';
 import { GridImageDisplay } from './GridImageDisplay';
@@ -101,6 +98,8 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                     justify="center"
                     style={{ minHeight: '100vh' }}
                 >
+                <GridImageDisplay location={props.location} />
+
                     <Card className={classes.root}>
                         <CardContent>
                             <Typography className={classes.locationName}>
@@ -119,7 +118,7 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                             <Typography className={classes.locationDetails}>
                                 {`Primary Population: ${props.location.primaryPopulation || `not applicable`}`}
                             </Typography>
-                                <Rating name="read-only" value={props.location.rating} readOnly />
+                                <Rating name="read-only" value={props.location.rating} precision={0.5} readOnly />
                                 <Typography className={classes.locationDetails}>Average Rating</Typography>
                             <Divider className={classes.divider}/>
                             <Typography className={classes.locationDetails}>
@@ -134,7 +133,6 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                           </Typography>
                         </CardActions>
                     </Card>
-                    <GridImageDisplay location={props.location} />
                 </Grid>
             </div>
 

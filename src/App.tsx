@@ -20,9 +20,6 @@ import { UpdateUserProfileComponent } from './components/Update-User-Components/
 
 import SimpleMap from './components/MapComponent/simpleMap';
 
-import { UpdateLocationProfileComponent } from './components/Update-Location-Components/AdminUpdateLocComponent';
-
-
 
 function App() {
   const [currentUser, changeCurrentUser] = useState<null | User>(null)
@@ -41,16 +38,11 @@ function App() {
 
         <Route exact path='/users/profile/:userId' component={UserProfileComponent}/>
         <Route exact path='/users' component={AllUsersComponent}/>
-        <Route exact path='/users/profile/:userId/update' component={UpdateUserProfileComponent}/>
-
-
+        <Route exact path='/users/profile/update/:userId' component={UpdateUserProfileComponent}/>
         <Route path='/locations/profile/:locationId' component={LocationProfileComponent}/>
         <Route exact path='/locations' component={AllLocationsComponent}/>
 
         <Route exact path='/map' component={SimpleMap}/>
-
-        <Route exact path='/locations/profile/:locationId/update' component={UpdateLocationProfileComponent}/>
-
         <br/>
       </Router>
       </Provider>

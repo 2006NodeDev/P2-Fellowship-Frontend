@@ -1,4 +1,4 @@
-import { ILoginState, state, IUserProfileState } from "./index";
+import { IUserProfileState } from "./index";
 import { AnyAction } from "redux";
 import { userProfileTypes } from "../action-mappers/user-profile-action-mapper";
 
@@ -41,7 +41,7 @@ export const userProfileReducer=(state = initialState, action:AnyAction) => {
         case userProfileTypes.PROFILE_FOUND:{
             return {
                 ...state,
-                currUser:action.payload.currUser
+                profUser:action.payload.currUser
             }
         }
         default:{
