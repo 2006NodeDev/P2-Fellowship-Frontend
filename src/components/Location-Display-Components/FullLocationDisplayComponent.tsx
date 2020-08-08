@@ -33,6 +33,7 @@ interface ILocationDisplayProps {
 const useStyles = makeStyles({
     root: {
         margin: "auto",
+        marginTop: 20,
         minWidth: 275,
         maxWidth: 500,
         justifyContent: "center",
@@ -98,19 +99,7 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
         return state.loginState.currUser
     })
 
-    const locUpdateComp = () => {
-        return (
-            (user?.role === "Admin") ?
-                <div>
-                    <AdminUpdateLocationProfileComponent />
-                </div>
-                :
-                <div>
-                    <UserUpdateLocationComponent />
-                </div>
-        )
-    }
-
+    
     return (
 
         (user?.role === "Admin") ?

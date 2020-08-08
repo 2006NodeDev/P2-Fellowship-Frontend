@@ -19,7 +19,7 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
             let response = await getAllLocations()
             changeAllLocations(response)
         }
-        if(allLocations.length === 0){
+        if(!allLocations){
             getLocations()
         }
     })  
