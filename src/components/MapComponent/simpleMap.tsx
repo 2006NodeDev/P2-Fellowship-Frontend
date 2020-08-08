@@ -1,8 +1,9 @@
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState, FunctionComponent, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { Marker } from './Marker';
-//import { Locations } from '../../models/Location';
 //import { getAllLocations } from '../../remote/location-service/getAllLocations';
+import { Location } from '../../models/Location';
+import { getAllLocations } from '../../remote/location-service/getAllLocations';
 
 export const SimpleMap: FunctionComponent<any> = (props: any) => {
   const getMapOptions = (maps: any) => {
@@ -16,23 +17,38 @@ export const SimpleMap: FunctionComponent<any> = (props: any) => {
     
     const [center, setCenter] = useState({lat: -39.156841, lng: 175.632148 });
     const [zoom, setZoom] = useState(6);
-    
+
+    let [allLocations, changeAllLocations] = useState<Location[]>([])
+
+    useEffect(() => {
+        const getLocations = async () => {
+            let locations = await getAllLocations()
+            changeAllLocations(locations)
+        }
+
+        if (allLocations.length === 0) {
+            getLocations()
+        }
+    })
+    let locationsTag = allLocations.map((location) => {
+      return <Marker
+      key={'locations-key-' + location.locationId}
+      location={location}
+      lat={location.latitude}
+      lng={location.longitude}
+  >
+  </Marker>
+})
+
     return (
         <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'key here' }}
+          bootstrapURLKeys={{ key: '' }}
           defaultCenter={center}
           defaultZoom={zoom}
           options={getMapOptions}
         >
-          <Marker
-            lat={-39.156841}
-            lng={ 175.632148}
-          />
-          <Marker
-            lat={-37.872003}
-            lng={175.682917}
-          />
+         {locationsTag}
         </GoogleMapReact>
       </div>
     );

@@ -10,7 +10,7 @@ export const adminUpdateLocationTypes = {
     RESET_ERROR:'P2_RESET_ERROR'
 }
 
-export const adminUpdateLocationActionMapper = (locationId:number, name:string, image:LocationImage[], realm:string, governance:string, primaryPopulation: string, description: string, rating:number, numVisited:number)=> async (dispatch:any) => {
+export const adminUpdateLocationActionMapper = (locationId:number, name:string, image:LocationImage[], realm:string, governance:string, primaryPopulation: string, description: string, rating:number, numVisited:number,latitude:number,  longitude:number)=> async (dispatch:any) => {
    
     let location:Location = {
         locationId,
@@ -21,7 +21,10 @@ export const adminUpdateLocationActionMapper = (locationId:number, name:string, 
         primaryPopulation,
         description,
         rating,
-        numVisited
+        numVisited,
+        latitude,
+	    longitude
+	    //image?:LocationImage[]
 
     }
    
