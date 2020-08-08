@@ -75,7 +75,6 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
                 
             />
             <CardContent>
-                    {/* Name of User: */}
                 <Typography className={classes.username} gutterBottom>
                     {props.user.firstName} {props.user.lastName}
                 </Typography>

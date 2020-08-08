@@ -22,6 +22,8 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
     const [rating, changeRating] = useState(0)
     const [numVisited, changeNumVisited] = useState(0)
     const [image, changeImage] = useState<any>(undefined)
+    const [latitude, changelatitude] = useState(0)
+    const [longitude, changelongitude] = useState(0)
 
 
     const updateName = (e:any) => {
@@ -74,7 +76,7 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
     
     const updateThisLocation = async (e:SyntheticEvent) => {
       e.preventDefault()        
-        let thunk = adminUpdateLocationActionMapper(locationId, name, image, realm, governance, primaryPopulation, description, rating, numVisited)
+        let thunk = adminUpdateLocationActionMapper(locationId, name, image, realm, governance, primaryPopulation, description, rating, numVisited, latitude, longitude)
         dispatch(thunk) 
         
     }

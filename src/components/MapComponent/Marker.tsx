@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useState } from 'react';
-import { makeStyles, createStyles, Theme, Paper, Typography } from '@material-ui/core';
+import { makeStyles, createStyles, Theme, Paper, Typography, Button, Link } from '@material-ui/core';
 import './Marker.css';
 import InfoWindow from 'google-map-react';
-//import {Location} from '../../models/Location'
+import {Location} from '../../models/Location'
+import { FullLocationDisplayComponent } from '../Location-Display-Components/FullLocationDisplayComponent';
 
 // hoping to pass some props here for infoWindow in div eg:props.location.name
-interface IMapProps {  
-    //location: Location  
+interface IMapProp {  
+    location: Location  
     lat: number
     lng: number
 } 
@@ -14,12 +15,13 @@ interface IMapProps {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         paper: {
-            height: 95,
-            width: 155,
+            //backgroundColor: 'black',
+            height: 110,
+            width: 175,
         },
         title: {
             fontSize:12,
-            fontWeight: "inherit"
+            fontWeight: "lighter"
         },
         typography: {
             color: 'black',
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export const Marker: FunctionComponent<IMapProps> = (props) => {
+export const Marker: FunctionComponent<IMapProp> = (props) => {
     let classes = useStyles()
     const [isOpen, setOpen] = useState(false);
 
@@ -46,19 +48,19 @@ export const Marker: FunctionComponent<IMapProps> = (props) => {
                 <div
                     className="pin bounce"
                     style={{ backgroundColor: 'red', cursor: 'pointer' }}
+                    title={props.location.governance}
                     onClick={handleonClick}
                 />
                 <InfoWindow
                     onClick={handleonClose}
                 >
                     <Paper className={classes.paper} elevation={6}>
-                    <Typography className={classes.title} >
-                        MOUNT DOOM
+                    <Typography className={classes.title} > 
+                        {props.location.name}
                         </Typography>
-
                         <Typography className={classes.title} >
-                        Volcano where the one ring was forged and the only place it can be destroyed.
-                        </Typography>
+                        {props.location.description}
+                        </Typography>                      
                     </Paper>
                 </InfoWindow>
             </div>
