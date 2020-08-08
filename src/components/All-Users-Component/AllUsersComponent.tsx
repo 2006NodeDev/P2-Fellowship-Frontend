@@ -1,7 +1,7 @@
 //display return from Full User Card Display Component
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { FullUserDisplayComponent } from '../User-Display-Components/FullUserDisplayComponent'
-import { UserCardDisplayComponent } from '../User-Display-Components/UserCardDisplayComponent'
+import { UserCardDisplayComponent} from '../User-Display-Components/UserCardDisplayComponent'
 import { getAllUsers } from '../../remote/user-service/getAllUsers'
 import { User } from '../../models/User'
 import { useSelector } from 'react-redux'
