@@ -2,7 +2,6 @@ import { combineReducers } from "redux";
 import { User } from "../models/User";
 import {Location} from "../models/Location";
 import { loginReducer } from "./login-reducer";
-import { logoutReducer } from "./logout-reducer";
 import { userProfileReducer } from "./userProfile-reducer";
 import { locationProfileReducer } from "./locationProfile-reducer";
 
@@ -10,11 +9,6 @@ import { locationProfileReducer } from "./locationProfile-reducer";
 //user who is currently logged in
 export interface ILoginState{
     currUser:User | null | undefined,
-    errorMessage:string
-}
-
-export interface ILogoutState{
-    noUser:User | null | undefined,
     errorMessage:string
 }
 
@@ -33,13 +27,9 @@ export interface ILocationProfileState{
 
 }
 
-
-
-
 //def of the total state i.e. what sub-states it SHOULD have
 export interface IState{
     loginState:ILoginState
-    logoutOutState:ILogoutState
     locationProfileState:ILocationProfileState
     userProfileState:IUserProfileState
 
@@ -49,7 +39,6 @@ export interface IState{
 export const state = combineReducers <IState>({
     //takes in an object that is all of the reducers
     loginState:loginReducer,
-    logoutOutState:logoutReducer, 
     locationProfileState:locationProfileReducer,
     userProfileState:userProfileReducer
 })

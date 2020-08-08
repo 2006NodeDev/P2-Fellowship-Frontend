@@ -19,7 +19,7 @@ interface IUpdateUserProps {
   user: User;
 }
 
-export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
+export const AdminUpdateUserProfileComponent: FunctionComponent<IUpdateUserProps> = (props) => {
   const classes = useStyles();
 
   let { userId } = useParams()
@@ -144,7 +144,7 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
+          <Typography className={classes.label}>
             Update User Profile
           </Typography>
           <form autoComplete="off" onSubmit={updateThisUser} className={classes.form} noValidate>
@@ -220,6 +220,17 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
                   onChange={updateLastName}
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="address"
+                  label="Change Address"
+                  name="address"
+                  value={address}
+                  onChange={updateAddress}
+                />
+              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
@@ -229,28 +240,6 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
                   name="affiliation"
                   value={affiliation}
                   onChange={updateAffiliation}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="placesVisited"
-                  label="Change No of Places Visited"
-                  name="Places Visited"
-                  value={placesVisited}
-                  onChange={updatePlacesVisited}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="address"
-                  label="Change Address"
-                  name="address"
-                  value={address}
-                  onChange={updateAddress}
                 />
               </Grid>
               <Grid>
@@ -266,7 +255,6 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
                     <MenuItem value={"User"}>User</MenuItem>
                     <MenuItem value={"Admin"}>Admin</MenuItem>
                   </Select>
-                  <FormHelperText>Required</FormHelperText>
                 </FormControl>
 
               </Grid>
@@ -283,12 +271,9 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
-                  >
-                    Update
-
+                  > Update
                 </CustomButton>
                 </Link>
-
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Link to="/" style={{ textDecoration: "none" }}>
@@ -358,6 +343,9 @@ const useStyles = makeStyles((theme) =>
     },
     media: {
 
+    }, 
+    label: {
+      fontSize: 30,
+      fontFamily: "Bookman Old Style"
     }
-
   }));

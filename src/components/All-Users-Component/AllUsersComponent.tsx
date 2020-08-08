@@ -6,6 +6,7 @@ import { getAllUsers } from '../../remote/user-service/getAllUsers'
 import { User } from '../../models/User'
 import { useSelector } from 'react-redux'
 import { IState } from '../../reducers'
+import { Card } from '@material-ui/core'
 
 export const AllUsersComponent: FunctionComponent<any> = (props) => {
 
@@ -30,10 +31,10 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
     })
 
     console.log(allUsers);
-
-
-    return (
-        (allUsers) ?
+    
+    if (thisUser && thisUser.role==="Admin"){ 
+        return (
+            (allUsers) ?
             <div>
                 {allUsers.map((user) => {
                     return <FullUserDisplayComponent key={'user-key-' + user.userId} user={user} />
@@ -42,8 +43,30 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
             :
             <div>
                 No Users Found
-        </div>
-    )
+            </div>
+        )
+    } else if (thisUser){
+        return (
+            (allUsers) ?
+            <div>
+                {allUsers.map((user) => {
+                    return <UserCardDisplayComponent key={'user-key-' + user.userId} user={user} />
+                })}
+            </div>
+            :
+            <div>
+                No Users Found
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                No Users Found
+            </div>
+        )
+    }
+
+   
 }
 
 

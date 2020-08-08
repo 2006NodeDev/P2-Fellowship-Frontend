@@ -123,36 +123,35 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     if (!currUser) {
       menuItems = []
       menuItems.push(
-        <Link to="/login" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose} >Login</MenuItem></Link>,
-        <Link to="/register" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Sign Up</MenuItem></Link>,
-        <Link to="/" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Home</MenuItem></Link>,
-        <Link to="/map" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Map</MenuItem></Link>
-        )
-      }
-  });
+
+        <ListItem button component={Link} key="listeItem3" to="/login" ><ListItemText onClick={handleDrawerClose}>Login</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem4" to="/register" ><ListItemText onClick={handleDrawerClose}>Register</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem5" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
+      )}
+
+  })
 
   if (currUser) {
     if (currUser.role === 'Admin') {
       menuItems.push(
-        <ListItem button component={Link} key="listItem1" to={`users/profile/${currUser.userId}`}>
-          <ListItemText >Hello {currUser.firstName}!</ListItemText>
-        </ListItem>,
+        <ListItem button component={Link} key="listItem1" to={`/users/profile/${currUser.userId}`}><ListItemText onClick={handleDrawerClose}>Hello {currUser.firstName}!</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem2" to="/" ><ListItemText onClick={handleDrawerClose}>Home</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem3" to={`/users/profile/${currUser.userId}/update`} ><ListItemText onClick={handleDrawerClose}>Update My Profile</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem4" to="/users" ><ListItemText onClick={handleDrawerClose}>All Users</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem5" to="/locations" ><ListItemText onClick={handleDrawerClose}>All Locations</ListItemText></ListItem>,
-        <ListItem button component={Link} key="listeItem6" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>,
-        <Link to="/map" style={{ textDecoration: "none" }}><MenuItem onClick={handleDrawerClose}>Map</MenuItem></Link>
+        <ListItem button component={Link} key="listeItem6" to="/map"> <ListItemText onClick={handleDrawerClose}>Map</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem7" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
 
       )
 
     } else {
       menuItems.push(
-        <ListItem button component={Link} key="listItem1" to={`users/profile/${currUser.userId}`}>
+        <ListItem button component={Link} key="listItem1" to={`/users/profile/${currUser.userId}`}>
           <ListItemText >Hello {currUser.firstName}!</ListItemText>
         </ListItem>,
         <ListItem button component={Link} key="listeItem2" to="/" ><ListItemText onClick={handleDrawerClose}>Home</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem3" to={`/users/profile/${currUser.userId}/update`} ><ListItemText onClick={handleDrawerClose}>Update My Profile</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem4" to="/users" ><ListItemText onClick={handleDrawerClose}>All Users</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem4" to="/locations" ><ListItemText onClick={handleDrawerClose}>All Locations</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem5" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
       

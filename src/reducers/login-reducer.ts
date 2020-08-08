@@ -1,6 +1,7 @@
 import { ILoginState, state } from "./index";
 import { AnyAction } from "redux";
 import { loginTypes } from "../action-mappers/login-action-mapper";
+import { logoutTypes } from "../action-mappers/logout-action-mapper";
 
 
 //when running reducer for the first time this initializes it to null
@@ -45,6 +46,18 @@ export const loginReducer=(state = initialState, action:AnyAction) => {
             return {
                 ...state,
                 currUser:action.payload.currUser
+            }
+        }
+        case logoutTypes.NO_USER_LOGGED_IN:{
+            return {
+                ...state,
+                errorMessage:'User must be logged in to log out'
+            }
+        }
+        case logoutTypes.LOGOUT_SUCCESSFUL:{
+            return {
+                ...state,
+                currUser:action.payload.noUser
             }
         }
         default:{

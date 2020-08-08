@@ -1,6 +1,4 @@
 import { fellowshipLogout } from "../remote/user-service/fellowshipLogout";
-import { User } from "../models/User";
-import { getUserProfile } from "../remote/user-service/getUserProfile";
 
 
 export const logoutTypes = {

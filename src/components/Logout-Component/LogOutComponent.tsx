@@ -1,8 +1,6 @@
 import React, { FunctionComponent, SyntheticEvent, useEffect } from "react";
-import { fellowshipLogout } from "../../remote/user-service/fellowshipLogout";
-import { Button, makeStyles, CssBaseline, Container, Typography, Grid, Link, withStyles } from "@material-ui/core";
+import { Button, makeStyles, CssBaseline, Container, Typography, Grid, withStyles } from "@material-ui/core";
 import { RouteComponentProps } from "react-router";
-import { UserProfileComponent } from "../User-Profile-Component/UserProfileComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { IState } from "../../reducers";
 import { teal } from "@material-ui/core/colors";
@@ -21,11 +19,12 @@ export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
     // })
 
     const user = useSelector((state: IState) => {
-      return state.logoutOutState.noUser
+      return state.loginState.currUser
     })
+    console.log(user);
   
     const errorMessage = useSelector((state: IState) => {
-      return state.logoutOutState.errorMessage
+      return state.loginState.errorMessage
     })
 
     const dispatch = useDispatch()
@@ -36,7 +35,7 @@ export const LogOutComponent: FunctionComponent<ILogoutProps> = (props)=>{
         e.preventDefault()
         let thunk = logoutActionMapper()
         dispatch(thunk)
-    }
+      }
   
     useEffect(() =>{
       if (errorMessage) {
