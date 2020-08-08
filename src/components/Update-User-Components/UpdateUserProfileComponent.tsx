@@ -1,7 +1,7 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
 import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles, Card } from "@material-ui/core";
 import { Link, useParams, } from 'react-router-dom';
-import { green, lime } from "@material-ui/core/colors";
+import { teal } from "@material-ui/core/colors";
 import { toast } from 'react-toastify'
 import { updateUserActionMapper, updateUserErrorReset } from "../../action-mappers/update-user-action-mapper";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,12 +15,12 @@ interface IUpdateUserState {
 
 const CustomButton = withStyles((theme) => ({
   root: {
-    color: theme.palette.getContrastText(lime[700]),
-    backgroundColor: "lime[700]",
+    color: theme.palette.getContrastText(teal[700]),
+    backgroundColor: "teal[700]",
     '&:hover': {
-      backgroundColor: green[900],
-    },
-  },
+      backgroundColor: teal[800],
+     }
+  }
 }))(Button);
 
 //styles at the bottom because closer to html return
@@ -47,18 +47,25 @@ const useStyles = makeStyles((theme) =>
       width: '100%',
       marginTop: theme.spacing(3),
     },
+    label: {
+      fontSize: 30,
+      fontFamily: "Bookman Old Style"
+    },
     submit: {
       margin: theme.spacing(3, 0, 2),
-      backgroundColor: lime[700],
+      backgroundColor: teal[700],
       color: 'white',
       //background color?
       fontFamily: "Bookman Old Style",
       fontSize: 16
     },
-    media: {
-      height:100,
-      width:100
-
+    noUser: {
+      marginTop: theme.spacing(3),
+      height:25,
+      width:240,
+      alignItems:'center',
+      margin: 'auto',
+      fontFamily: "Bookman Old Style"
     }
 
   }));
@@ -150,8 +157,6 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
     e.preventDefault()
     let thunk = updateUserActionMapper(userId, username, password, firstName, lastName, affiliation, placesVisited, address, email, role, image)
     dispatch(thunk)
-
-
   }
   const updatedUser = useSelector((state: IState) => {
     return state.loginState.currUser
@@ -174,7 +179,7 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
+          <Typography className={classes.label}>
             Update User Profile
           </Typography>
           <form autoComplete="off" onSubmit={updateThisUser} className={classes.form} noValidate>
@@ -250,7 +255,7 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
                   onChange={updateLastName}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   variant="outlined"
                   fullWidth
@@ -261,18 +266,7 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
                   onChange={updateAffiliation}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="placesVisited"
-                  label="Change No of Places Visited"
-                  name="Places Visited"
-                  value={placesVisited}
-                  onChange={updatePlacesVisited}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   variant="outlined"
                   fullWidth
@@ -291,7 +285,7 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
                 <img src={image} width="100%" />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Link to={`/profile/${updatedUser.userId}`}>
+                <Link to={`/profile/${updatedUser.userId}`} style={{ textDecoration: "none" }}>
                   <CustomButton
                     type="submit"
                     fullWidth
@@ -320,7 +314,7 @@ export const UpdateUserProfileComponent: FunctionComponent<IUpdateUserState> = (
       </Container>
       :
       <div>
-        <Card className={classes.media}>
+        <Card className={classes.noUser}>
           Begone. You are not a Member.
         </Card>
 
