@@ -118,21 +118,6 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
   }
 
 
-  //Plain React w/o Redux:
-  // const newUserSubmit = async (e:SyntheticEvent) => {
-  //   e.preventDefault()
-
-  //     let res = await createNewUser(username, password, firstname, lastname, affiliation, placesVisited, address, email, role, image)
-  //     console.log("new user submit response in compontn" + res)
-
-  //     props.changeNewUser(res)
-  //     props.history.push(`/profile/${res.userId}`) 
-
-  // }
-
-
-  //with Redux:
-
   const dispatch = useDispatch()
 
   const newUserSubmit = async (e: SyntheticEvent) => {
@@ -171,7 +156,7 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
         justify="center"
         style={{ minHeight: '100vh' }}
       >
-      <Card className={classes.root} >
+     
         <form className={classes.root} autoComplete="off" onSubmit={newUserSubmit}>
           <div>
             <br />
@@ -245,7 +230,7 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
             <SignUpButton type='submit' variant='contained' onClick={newUserSubmit} className={classes.submit}> Submit </SignUpButton>          
           </div>
         </form>
-      </Card>
+    
       </Grid>
     </div>
   )

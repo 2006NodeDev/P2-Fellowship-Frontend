@@ -1,13 +1,16 @@
 //this will use the FullLocationDisplayComponent to show all information to a user (and update?)
 import React from "react"
-//import { Location } from "../../models/Location"
+import { Location } from "../../models/Location"
 import { useState, FunctionComponent, useEffect } from "react"
 import { useParams } from "react-router"
 import { getLocationProfile } from "../../remote/location-service/getLocationProfile"
 import { FullLocationDisplayComponent } from '../Location-Display-Components/FullLocationDisplayComponent'
 
+interface ILocationProfileState{
+    location:Location
+}
 
-export const LocationProfileComponent:FunctionComponent<any> = (props) => {
+export const LocationProfileComponent:FunctionComponent<ILocationProfileState> = (props) => {
 
     let[locationProfile, changeLocationProfile] = useState<any>(null)
     let {locationId} = useParams()

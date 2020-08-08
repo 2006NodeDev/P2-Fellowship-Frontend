@@ -18,7 +18,8 @@ const useStyles = makeStyles({ //customize this more!
     minWidth: 275,
     maxWidth: 500,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+
   },
   media: {
     height: "auto",

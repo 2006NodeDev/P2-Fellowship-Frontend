@@ -5,7 +5,6 @@ import { ILoginState, IState } from '../../reducers';
 import { loginActionMapper, loginErrorReset } from '../../action-mappers/login-action-mapper';
 import { toast } from 'react-toastify'
 import { teal, green } from '@material-ui/core/colors';
-import Image from '../../images/login.png'
 
 
 const LoginButton = withStyles((theme) => ({
@@ -49,7 +48,7 @@ const background = {
   card: {
     height: '100%',
     maxWidth: '100%',
-    backgroundImage: `url(${Image})`
+    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/Project-Images/login.png"})`
 
   }
 }
