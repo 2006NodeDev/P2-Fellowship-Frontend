@@ -54,10 +54,7 @@ export const UserCardDisplayComponent: FunctionComponent<IUserDisplayProps> = (p
         justify="center"
         style={{ minHeight: '100vh' }}
       >
-
-
         <Card className={classes.root}>
-        
           <br />
           <CardMedia
             className={classes.media}
