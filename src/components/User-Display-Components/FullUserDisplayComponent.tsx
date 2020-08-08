@@ -50,6 +50,8 @@ const CustomButton = withStyles((theme) => ({
     }
 }))(Button);
 
+
+
 export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (props) => {
     const classes = useStyles(); 
  
@@ -96,7 +98,7 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
                 </Typography>
             </CardContent>
             <CardActions className={classes.root}>
-                <Link to= {`/users/profile/${props.user.userId}/update`}>
+                <Link to={`/users/profile/${props.user.userId}/update`} style={{ textDecoration:"none"}}>
                     <CustomButton variant="contained" className={classes.submit}>
                         Update Profile
                     </CustomButton>

@@ -153,6 +153,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
         </ListItem>,
         <ListItem button component={Link} key="listeItem2" to="/" ><ListItemText onClick={handleDrawerClose}>Home</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem3" to={`/users/profile/${currUser.userId}/update`} ><ListItemText onClick={handleDrawerClose}>Update My Profile</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem4" to="/users" ><ListItemText onClick={handleDrawerClose}>All Users</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem4" to="/locations" ><ListItemText onClick={handleDrawerClose}>All Locations</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem5" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
       
