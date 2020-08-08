@@ -7,7 +7,7 @@ import { updateLocationErrorReset, adminUpdateLocationActionMapper } from "../..
 import { useSelector, useDispatch } from "react-redux";
 import { IState } from "../../reducers/index";
 
-export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
+export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     const classes = useStyles();
 
     let {locationId} = useParams()
@@ -105,7 +105,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
         <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
-            Update Location Info
+            Update Location Information
           </Typography>
           <form autoComplete="off" onSubmit={updateThisLocation} className={classes.form} noValidate>
             <Grid container spacing={2}>
@@ -156,7 +156,7 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
                   onChange={updatePrimaryPopulation}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   variant="outlined"
                   fullWidth
@@ -167,7 +167,15 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
                   onChange={updateDescription}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <br />
+              <Typography>
+              Profile Picture
+              <br/>
+              <input type="file" name="file" accept="image/*" onChange={updateImage} />
+              <img src={image} width="100%"/>
+              <hr />
+              </Typography>
+              <Grid item xs={12} >
                 <CustomButton
                   type="submit"
                   fullWidth
@@ -177,8 +185,8 @@ export const UpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
                 > Update
                 </CustomButton>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <Link to= "/home" style={{ textDecoration:"none"}}>
+              <Grid item xs={12}>
+                <Link to= "/" style={{ textDecoration:"none"}}>
                 <CustomButton
                   type="submit"
                   fullWidth
