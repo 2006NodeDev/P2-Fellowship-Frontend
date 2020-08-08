@@ -15,6 +15,7 @@ interface ILocationDisplayProps {
 const useStyles = makeStyles({ //customize this more!
   root: {
     margin: "auto",
+    marginTop: 10,
     minWidth: 275,
     maxWidth: 500,
     justifyContent: "center",
