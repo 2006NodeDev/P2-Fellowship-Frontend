@@ -1,4 +1,4 @@
-import { ILoginState } from "./index";
+import { ILoginState, IUserProfileState } from "./index";
 import { AnyAction } from "redux";
 import { updateUserTypes } from "../action-mappers/update-user-action-mapper";
 
@@ -6,8 +6,8 @@ import { updateUserTypes } from "../action-mappers/update-user-action-mapper";
 
 //when running reducer for the first time this initializes it to null
 //since creating a new user is just logging in as a new object, i left this as loginstate
-const initialState:ILoginState = {
-    currUser:undefined,
+const initialState:IUserProfileState = {
+    profUser:undefined,
     errorMessage:''
 
 }
@@ -41,7 +41,7 @@ export const updateuserReducer=(state = initialState, action:AnyAction) => {
         case updateUserTypes.UPDATE_SUCCESSFUL:{
             return {
                 ...state,
-                currUser:action.payload.currUser
+                profUser:action.payload.userProfile
             }
         }
         default:{

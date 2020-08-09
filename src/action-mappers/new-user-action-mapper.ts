@@ -1,4 +1,5 @@
 import { createNewUser } from "../remote/user-service/createNewUser";
+import { User } from "../models/User";
 
 
 export const newuserTypes = {
@@ -10,10 +11,9 @@ export const newuserTypes = {
 
 }
 
-export const newuserActionMapper = (username:string, password:string, firstName:string, lastName:string, affiliation:string, placesVisited: number, address:string, email:string, image:string)=> async (dispatch:any) => {
-    let default_role = "User"
+export const newUserActionMapper = (newUser:User)=> async (dispatch:any) => {
     try{
-        let currUser = await createNewUser(username, password, firstName, lastName, affiliation, placesVisited, address, email, default_role, image)
+        let currUser = await createNewUser(newUser)
         console.log(currUser)
         dispatch({
             type:newuserTypes.LOGIN_SUCCESSFUL,

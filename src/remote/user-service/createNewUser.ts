@@ -1,22 +1,11 @@
 
 import { fellowshipClient } from ".."
+import { User } from "../../models/User"
 
-export const createNewUser = async (username:string, password:string, firstName:string, lastName:string,  affiliation:string, placesVisited:number, address:string, email:string, role:string, image:string) => {
-    
-    let credentials = {
-        username,
-        password,
-        firstName,
-        lastName,
-        affiliation,
-        placesVisited:0,
-        address,
-        email,
-        role,
-        image 
-    } 
+export const createNewUser = async (newUser:User) => {
+
     try{
-        let response = await fellowshipClient.post('/P2-Fellowship-User-Service/register', credentials)
+        let response = await fellowshipClient.post('/P2-Fellowship-User-Service/register', newUser)
         return response.data
         
     } catch(err){

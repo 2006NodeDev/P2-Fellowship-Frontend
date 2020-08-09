@@ -3,12 +3,13 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Button, Grid, Card, Container, CssBaseline, Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { newuserActionMapper } from '../../action-mappers/new-user-action-mapper';
+import { newUserActionMapper } from '../../action-mappers/new-user-action-mapper';
 import { toast } from 'react-toastify';
 import { loginErrorReset } from '../../action-mappers/login-action-mapper';
 import { IState } from '../../reducers';
 import { teal } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
+import { User } from '../../models/User';
 
 const background = {
   image: {
@@ -36,10 +37,8 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
     const [firstName, changeFirstName] = useState('')
     const [lastName, changeLastName] = useState('')
     const [affiliation, changeAffiliation] = useState('')
-    const [placesVisited, changePlacesVisited] = useState(0)
     const [address, changeAddress] = useState('')
     const [email, changeEmail] = useState('')
-    const [role, changeRole] = useState('')
     const [image, changeImage] = useState<any>(null)
 
   const updateUsername = (event:any) => {
@@ -90,7 +89,22 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
     if(password !== confirmPassword){
       toast.error('Passwords Do Not Match!')
     }
-    let thunk = newuserActionMapper(username, password, firstName, lastName, affiliation, placesVisited, address, email, image)
+    let newUser: User = {
+      userId:0,
+      username, 
+      password, 
+      firstName, 
+      lastName, 
+      affiliation, 
+      placesVisited:0, 
+      address, 
+      email, 
+      role:"User",
+      image
+    }
+    console.log(newUser);
+    
+    let thunk = newUserActionMapper(newUser)
     dispatch(thunk)
   }
         //Note: placesVisited starts at 0 by default so 
@@ -102,7 +116,8 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
           dispatch(loginErrorReset())
       }
     })
-
+    console.log(user);
+    
     useEffect(()=>{
       if(user){
         props.history.push(`users/profile/${user.userId}`)
@@ -233,7 +248,6 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
               <Grid item xs={12} sm={6}>
                 <Link to= "/" style={{ textDecoration:"none"}}>
                 <CustomButton
-                  type="submit"
                   fullWidth
                   variant="contained"
                   color="primary"

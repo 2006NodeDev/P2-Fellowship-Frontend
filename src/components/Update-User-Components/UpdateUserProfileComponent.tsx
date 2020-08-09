@@ -7,6 +7,7 @@ import { updateUserActionMapper, updateUserErrorReset } from "../../action-mappe
 import { useSelector, useDispatch } from "react-redux";
 import { createStyles } from '@material-ui/core/styles';
 import { IState } from "../../reducers";
+import { User } from "../../models/User";
 
 const CustomButton = withStyles((theme) => ({
   root: {
@@ -69,14 +70,6 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
   const classes = useStyles();
 
   let { userId } = useParams()
-  
-  const currentUser = useSelector((state: IState) => {
-    return state.loginState.currUser
-  })
-
-  const errorMessage = useSelector((state: IState) => {
-    return state.loginState.errorMessage
-  })
 
   let [username, changeUsername] = useState("")
   let [password, changePassword] = useState("")
@@ -84,10 +77,8 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
   let [firstName, changeFirstName] = useState("")
   let [lastName, changeLastName] = useState("")
   let [affiliation, changeAffiliation] = useState("")
-  let [placesVisited, changePlacesVisited] = useState(currentUser?.placesVisited)
   let [address, changeAddress] = useState("")
   let [email, changeEmail] = useState("")
-  let [role, changeRole] = useState(currentUser?.role)
   let [image, changeImage] = useState<any>(null)
 
   const updateUsername = (e: any) => {
@@ -147,12 +138,36 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
       changeImage(reader.result)
     }
   }
+  
+  const currentUser = useSelector((state: IState) => {
+    return state.loginState.currUser
+  })
+
+  const errorMessage = useSelector((state: IState) => {
+    return state.loginState.errorMessage
+  })
 
   const dispatch = useDispatch()
 
   const updateThisUser = async (e: SyntheticEvent) => {
     e.preventDefault()
-    let thunk = updateUserActionMapper(userId, username, password, firstName, lastName, affiliation, (placesVisited || 0), address, email, (role || "User"), image)
+    if(password !== confirmPassword){
+      toast.error('Passwords Do Not Match!')
+    }
+    let updatedUser:User = {
+      userId, 
+      username, 
+      password, 
+      firstName, 
+      lastName, 
+      affiliation, 
+      placesVisited: (currentUser?.placesVisited || 0), 
+      address, 
+      email, 
+      role: "User", 
+      image
+    }
+    let thunk = updateUserActionMapper(updatedUser)
     dispatch(thunk)
   }
   
@@ -170,6 +185,7 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
   })
  
   return (
+    (currentUser)?
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -284,7 +300,6 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
                     fullWidth
                     variant="contained"
                     color="primary"
-                    onClick={updateThisUser} 
                     className={classes.submit}
                   > Update
                 </CustomButton>
@@ -305,5 +320,9 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
           </form>
         </div>
       </Container>
+    : 
+    <div>
+      <h3> Please log in to view</h3>
+    </div>
   )
 }

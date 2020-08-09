@@ -14,11 +14,7 @@ import { IState } from "../../reducers";
 import { User } from "../../models/User";
 
 
-interface IUpdateUserProps {
-  user: User;
-}
-
-export const AdminUpdateUserProfileComponent: FunctionComponent<IUpdateUserProps> = (props) => {
+export const AdminUpdateUserProfileComponent: FunctionComponent<any> = (props) => {
   const classes = useStyles();
 
   let { userId } = useParams()
@@ -104,24 +100,41 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<IUpdateUserProps
     }
   }
 
-
-
-  const dispatch = useDispatch()
-
-
-  const updateThisUser = async (e: SyntheticEvent) => {
-    e.preventDefault()
-    let thunk = updateUserActionMapper(userId, username, password, firstName, lastName, affiliation, placesVisited, address, email, role, image)
-    dispatch(thunk)
-
-  }
-  const updatedUser = useSelector((state: IState) => {
+  const currentUser = useSelector((state: IState) => {
     return state.loginState.currUser
+  })
+
+  const updatedUser = useSelector((state: IState) => {
+    return state.userProfileState.profUser
   })
 
   const errorMessage = useSelector((state: IState) => {
     return state.loginState.errorMessage
   })
+
+  const dispatch = useDispatch()
+
+  const updateThisUser = async (e: SyntheticEvent) => {
+    e.preventDefault()
+    if(password !== confirmPassword){
+      toast.error('Passwords Do Not Match!')
+    }
+    let userToUpdate:User = {
+      userId, 
+      username, 
+      password, 
+      firstName, 
+      lastName, 
+      affiliation, 
+      placesVisited: (updatedUser?.placesVisited || 0), 
+      address, 
+      email, 
+      role: "User", 
+      image
+    }
+    let thunk = updateUserActionMapper(userToUpdate)
+    dispatch(thunk)
+  }
 
   useEffect(() => {
     if (errorMessage) {
@@ -130,16 +143,15 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<IUpdateUserProps
     }
   })
 
-  // useEffect(() => {
-  //   if (updatedUser) {
-  //     props.history.push(`/profile/${updatedUser.userId}`)
+  useEffect(() => {
+    if (updatedUser) {
+      props.history.push(`/profile/${updatedUser.userId}`)
 
-  //   }
-  // })
+    }
+  })
 
   return (
-    (updatedUser) ?
-
+    (currentUser?.role === "Admin") ?
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -263,7 +275,6 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<IUpdateUserProps
                 <img src={image} width="100%" />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Link to={`/profile/${updatedUser.userId}`}>
                   <CustomButton
                     type="submit"
                     fullWidth
@@ -272,12 +283,10 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<IUpdateUserProps
                     className={classes.submit}
                   > Update
                 </CustomButton>
-                </Link>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Link to="/" style={{ textDecoration: "none" }}>
                   <CustomButton
-                    type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"

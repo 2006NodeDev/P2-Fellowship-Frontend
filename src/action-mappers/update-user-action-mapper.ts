@@ -11,29 +11,15 @@ export const updateUserTypes = {
 
 }
 
-export const updateUserActionMapper = (userId:number, username:string, password:string, firstName:string, lastName:string, affiliation: string, placesVisited: number, address:string, email:string, role:string, image:string)=> async (dispatch:any) => {
-   
-    let user:User = {
-        userId,
-        username,
-        password,
-        firstName,
-        lastName,
-        affiliation,
-        placesVisited,
-        address,
-        email,
-        role,
-        image
-    }
+export const updateUserActionMapper = (updatedUser:User)=> async (dispatch:any) => {
    
     try{
-        let currUser = await updateUser(user)
-        console.log(currUser)
+        let userProfile = await updateUser(updatedUser)
+        console.log(userProfile)
         dispatch({
             type:updateUserTypes.UPDATE_SUCCESSFUL,
             payload:{
-                currUser
+                userProfile
             }
         })
     }catch (err) {
