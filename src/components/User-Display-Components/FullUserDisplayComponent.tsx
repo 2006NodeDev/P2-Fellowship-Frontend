@@ -2,7 +2,6 @@
 
 import 'react-toastify/dist/ReactToastify.css';
 import React, { FunctionComponent, useEffect } from 'react'
-import { User } from '../../models/User'
 import { makeStyles, CardActions, Card, CardContent, Typography, CardMedia, Button, withStyles, Grid } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors';
 import { Link, useParams } from 'react-router-dom';
@@ -66,7 +65,7 @@ export const FullUserDisplayComponent :FunctionComponent<any> = (props) => {
         let thunk = userProfileActionMapper(userId)
         dispatch(thunk)
     }
-    
+    //the userProfile state is not the current user state in the case of admin, so we need to get both of them to use
     const userProfile = useSelector((state: IState) => {
         return state.userProfileState.profUser
     })
@@ -81,7 +80,7 @@ export const FullUserDisplayComponent :FunctionComponent<any> = (props) => {
             dispatch(userProfileErrorReset())
         }
     })
-
+    //make sure we are actually calling the action mapper
     openProfile();
  
     return(

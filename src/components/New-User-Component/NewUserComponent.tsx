@@ -1,60 +1,21 @@
 import React, { FunctionComponent, useState, SyntheticEvent, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
-import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
-import { Button, Grid, Card } from '@material-ui/core';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { Button, Grid, Card, Container, CssBaseline, Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { newuserActionMapper } from '../../action-mappers/new-user-action-mapper';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import { toast } from 'react-toastify';
 import { loginErrorReset } from '../../action-mappers/login-action-mapper';
 import { IState } from '../../reducers';
 import { teal } from '@material-ui/core/colors';
-
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-    root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
-    },
-    submit: {
-      backgroundColor: teal[700],
-      color: 'white',
-      fontFamily: "Bookman Old Style",
-      fontSize: 16,
-    } 
-  }),
-);
-
-const SignUpButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText(teal[700]),
-    backgroundColor: "teal[700]",
-    '&:hover': {
-      backgroundColor: teal[800],
-     }
-  }
-}))(Button);
-
+import { Link } from 'react-router-dom';
 
 const background = {
-  card: {
-    height: '100%',
-    maxWidth: '100%',
-    backgroundImage: `url(${Image})`
-
+  image: {
+    backgroundRepeat: 'no-repeat',
+    width:'100%',
+    height:'100%',
+    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/Project-Images/register.jpg"})`
   }
 }
 
@@ -71,6 +32,7 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
 
     const [username, changeUsername] = useState('')
     const [password, changePassword] = useState('')
+    const [confirmPassword, changeConfirmPassword] = useState("")
     const [firstName, changeFirstName] = useState('')
     const [lastName, changeLastName] = useState('')
     const [affiliation, changeAffiliation] = useState('')
@@ -87,6 +49,10 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
   const updatePassword = (event: any) => {
     event.preventDefault()
     changePassword(event.currentTarget.value)
+  }
+  const updateConfirmPassword = (e:any) => {
+    e.preventDefault()
+    changeConfirmPassword(e.currentTarget.value)
   }
   const updateFirstName = (event: any) => {
     event.preventDefault()
@@ -117,19 +83,19 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
     }
   }
 
-
   const dispatch = useDispatch()
 
   const newUserSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
-
-
-  //Note: placesVisited starts at 0 by default so 
-  //User is not required to fill in this field of the form below.
-        //new usr doesnt need a role because they default to "User"
-        let thunk = newuserActionMapper(username, password, firstName, lastName, affiliation, placesVisited, address, email, image)
-        dispatch(thunk) 
+    if(password !== confirmPassword){
+      toast.error('Passwords Do Not Match!')
     }
+    let thunk = newuserActionMapper(username, password, firstName, lastName, affiliation, placesVisited, address, email, image)
+    dispatch(thunk)
+  }
+        //Note: placesVisited starts at 0 by default so 
+        //User is not required to fill in this field of the form below.
+        //new usr doesnt need a role because they default to "User"
     useEffect(()=>{
       if(errorMessage){
           toast.error(errorMessage)
@@ -146,94 +112,186 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
 //User is not required to fill in this field of the form below.
 
   return (
-    <div style={background.card}>
-     
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justify="center"
-        style={{ minHeight: '100vh' }}
-      >
-     
-        <form className={classes.root} autoComplete="off" onSubmit={newUserSubmit}>
-          <div>
-            <br />
-            <TextField
-              required 
-              label="Username"
-              autoComplete="off"
-              value={username}
-              onChange={updateUsername}
-            />
-            <br />
-            <TextField
-              required
-              label="Password"
-              autoComplete="off"
-              type="password"
-              value={password}
-              onChange={updatePassword}
-            />
-            <br />
-            <TextField
-              required
-              id="standard-password-input"
-              label="First Name"
-              autoComplete="off"
-              value={firstName}
-              onChange={updateFirstName}
-            />
-            <br />
-            <TextField
-              id="standard-password-input"
-              label="Last Name"
-              autoComplete="off"
-              value={lastName}
-              onChange={updateLastName}
-
-            />
-            <br />
-            <TextField
-              required
-              id="standard-multiline-static"
-              label="Affiliation"
-              autoComplete="off"
-              multiline
-              value={affiliation}
-              onChange={updateAffiliation}
-            />
-            <br />
-            <TextField
-              id="standard-password-input"
-              label="Address"
-              autoComplete="off"
-              value={address}
-              onChange={updateAddress}
-            />
-            <br />
-            <TextField
-              required
-              id="standard-password-input"
-              label="Email"
-              type="email"
-              autoComplete="off"
-              value={email}
-              onChange={updateEmail}
-            />
-            <br />
-              <label htmlFor="file">Profile Picture</label> <br/>
-              <input type="file" name="file" accept="image/*" onChange={updateImage} />
-              <img src={image} width="100%"/>
-            <hr />
-            <SignUpButton type='submit' variant='contained' onClick={newUserSubmit} className={classes.submit}> Submit </SignUpButton>          
-          </div>
-        </form>
-    
-      </Grid>
-    </div>
-  )
-
-
+     <div style={background.image}>
+       
+     <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+        <Card className={classes.card}>
+          <form autoComplete="off" onSubmit={newUserSubmit} className={classes.form} noValidate>
+            <Typography className={classes.registerMessage}>
+              Join the expedition!
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  value={username}
+                  onChange={updateUsername}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={updatePassword}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="confirm-password"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirm-password"
+                  value={confirmPassword}
+                  onChange={updateConfirmPassword}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
+                  value={email}
+                  onChange={updateEmail}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  required
+                  label="First Name"
+                  value={firstName}
+                  onChange={updateFirstName}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  label="Last Name"
+                  value={lastName}
+                  onChange={updateLastName}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  required
+                  label="Affiliation"
+                  value={affiliation}
+                  onChange={updateAffiliation}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  multiline
+                  label="Address"
+                  value={address}
+                  onChange={updateAddress}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <label htmlFor="file">Profile Picture</label> <br/>
+                <input type="file" name="file" accept="image/*" onChange={updateImage} />
+                <img src={image} width="100%"/>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <CustomButton
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                > Register
+                </CustomButton>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Link to= "/" style={{ textDecoration:"none"}}>
+                <CustomButton
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                > Cancel 
+                </CustomButton>
+                </Link>
+              </Grid>
+            </Grid>            
+          </form>
+          </Card>
+        </div>
+      </Container>
+      </div>
+    )
 })
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  card: {
+    width:"100%",
+  },
+  registerMessage: {
+    marginTop: 5,
+    fontSize: 25,
+    fontFamily: "Bookman Old Style",
+    alignItems:'center'
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '90%',
+    margin:"auto",
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: teal[700],
+    color: 'white',
+    //background color?
+    fontFamily: "Bookman Old Style",
+    fontSize: 16
+  }
+}));
+
+const CustomButton = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText(teal[700]),
+    backgroundColor: "teal[700]",
+    '&:hover': {
+      backgroundColor: teal[800],
+     }
+  }
+}))(Button);

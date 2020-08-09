@@ -6,7 +6,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
 import { teal } from '@material-ui/core/colors';
@@ -138,7 +137,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
       menuItems.push(
         <ListItem button component={Link} key="listItem1" to={`/users/profile/${currUser.userId}`}><ListItemText onClick={handleDrawerClose}>Hello {currUser.firstName}!</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem2" to="/" ><ListItemText onClick={handleDrawerClose}>Home</ListItemText></ListItem>,
-        <ListItem button component={Link} key="listeItem3" to={`/users/profile/update/${currUser.userId}`} ><ListItemText onClick={handleDrawerClose}>Update My Profile</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem3" to={`/users/profile/admin/update/${currUser.userId}`} ><ListItemText onClick={handleDrawerClose}>Update My Profile</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem4" to="/users" ><ListItemText onClick={handleDrawerClose}>All Users</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem5" to="/locations" ><ListItemText onClick={handleDrawerClose}>All Locations</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem6" to="/map"> <ListItemText onClick={handleDrawerClose}>Map</ListItemText></ListItem>,
@@ -152,7 +151,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
           <ListItemText >Hello {currUser.firstName}!</ListItemText>
         </ListItem>,
         <ListItem button component={Link} key="listeItem2" to="/" ><ListItemText onClick={handleDrawerClose}>Home</ListItemText></ListItem>,
-        <ListItem button component={Link} key="listeItem3" to={`/users/profile/${currUser.userId}/update`} ><ListItemText onClick={handleDrawerClose}>Update My Profile</ListItemText></ListItem>,
+        <ListItem button component={Link} key="listeItem3" to={`/users/profile/update/${currUser.userId}`} ><ListItemText onClick={handleDrawerClose}>Update My Profile</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem4" to="/users" ><ListItemText onClick={handleDrawerClose}>All Users</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem4" to="/locations" ><ListItemText onClick={handleDrawerClose}>All Locations</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem6" to="/map"> <ListItemText onClick={handleDrawerClose}>Map</ListItemText></ListItem>,

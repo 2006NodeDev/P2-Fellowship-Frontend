@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react"
+
 import { fellowshipClient } from ".."
 
 export const getAllUsers = async () => {

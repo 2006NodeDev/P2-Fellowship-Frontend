@@ -1,13 +1,12 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
-import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles, Card } from "@material-ui/core";
+import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles } from "@material-ui/core";
 import { Link, useParams, } from 'react-router-dom';
 import { teal } from "@material-ui/core/colors";
 import { toast } from 'react-toastify'
 import { updateUserActionMapper, updateUserErrorReset } from "../../action-mappers/update-user-action-mapper";
 import { useSelector, useDispatch } from "react-redux";
-import { createStyles, Theme } from '@material-ui/core/styles';
+import { createStyles } from '@material-ui/core/styles';
 import { IState } from "../../reducers";
-import { User } from "../../models/User";
 
 const CustomButton = withStyles((theme) => ({
   root: {

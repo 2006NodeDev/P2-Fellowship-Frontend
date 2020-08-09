@@ -1,6 +1,5 @@
 import React, { FunctionComponent, SyntheticEvent, useEffect } from "react";
 import { Button, makeStyles, CssBaseline, Container, Typography, Grid, withStyles } from "@material-ui/core";
-import { RouteComponentProps } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { IState } from "../../reducers";
 import { teal } from "@material-ui/core/colors";

@@ -1,14 +1,12 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
-import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles, FormControlLabel, Checkbox, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
-import { Link, useParams, RouteComponentProps } from 'react-router-dom';
+import { Button, makeStyles, Container, CssBaseline, Typography, Grid, withStyles, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { Link, useParams } from 'react-router-dom';
 import { green, lime } from "@material-ui/core/colors";
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from "react-redux";
 import { userUpdateLocationActionMapper, updateLocationErrorReset } from "../../action-mappers/user-update-location-action-mapper";
 import { IState } from "../../reducers";
-import { LoginComponent } from "../Login-Component/LoginComponent";
 import { Alert, AlertTitle } from '@material-ui/lab';
-import { Theme, createStyles } from '@material-ui/core/styles';
 
 
 //styles at the bottom because closer to html return

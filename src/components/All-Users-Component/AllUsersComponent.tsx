@@ -1,14 +1,12 @@
 //display return from Full User Card Display Component
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { FullUserDisplayComponent } from '../User-Display-Components/FullUserDisplayComponent'
 import { getAllUsers } from '../../remote/user-service/getAllUsers'
 import { User } from '../../models/User'
 import { useSelector } from 'react-redux'
 import { IState } from '../../reducers'
-import { Card, makeStyles, GridList, GridListTile, ListSubheader, GridListTileBar, IconButton } from '@material-ui/core'
+import { makeStyles, GridList, GridListTile, ListSubheader, GridListTileBar, IconButton } from '@material-ui/core'
 import InfoIcon from '@material-ui/icons/Info';
 import { Link } from 'react-router-dom'
-import { userProfileActionMapper } from '../../action-mappers/user-profile-action-mapper'
 
 
 const useStyles = makeStyles((theme)=>({ //customize this more!

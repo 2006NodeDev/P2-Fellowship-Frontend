@@ -1,4 +1,4 @@
-import { Location } from "./Location";
+
 
 export interface User{
     userId: number // primary key

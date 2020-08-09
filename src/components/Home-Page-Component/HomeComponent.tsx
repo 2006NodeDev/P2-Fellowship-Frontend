@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useEffect } from 'react';
-import { withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import React, { FunctionComponent } from 'react';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { teal, green } from '@material-ui/core/colors';
-import { Card, CardContent, Typography, CardActions, Paper, CardMedia, Grid, Menu } from '@material-ui/core';
+import { teal } from '@material-ui/core/colors';
+import { Card, CardContent, Typography, CardActions, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { IState } from '../../reducers';

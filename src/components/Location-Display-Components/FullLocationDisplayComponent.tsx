@@ -1,9 +1,8 @@
 //display a location's profile in detail
 
 import 'react-toastify/dist/ReactToastify.css';
-import React, { FunctionComponent, useState, useEffect, SyntheticEvent } from 'react'
-import { useParams, Redirect } from 'react-router'
-import { Grid, Paper, makeStyles, createStyles, Theme, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia, Button, Box, Divider, withStyles, CardActions } from '@material-ui/core'
+import React, { FunctionComponent } from 'react'
+import { Grid, makeStyles, Card, CardContent, Typography, Button, Divider, withStyles, CardActions } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { Location } from '../../models/Location';
 import Rating from '@material-ui/lab/Rating';
@@ -11,9 +10,6 @@ import { grey, teal } from '@material-ui/core/colors';
 import { GridImageDisplay } from './GridImageDisplay';
 import { useSelector } from 'react-redux';
 import { IState } from '../../reducers';
-import { User } from '../../models/User';
-import { UserUpdateLocationComponent } from '../Update-Location-Components/UserUpdateLocComponent';
-import { AdminUpdateLocationProfileComponent } from '../Update-Location-Components/AdminUpdateLocComponent';
 
 
 //rough suggestion of how to grab images form LocationImage[]:

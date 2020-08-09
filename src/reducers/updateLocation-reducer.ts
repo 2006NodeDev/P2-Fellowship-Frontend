@@ -1,4 +1,4 @@
-import { ILoginState, state, ILocationProfileState } from "./index";
+import { ILocationProfileState } from "./index";
 import { AnyAction } from "redux";
 import { adminUpdateLocationTypes } from "../action-mappers/admin-update-location-action-mapper";
 

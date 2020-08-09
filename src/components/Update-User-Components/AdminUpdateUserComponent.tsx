@@ -5,10 +5,9 @@ import { green, lime } from "@material-ui/core/colors";
 import { toast } from 'react-toastify'
 import { updateUserActionMapper, updateUserErrorReset } from "../../action-mappers/update-user-action-mapper";
 import { useSelector, useDispatch } from "react-redux";
-import { createStyles, Theme } from '@material-ui/core/styles';
+import { createStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { IState } from "../../reducers";

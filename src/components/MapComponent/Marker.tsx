@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useState } from 'react';
-import { makeStyles, createStyles, Theme, Paper, Typography, Button, Link } from '@material-ui/core';
+import { makeStyles, createStyles, Theme, Paper, Typography } from '@material-ui/core';
 import './Marker.css';
 import InfoWindow from 'google-map-react';
 import {Location} from '../../models/Location'
-import { FullLocationDisplayComponent } from '../Location-Display-Components/FullLocationDisplayComponent';
 
 // hoping to pass some props here for infoWindow in div eg:props.location.name
 interface IMapProp {  

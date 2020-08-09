@@ -1,5 +1,4 @@
-import { User } from "../models/User";
-import { getUserProfile } from "../remote/user-service/getUserProfile";
+
 import { getLocationProfile } from "../remote/location-service/getLocationProfile";
 
 

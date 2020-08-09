@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useState, SyntheticEvent, useEffect } from 'react'
-import { TextField, makeStyles, createStyles, Theme, Button, FormControlLabel, Checkbox, CheckboxProps, withStyles, Card, Grid, Typography, CardContent, CardActionArea } from '@material-ui/core'
+import { TextField, makeStyles, createStyles, Theme, Button, withStyles, Card, Grid, Typography } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux';
-import { ILoginState, IState } from '../../reducers';
+import { IState } from '../../reducers';
 import { loginActionMapper, loginErrorReset } from '../../action-mappers/login-action-mapper';
 import { toast } from 'react-toastify'
-import { teal, green } from '@material-ui/core/colors';
+import { teal } from '@material-ui/core/colors';
 
 
 const LoginButton = withStyles((theme) => ({
@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     loginMessage: {
-      margin: theme.spacing(1),
-      fontSize: 20,
+      marginTop: 5,
+      fontSize: 25,
       fontFamily: "Bookman Old Style",
       alignItems:'center'
     },
@@ -126,9 +126,8 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
             <LoginButton type='submit' variant='contained' onClick={loginSubmit} className={classes.submit}> Submit </LoginButton>          
           </form>
         </Card>
-      </Grid>
-            
-        </div>
+      </Grid> 
+    </div>
     )
 
 }

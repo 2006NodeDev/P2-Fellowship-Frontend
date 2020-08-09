@@ -1,4 +1,4 @@
-import { ILoginState, state, ILocationProfileState } from "./index";
+import { ILocationProfileState } from "./index";
 import { AnyAction } from "redux";
 import { locationProfileTypes } from "../action-mappers/location-profile-action-mapper";
 
