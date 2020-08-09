@@ -13,48 +13,20 @@ interface ILocationProps{
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      
       display: 'flex',
       flexWrap: 'wrap',
-      //justifyContent: 'space-around', //?
       overflow: 'hidden',
-      //backgroundColor: theme.palette.background.paper, //del this
-      //alignItems: 'center',
-    //justifyContent: 'center',
-      
-       
-      
+      alignContent: "center",
+      marginLeft: 30
     },
     gridList: {
-      width:1000,
-      height: 300, 
+      width:"100%",
+      height: "100%", 
       alignItems: 'center',
-    justifyContent: 'center',
-      
-
-     
-     
-    
-    },
-    title: {
-      color: theme.palette.primary.light,
-    },
-    titleBar: {
-      background:
-        'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+      justifyContent: 'center'
     },
   }),
 );
-
-
-// const tileData = [
-//   //add the image array here
-//   {
-//     img: image,
-//     author: 'author',
-//   },
-
-// ];
 
 
 
@@ -70,10 +42,10 @@ export const GridImageDisplay:FunctionComponent<ILocationProps> = (props) => {
     <div className={classes.root} style={{marginTop: 20}}>
       <br/>
 
-      <GridList cellHeight={160} className={classes.gridList} cols={3}>
+      <GridList cellHeight={300} className={classes.gridList} cols={3}>
         
         {tileData.map((tile:LocationImage) => (
-          <GridListTile key={tile.image} cols={1}>
+          <GridListTile key={tile.image} cols={3}>
             <img src={tile.image}/>
           </GridListTile>
         ))}

@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { getAllLocations } from '../../remote/location-service/getAllLocations'
 import { Location } from '../../models/Location'
-import InfoIcon from '@material-ui/icons/Info';
-import { GridList, GridListTile, ListSubheader, GridListTileBar, IconButton, makeStyles } from '@material-ui/core'
+import { GridList, GridListTile, ListSubheader, GridListTileBar, IconButton, makeStyles, CardActionArea } from '@material-ui/core'
 import { SingleImageDisplay } from '../Location-Display-Components/SingleImageDisplay';
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { IState } from '../../reducers';
 
 
 const useStyles = makeStyles((theme)=>({ //customize this more!
@@ -33,6 +34,11 @@ const useStyles = makeStyles((theme)=>({ //customize this more!
 export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     const classes = useStyles();
 
+    const user = useSelector((state: IState) => {
+        return state.loginState.currUser
+    })
+
+    
     let [allLocations, changeAllLocations] = useState<Location[]>([])
 
     //query the server
@@ -45,10 +51,11 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
             getLocations()
         }
     })  
-
     console.log(allLocations)
+    
 
     return(
+        (user)?
         <div className={classes.root}>
             <GridList cellHeight={300} cols={3} className={classes.gridList}>
                 <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
@@ -56,21 +63,22 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
                 </GridListTile>
                 {allLocations.map((tile) => (
                     <GridListTile key={tile.locationId}>
-                        <SingleImageDisplay location={props.location}/>
+                    <Link to={`/locations/profile/${tile.locationId}`}>                        
+                        <SingleImageDisplay location={tile}/>
                         <GridListTileBar
                             title={tile.name}
                             subtitle={<span> {tile.realm}<br/> {tile.rating} <br/> {tile.numVisited} have visited </span>}
-                            actionIcon={
-                                <IconButton aria-label={`View all location information`} component={Link} to={`/locations/profile/${tile.locationId}`} className={classes.icon}>
-                                <InfoIcon/>
-                                </IconButton>
-                            }
                         />
+                    </Link>
                     </GridListTile>
                 ))}
             </GridList>
         </div>
-         
+        :
+        <div>
+            <h3> Please log in to view</h3>
+        </div>
+
     )
 }
 

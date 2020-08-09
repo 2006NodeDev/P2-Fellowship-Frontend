@@ -67,16 +67,13 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
                 </GridListTile>
                 {allUsers.map((tile) => (
                     <GridListTile key={tile.userId}>
-                    <img src={tile.image} alt={"Profile Picture"}/>
-                    <GridListTileBar
-                        title={tile.firstName}
-                        subtitle={<span>Affiliation: {tile.affiliation}<br/> Places Visted:{tile.placesVisited} </span>}
-                        actionIcon={
-                            <IconButton aria-label={`View full user profile`} component={Link} to={`/users/profile/${tile.userId}`} className={classes.icon}>
-                              <InfoIcon/>
-                            </IconButton>
-                          }
-                    />
+                    <Link to={`/users/profile/${tile.userId}`}>
+                        <img src={tile.image} alt={"Profile Picture"}/>
+                        <GridListTileBar
+                            title={tile.firstName}
+                            subtitle={<span>Affiliation: {tile.affiliation}<br/> Places Visted:{tile.placesVisited} </span>}
+                        />
+                    </Link>
                     </GridListTile>
                 ))}
                 </GridList>

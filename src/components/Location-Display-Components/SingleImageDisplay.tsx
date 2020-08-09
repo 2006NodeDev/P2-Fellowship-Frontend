@@ -19,17 +19,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
     },
     image: {
-      width: 600,
-      height: 500,
+      width: "100%",
+      height: 400,
       margin: 'auto'
-
-    },
-    title: {
-      color: theme.palette.primary.light,
-    },
-    titleBar: {
-      background:
-        'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     },
   }),
 );
@@ -62,11 +54,7 @@ export const SingleImageDisplay: FunctionComponent<ILocationProps> = (props) => 
   return (
     (tileData) ?
       <div className={classes.root}>
-
-        <GridList>
           <img src={tileData} className={classes.image} />
-        </GridList>
-
       </div>
       :
       <div>

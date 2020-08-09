@@ -12,16 +12,6 @@ import { useSelector } from 'react-redux';
 import { IState } from '../../reducers';
 
 
-//rough suggestion of how to grab images form LocationImage[]:
-// while(x<length(image array)){
-//     if(image[x]){
-//         display image
-
-//     }
-
-// }
-
-
 interface ILocationDisplayProps {
     location: Location
 }
@@ -77,16 +67,6 @@ const CustomButton = withStyles((theme) => ({
     }
 }))(Button);
 
-const styles =
-{
-    media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9,
-        marginTop: '30'
-    }
-};
-
-
 
 export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayProps> = (props) => {
     const classes = useStyles();
@@ -97,19 +77,19 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
 
     
     return (
-
-        (user?.role === "Admin") ?
+        (user)?
             <div>
                 <Grid
                     container
-                    spacing={0}
-                    direction="column"
+                    spacing={2}
                     alignItems="center"
                     justify="center"
                     style={{ minHeight: '100vh' }}
                 >
+                <Grid item xs={12} sm={6}>
                     <GridImageDisplay location={props.location} />
-
+                </Grid>
+                <Grid item xs={12} sm={6}>
                     <Card className={classes.root}>
                         <CardContent>
                             <Typography className={classes.locationName}>
@@ -136,64 +116,27 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                             </Typography>
                         </CardContent>
                         <CardActions className={classes.root}>
-                            <Typography>
-                                <Link to={`/locations/profile/${props.location.locationId}/admin/update`}>
-                                    <Button variant="contained" className={classes.submit}>Record your visit!</Button>
-                                </Link>
-                            </Typography>
+                            <Link to={`/locations/profile/update/${props.location.locationId}`} style={{ textDecoration:"none"}}>
+                                <CustomButton variant="contained" className={classes.submit}>
+                                    Record your visit!
+                                </CustomButton>
+                            </Link>
+                            {user?.role === "Admin" &&
+                                <Link to={`/locations/profile/admin/update/${props.location.locationId}`} style={{ textDecoration:"none"}}>
+                                    <CustomButton variant="contained" className={classes.submit}>
+                                        Update Location Information
+                                    </CustomButton>
+                                </Link> 
+                            }
                         </CardActions>
                     </Card>
+                    </Grid>
                 </Grid>
             </div>
             :
             <div>
-                <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="center"
-                    justify="center"
-                    style={{ minHeight: '100vh' }}
-                >
-                    <GridImageDisplay location={props.location} />
-
-                    <Card className={classes.root}>
-                        <CardContent>
-                            <Typography className={classes.locationName}>
-                                {props.location?.name}
-                            </Typography>
-                            <Typography className={classes.locationDetails} gutterBottom>
-                                {props.location.realm}
-                            </Typography>
-                            <Divider className={classes.divider} />
-                            <Typography className={classes.locationDescription}>
-                                {props.location.description || ""}
-                            </Typography>
-                            <Typography className={classes.locationDetails}>
-                                {`Governance: ${props.location.governance || `not applicable`}`}
-                            </Typography >
-                            <Typography className={classes.locationDetails}>
-                                {`Primary Population: ${props.location.primaryPopulation || `not applicable`}`}
-                            </Typography>
-                            <Rating name="read-only" value={props.location.rating} precision={0.5} readOnly />
-                            <Typography className={classes.locationDetails}>Average Rating</Typography>
-                            <Divider className={classes.divider} />
-                            <Typography className={classes.locationDetails}>
-                                {props.location.numVisited || 0} People have visited this location
-                            </Typography>
-                        </CardContent>
-                        <CardActions className={classes.root}>
-                            <Typography>
-                                <Link to={`/locations/profile/${props.location.locationId}/user/update`}>
-                                    <Button variant="contained" className={classes.submit}>Record your visit!</Button>
-                                </Link>
-                            </Typography>
-                        </CardActions>
-                    </Card>
-                </Grid>
+                <h3> Please log in to view</h3>
             </div>
-
-
     )
 
 }

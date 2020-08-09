@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-//import './components/User-Profile-Component/node_modules/react-toastify/dist/ReactToastify.css';
 import { User } from './models/User';
 import { LoginComponent } from './components/Login-Component/LoginComponent';
 import { NavBarComponent } from './components/Nav-Bar-Component/NavBarComponent';
@@ -45,8 +44,8 @@ function App() {
 
         <Route exact path='/locations' component={AllLocationsComponent}/>
         <Route exact path='/locations/profile/:locationId' component={LocationProfileComponent}/>
-        <Route exact path='/locations/profile/:locationId/update' component={UserUpdateLocationComponent}/>
-        <Route exact path='/locations/profile/:locationId/update/admin' component={AdminUpdateLocationProfileComponent}/>
+        <Route exact path='/locations/profile/update/:locationId' component={UserUpdateLocationComponent}/>
+        <Route exact path='/locations/profile/admin/update/:locationId' component={AdminUpdateLocationProfileComponent}/>
 
         <Route exact path='/map' component={SimpleMap}/>
         <br/>
