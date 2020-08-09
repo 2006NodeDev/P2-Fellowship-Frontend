@@ -4,9 +4,8 @@ import { getUserProfile } from "../remote/user-service/getUserProfile";
 
 export const userProfileTypes = {
     PROFILE_FOUND: 'P2_PROFILE_FOUND',
-    BAD_CREDENTIALS: 'P2_BAD_CREDENTIALS',
     PROFILE_NOT_FOUND: 'P2_PROFILE_NOT_FOUND',
-    SERVER_ERROR:'P2_LOGIN_SERVER',
+    SERVER_ERROR:'P2_SERVER_ERROR',
     RESET_ERROR:'P2_RESET_ERROR'
 
 }
@@ -14,21 +13,17 @@ export const userProfileTypes = {
 export const userProfileActionMapper = (userId:number)=> async (dispatch:any) => {
     
     try{
-        let profUser = await getUserProfile(userId)
-        //console.log(`user profile ${profUser}`)
+        let userProfile = await getUserProfile(userId)
+        console.log(`user profile ${userProfile}`)
         dispatch({
             type:userProfileTypes.PROFILE_FOUND,
             payload:{
-                profUser
+                userProfile
             }
         })
     }catch (err) {
         console.log(err.message)
-        if(err.message.includes('400')){
-            dispatch({
-                type:userProfileTypes.BAD_CREDENTIALS
-            })
-        }else if (err.message.includes('404')){
+        if (err.message.includes('404')){
             dispatch({
                 type:userProfileTypes.PROFILE_NOT_FOUND
             })

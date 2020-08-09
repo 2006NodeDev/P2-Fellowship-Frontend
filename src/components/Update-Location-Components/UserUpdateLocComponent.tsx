@@ -54,9 +54,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
     const classes = useStyles();
-    const user = useSelector((state: IState) => {
-        return state.loginState.currUser
-    })
 
     let { locationId } = useParams()
 
@@ -77,15 +74,6 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
         changeRating(event.target.value as number);
     };
 
-    // const updateRating = (event: any) => {
-    //     event.preventDefault()
-    //     changeRating(event.currentTarget.value)
-    // }
-    // const updateVisited = (event: any) => {
-    //     event.preventDefault()
-    //     changeVisited(event.currentTarget.value)
-    // }
-
     const updateImage = (event: any) => {
         let file: File = event.currentTarget.files[0]
         let reader = new FileReader()
@@ -97,12 +85,17 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
 
     const dispatch = useDispatch()
 
-    const updatedLocation = useSelector((state: IState) => {
-        return state.locationProfileState.profLocation
+    //getting the user to allow acces to page
+    const user = useSelector((state: IState) => {
+        return state.loginState.currUser
     })
 
+    //getting the updated location
+    const updatedLocation = useSelector((state: IState) => {
+        return state.locationEditState.edittedLocation
+    })
     const errorMessage = useSelector((state: IState) => {
-        return state.locationProfileState.errorMessage
+        return state.locationEditState.errorMessage
     })
 
     const updateThisLocation = async (e: SyntheticEvent) => {
@@ -113,6 +106,7 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
         }
     }
 
+    //if there's an error
     useEffect(() => {
         if (errorMessage) {
             toast.error(errorMessage)
@@ -120,6 +114,7 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
         }
     })
 
+    //redirect to the updated locationProfile now
     useEffect(() => {
         if (updatedLocation) {
             props.history.push(`/profile/${updatedLocation.locationId}`)
@@ -128,17 +123,15 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
     })
 
     return (
-        (!user) ?
+        (!user) ? 
             <div className={classes.root} style={{ marginTop: 20 }}>
                 <Alert severity="error" >
                     <AlertTitle>Error</AlertTitle>
                     You are not logged in. Shoo. Go log in
                 </Alert>
-
+{/**EXTRA*/}
             </div>
-
             :
-
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>

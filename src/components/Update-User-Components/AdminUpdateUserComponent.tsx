@@ -1,9 +1,8 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
-import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles, Card } from "@material-ui/core";
+import { Button, makeStyles, Container, CssBaseline, Typography, Grid, withStyles, Card, TextField } from "@material-ui/core";
 import { Link, useParams, } from 'react-router-dom';
 import { green, lime } from "@material-ui/core/colors";
 import { toast } from 'react-toastify'
-import { updateUserActionMapper, updateUserErrorReset } from "../../action-mappers/update-user-action-mapper";
 import { useSelector, useDispatch } from "react-redux";
 import { createStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -12,6 +11,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { IState } from "../../reducers";
 import { User } from "../../models/User";
+import { userProfileActionMapper } from "../../action-mappers/user-profile-action-mapper";
+import { adminUpdateUserActionMapper, adminUpdateUserErrorReset } from "../../action-mappers/admin-user-update-actionampper";
 
 
 export const AdminUpdateUserProfileComponent: FunctionComponent<any> = (props) => {
@@ -25,7 +26,6 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<any> = (props) =
   let [firstName, changeFirstName] = useState("")
   let [lastName, changeLastName] = useState("")
   let [affiliation, changeAffiliation] = useState("")
-  let [placesVisited, changePlacesVisited] = useState(0)
   let [address, changeAddress] = useState("")
   let [email, changeEmail] = useState("")
   let [role, changeRole] = useState("")
@@ -61,12 +61,6 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<any> = (props) =
       changeAffiliation(e.currentTarget.value)
     }
   }
-  const updatePlacesVisited = (e: any) => {
-    e.preventDefault()
-    if (e.currentTarget.value !== '') {
-      changePlacesVisited(e.currentTarget.value)
-    }
-  }
   const updateAddress = (e: any) => {
     e.preventDefault()
     if (e.currentTarget.value !== '') {
@@ -100,51 +94,68 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<any> = (props) =
     }
   }
 
+  const dispatch = useDispatch()
+
+  //the user doing the updating
   const currentUser = useSelector((state: IState) => {
     return state.loginState.currUser
   })
-
-  const updatedUser = useSelector((state: IState) => {
+  //the profile we're updating
+  const userToUpdate = useSelector((state: IState) => {
     return state.userProfileState.profUser
   })
 
-  const errorMessage = useSelector((state: IState) => {
-    return state.loginState.errorMessage
+  //the updated user
+  const updatedUser = useSelector((state: IState) => {
+    return state.userEditState.edittedUser
   })
-
-  const dispatch = useDispatch()
+  const errorMessage = useSelector((state: IState) => {
+    return state.userEditState.errorMessage
+  })
 
   const updateThisUser = async (e: SyntheticEvent) => {
     e.preventDefault()
     if(password !== confirmPassword){
       toast.error('Passwords Do Not Match!')
     }
-    let userToUpdate:User = {
-      userId, 
-      username, 
-      password, 
-      firstName, 
-      lastName, 
-      affiliation, 
-      placesVisited: (updatedUser?.placesVisited || 0), 
-      address, 
-      email, 
-      role: "User", 
-      image
+    const getUser = async ()=>{
+      //get the userProfile state 
+      let thunk = userProfileActionMapper(userId)
+      dispatch(thunk)
     }
-    let thunk = updateUserActionMapper(userToUpdate)
-    dispatch(thunk)
+    if (!userToUpdate){
+      getUser()
+    }
+    if(userToUpdate){
+      let updatingUserInfo:User = {
+        userId, 
+        username, 
+        password, 
+        firstName, 
+        lastName, 
+        affiliation, 
+        placesVisited: userToUpdate.placesVisited, 
+        address, 
+        email, 
+        role, 
+        image
+      }
+      let thunk2 = adminUpdateUserActionMapper(updatingUserInfo)
+      dispatch(thunk2)
+    } 
+   
   }
 
+  //if errors
   useEffect(() => {
     if (errorMessage) {
       toast.error(errorMessage)
-      dispatch(updateUserErrorReset())
+      dispatch(adminUpdateUserErrorReset())
     }
   })
 
   useEffect(() => {
-    if (updatedUser) {
+    if (updatedUser) { //send to updated profile
       props.history.push(`/profile/${updatedUser.userId}`)
 
     }

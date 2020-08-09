@@ -71,10 +71,11 @@ const CustomButton = withStyles((theme) => ({
 export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayProps> = (props) => {
     const classes = useStyles();
 
+    //get the current user to display page and find permissions
     const user = useSelector((state: IState) => {
         return state.loginState.currUser
     })
-
+    //not tied to state; that's in the location Profile component
     
     return (
         (user)?

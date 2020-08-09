@@ -57,22 +57,9 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
 
   const classes = useStyles();
 
-  //this hook is how you get the state from the store and give it to the component
-  const user = useSelector((state: IState) => {
-    return state.loginState.currUser
-  })
-
-  const errorMessage = useSelector((state: IState) => {
-    return state.loginState.errorMessage
-  })
-
   const [username, changeUsername] = useState('')
   const [password, changePassword] = useState('')
-
-  //dispatch is the function that takes an action as an argument and gives it to the reducer
-  //you get the action from the action mapper
-  const dispatch = useDispatch()
-
+  
   const updateUsername = (event: any) => {
     event.preventDefault()
     changeUsername(event.currentTarget.value)
@@ -82,12 +69,26 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
     changePassword(event.currentTarget.value)
   }
 
+  //dispatch is the function that takes an action as an argument and gives it to the reducer
+  //you get the action from the action mapper
+  const dispatch = useDispatch()
+  
+  //this hook is how you get the state from the store and give it to the component
+  const thisUser = useSelector((state: IState) => {
+    return state.loginState.currUser
+  })
+
+  const errorMessage = useSelector((state: IState) => {
+    return state.loginState.errorMessage
+  })
+
   const loginSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
+    //log in the user using the action mapper, updating thisUser and errorMessage
     let thunk = loginActionMapper(username, password)
     dispatch(thunk)
   }
-
+  //if there's an error
   useEffect(() => {
     if (errorMessage) {
       toast.error(errorMessage)
@@ -96,8 +97,9 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
   })
 
   useEffect(() => {
-    if (user) {
-      props.history.push(`users/profile/${user.userId}`)
+    if (thisUser) {
+      //send to profile page if login works
+      props.history.push(`users/profile/${thisUser.userId}`)
     }
   })
 

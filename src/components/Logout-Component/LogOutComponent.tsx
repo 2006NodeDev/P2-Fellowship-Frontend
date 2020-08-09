@@ -1,4 +1,4 @@
-import React, { FunctionComponent, SyntheticEvent, useEffect } from "react";
+import React, { FunctionComponent, SyntheticEvent, useEffect, useState } from "react";
 import { Button, makeStyles, CssBaseline, Container, Typography, Grid, withStyles } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { IState } from "../../reducers";
@@ -10,39 +10,45 @@ import { toast } from "react-toastify";
 export const LogOutComponent: FunctionComponent<any> = (props)=>{
     const classes = useStyles();
 
-    const user = useSelector((state: IState) => {
+    const thisUser = useSelector((state: IState) => {
       return state.loginState.currUser
     })
-    console.log(user);
-  
+    const userProfile = useSelector((state: IState) => {
+      return state.userProfileState.profUser
+    })
+    //console.log(thisUser + userProfile)  //for check
+    
     const errorMessage = useSelector((state: IState) => {
       return state.loginState.errorMessage
     })
 
     const dispatch = useDispatch()
 
-    // let userId = currUser?.userId
-
     const logoutUser = async (e: SyntheticEvent) => {
         e.preventDefault()
-        let thunk = logoutActionMapper()
+        //log in the user using the action mapper
+        //should update thisUser, userProfile AND errorMessage
+        let thunk = logoutActionMapper() //no params (like endpoint in backend)
         dispatch(thunk)
       }
-  
+
     useEffect(() =>{
+        //if there's an error, show it
       if (errorMessage) {
-        toast.error(errorMessage)
+          toast.error(errorMessage)
         dispatch(logoutErrorReset())
       }
     })
     
     useEffect(() => {
-      if (!user) { //if user is null, logout was successful
+      //if user and userProfile are null, logout was successful
+      if (!thisUser && !userProfile) {
         props.history.push(`/`)
       }
     })
 
     return (
+      (thisUser)?
         <Container component="main" maxWidth="xs">
         <CssBaseline />
           <div className={classes.paper}>
@@ -58,11 +64,13 @@ export const LogOutComponent: FunctionComponent<any> = (props)=>{
                   onClick={logoutUser}
                 > Logout
               </LogoutButton>
-              
             </Grid>
           </div>
         </Container>
-
+      :
+      <div>
+          <h3> Must be logged in to log out</h3>
+      </div>
     )
 }
 

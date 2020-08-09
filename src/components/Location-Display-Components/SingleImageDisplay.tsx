@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
 import { Location } from '../../models/Location';
 
 
@@ -33,7 +32,7 @@ export const SingleImageDisplay: FunctionComponent<ILocationProps> = (props) => 
   let locationImageLinks: string[]
   let tileData = undefined
 
-  if (props.location.image){
+  if (props.location.image){ //not tied to state and I don't think it should be 
     let imageObjectArray = props.location.image
 
     locationImageLinks = imageObjectArray.filter(function(obj) {

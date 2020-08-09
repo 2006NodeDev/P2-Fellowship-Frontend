@@ -6,20 +6,20 @@ export const loginTypes = {
     LOGIN_SUCCESSFUL: 'P2_SUCCESSFUL_LOGIN',
     AUTH_ERROR: 'P2_AUTH_ERROR',
     BAD_CREDENTIALS: 'P2_BAD_CREDENTIALS',
-    SERVER_ERROR:'P2_LOGIN_SERVER',
+    SERVER_ERROR:'P2_SERVER_ERROR',
     USER_NOT_FOUND:'P2_LOGIN_USER_NOT_FOUND',
     RESET_ERROR:'P2_RESET_ERROR'
 }
 
 export const loginActionMapper = (username:string, password:string) => async (dispatch:any) => {
     try{
-        let currUser:User = await fellowshipLogin(username, password)
-        console.log("current User is now: " + currUser)
-        //console.log(currUser[1])
+        let loggedInUser:User = await fellowshipLogin(username, password)
+        console.log("current User is now: " + loggedInUser)
+        //console.log(loggedInUser[1])
         dispatch({
             type:loginTypes.LOGIN_SUCCESSFUL,
             payload:{
-                currUser
+                loggedInUser
             }
         })
     }catch (err) {

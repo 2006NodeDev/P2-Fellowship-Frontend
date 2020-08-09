@@ -11,6 +11,8 @@ export const userUpdateLocationActionMapper = (locationId:number, userId: number
    
     try{
         let updateLoc = await userUpdateLocation(locationId, userId, visited, rating, image)
+        //we're only really passing in visited, rating, and image
+        //locationId needed for path, but userId tied to token
         console.log(updateLoc)
         dispatch({
             type:userUpdateLocationTypes.UPDATE_SUCCESSFUL,

@@ -28,22 +28,16 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-
-
 export const GridImageDisplay:FunctionComponent<ILocationProps> = (props) => {
   const classes = useStyles();
   
-  const tileData = props.location.image
-
-  //tileData is first image in the images array
+  const tileData = props.location.image //not tied to state and I don't think it should be 
 
   return (
     (tileData)?
     <div className={classes.root} style={{marginTop: 20}}>
       <br/>
-
       <GridList cellHeight={300} className={classes.gridList} cols={3}>
-        
         {tileData.map((tile:LocationImage) => (
           <GridListTile key={tile.image} cols={3}>
             <img src={tile.image}/>
@@ -53,7 +47,7 @@ export const GridImageDisplay:FunctionComponent<ILocationProps> = (props) => {
     </div>
     :
     <div>
-      No Image
+      No Images
     </div>
   );
 }

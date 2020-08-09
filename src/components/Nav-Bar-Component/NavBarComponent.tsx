@@ -96,12 +96,12 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   //const open = Boolean(anchorEl);
 
-
+  //only fetching the current User state to display certain things accordingly
   const currUser = useSelector((state: IState) => {
     return state.loginState.currUser
   })
 
-  const handleClick = (event: any) => {
+  const handleClick = (event: any) => { //not sure what this is or if we need it
     setAnchorEl(event.currentTarget);
   };
 

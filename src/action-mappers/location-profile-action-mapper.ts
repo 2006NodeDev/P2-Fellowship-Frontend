@@ -7,9 +7,8 @@ import { getLocationProfile } from "../remote/location-service/getLocationProfil
 //then this is the place to state that
 export const locationProfileTypes = {
     PROFILE_FOUND: 'P2_PROFILE_FOUND',
-    BAD_CREDENTIALS: 'P2_BAD_CREDENTIALS',
     PROFILE_NOT_FOUND: 'P2_PROFILE_NOT_FOUND',
-    SERVER_ERROR:'P2_LOGIN_SERVER',
+    SERVER_ERROR:'P2_SERVER_ERROR',
     RESET_ERROR:'P2_RESET_ERROR'
 
 }
@@ -29,11 +28,7 @@ export const locationProfileActionMapper = (locationId:number)=> async (dispatch
         })
     }catch (err) {
         console.log(err.message)
-        if(err.message.includes('400')){
-            dispatch({
-                type:locationProfileTypes.BAD_CREDENTIALS
-            })
-        }else if (err.message.includes('404')){
+        if (err.message.includes('404')){
             dispatch({
                 type:locationProfileTypes.PROFILE_NOT_FOUND
             })

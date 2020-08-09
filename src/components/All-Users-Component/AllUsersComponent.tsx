@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme)=>({ //customize this more!
 export const AllUsersComponent: FunctionComponent<any> = (props) => {
     const classes = useStyles();
 
+    //get current user (to allow access to page)
     const thisUser = useSelector((state: IState) => {
         return state.loginState.currUser
     })
@@ -45,7 +46,7 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
     useEffect(() => {
 
         const getUsers = async () => {
-            let response = await getAllUsers() //returning undefined
+            let response = await getAllUsers() //doesn't affect state rn... idk if it needs to though... 
             console.log(response);
             changeAllUsers(response)
         }

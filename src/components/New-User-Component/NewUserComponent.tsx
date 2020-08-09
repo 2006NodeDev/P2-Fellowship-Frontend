@@ -76,6 +76,14 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
 
   const dispatch = useDispatch()
 
+  const thisUser = useSelector((state:IState) => {
+    return state.loginState.currUser
+  })
+
+  const errorMessage = useSelector((state:IState) => {
+    return state.loginState.errorMessage
+  })
+
   const newUserSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
     if(password !== confirmPassword){
@@ -88,27 +96,18 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
       firstName, 
       lastName, 
       affiliation, 
-      placesVisited:0, 
+      placesVisited:0, //0 because new
       address, 
       email, 
-      role:"User",
+      role:"User", //"user" becuase admin has to grant power
       image
     }
-    //console.log(newUser);
+    //sending the user to the action mapper
+    //should set thisUser or errorMessage
     let thunk = newUserActionMapper(newUser)
     dispatch(thunk)
-  }
-        //Note: placesVisited starts at 0 by default so 
-        //User is not required to fill in this field of the form below.
-        //new usr doesnt need a role because they default to "User"
-  const user = useSelector((state:IState) => {
-    return state.loginState.currUser
-  })
-
-  const errorMessage = useSelector((state:IState) => {
-    return state.loginState.errorMessage
-  })
-    
+  }  
+  //if error
   useEffect(()=>{
     if(errorMessage){
         toast.error(errorMessage)
@@ -117,13 +116,14 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
   })
     
   useEffect(()=>{
-    if(user){
-      console.log(`the current user ${user}`);
-      props.history.push(`users/profile/${user.userId}`)
+    //if sign up successful
+    if(thisUser){
+      console.log(`the current user ${thisUser}`); //check
+      //send to profile page
+      props.history.push(`users/profile/${thisUser.userId}`)
     }
   })
-//Note: placesVisited starts at 0 by default so 
-//User is not required to fill in this field of the form below.
+
 
   return (
      <div style={background.image}>

@@ -1,7 +1,7 @@
 import { fellowshipClient } from "..";
 import { User } from "../../models/User";
 
-export const updateUser = async (user:User) => {
+export const adminUpdateUser = async (user:User) => {
     
     try{
         console.log(user)

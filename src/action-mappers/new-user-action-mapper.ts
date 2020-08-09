@@ -3,22 +3,22 @@ import { User } from "../models/User";
 
 
 export const newUserTypes = {
-    LOGIN_SUCCESSFUL: 'P2_SUCCESSFUL_LOGIN',
+    CREATION_SUCCESSFUL: 'P2_CREATION_SUCCESSFUL',
     BAD_CREDENTIALS: 'P2_BAD_CREDENTIALS',
     USERNAME_TAKEN:'P2_USERNAME_TAKEN',
-    SERVER_ERROR:'P2_LOGIN_SERVER',
+    SERVER_ERROR:'P2_SERVER_ERROR',
     RESET_ERROR:'P2_RESET_ERROR'
 
 }
 
 export const newUserActionMapper = (newUser:User)=> async (dispatch:any) => {
     try{
-        let currUser = await createNewUser(newUser)
-        console.log(`current user: ${currUser}`)
+        let newUserResults = await createNewUser(newUser)
+        console.log(`created user: ${newUserResults}`)
         dispatch({
-            type:newUserTypes.LOGIN_SUCCESSFUL,
+            type:newUserTypes.CREATION_SUCCESSFUL,
             payload:{
-                currUser
+                newUserResults
             }
         })
     }catch (err) {
