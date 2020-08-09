@@ -138,16 +138,21 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
       changeImage(reader.result)
     }
   }
-  
+
+  const dispatch = useDispatch()
+
+  //the current user updating their profile
   const currentUser = useSelector((state: IState) => {
     return state.loginState.currUser
   })
 
-  const errorMessage = useSelector((state: IState) => {
-    return state.loginState.errorMessage
+  //the updated profile
+  const updatedUser = useSelector((state: IState) => {
+    return state.userEditState.edittedUser
   })
-
-  const dispatch = useDispatch()
+  const errorMessage = useSelector((state: IState) => {
+    return state.userEditState.errorMessage
+  })
 
   const updateThisUser = async (e: SyntheticEvent) => {
     e.preventDefault()
@@ -171,6 +176,7 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
     dispatch(thunk)
   }
   
+  //if error
   useEffect(() => {
     if (errorMessage) {
       toast.error(errorMessage)
@@ -179,8 +185,8 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
   })
 
   useEffect(() =>{
-    if (currentUser){ 
-      props.history.push(`users/profile/${currentUser.userId}`)
+    if (updatedUser){ //send to profile of updated user
+      props.history.push(`users/profile/${updatedUser.userId}`)
     }
   })
  

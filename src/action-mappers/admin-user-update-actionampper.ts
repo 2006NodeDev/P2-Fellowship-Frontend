@@ -41,7 +41,7 @@ export const adminUpdateUserActionMapper = (updatedUser:User)=> async (dispatch:
 }
 
 
-export const updateUserErrorReset = () => {
+export const adminUpdateUserErrorReset = () => {
     return{
         type:adminUpdateProfileTypes.RESET_ERROR
     }

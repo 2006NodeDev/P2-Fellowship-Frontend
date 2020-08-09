@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme)=>({ //customize this more!
 export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     const classes = useStyles();
 
-    const user = useSelector((state: IState) => {
+    //get current user (to allow access to page)
+    const thisUser = useSelector((state: IState) => {
         return state.loginState.currUser
     })
 
@@ -44,7 +45,7 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     //query the server
     useEffect(()=>{
         const getLocations = async ()=>{
-            let response = await getAllLocations()
+            let response = await getAllLocations() //doesn't affect state rn... idk if it needs to though... 
             changeAllLocations(response)
         }
         if(allLocations.length === 0){
@@ -55,7 +56,7 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     
 
     return(
-        (user)?
+        (thisUser)?
         <div className={classes.root}>
             <GridList cellHeight={300} cols={3} className={classes.gridList}>
                 <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>

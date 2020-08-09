@@ -50,31 +50,28 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-
+  //get current user (to hide or show buttons)
   const currUser = useSelector((state:IState) => {
     return state.loginState.currUser
   })
 
   let buttonsDisplayed:any[] = []
   
-  // useEffect(()=>{
-    if (!currUser){
-      buttonsDisplayed.push(
-        <Link to= "/register" style={{ textDecoration:"none"}}>
-          <CustomButton variant="contained" className={classes.submit}>
-            Register Now!
-          </CustomButton>
-        </Link>,
-        <Link to="/login" style={{ textDecoration:"none"}} >
-          <CustomButton variant="contained" className={classes.submit}>
-            Login
-          </CustomButton> 
-        </Link>
-      )}
-// })
+  if (!currUser){
+    buttonsDisplayed.push(
+      <Link to= "/register" style={{ textDecoration:"none"}}>
+        <CustomButton variant="contained" className={classes.submit}>
+          Register Now!
+        </CustomButton>
+      </Link>,
+      <Link to="/login" style={{ textDecoration:"none"}} >
+        <CustomButton variant="contained" className={classes.submit}>
+          Login
+        </CustomButton> 
+      </Link>
+  )}
 
   return (
-
     <div style={background.card} >
       <Grid
         container
@@ -85,12 +82,7 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
         style={{ minHeight: '100vh' }}
       >
       <Card className={classes.root}>
-      
-        {/* <CardMedia  /> 
-        Insert image of middle earth here! (or slideshow?)*/}
-        <br/>
-
-        <CardContent>
+          <CardContent>
             <Typography gutterBottom variant="h5" component="h2" className={classes.text}>
                Explore the unknown territories of the world!                 
             </Typography>
@@ -107,8 +99,7 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
             {buttonsDisplayed}
           </Typography>
         </CardActions>
-        
-    </Card>
+      </Card>
     </Grid>
     </div>
   )

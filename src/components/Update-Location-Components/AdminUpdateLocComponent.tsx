@@ -6,24 +6,28 @@ import {toast} from 'react-toastify'
 import { updateLocationErrorReset, adminUpdateLocationActionMapper } from "../../action-mappers/admin-update-location-action-mapper";
 import { useSelector, useDispatch } from "react-redux";
 import { IState } from "../../reducers/index";
+import { locationProfileActionMapper } from "../../action-mappers/location-profile-action-mapper";
+import { Location } from "../../models/Location";
 
 export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props) =>{
     const classes = useStyles();
 
-    let {locationId} = useParams()
+    let { locationId } = useParams()
 
-    const [name, changeName] = useState("") 
+    //should be the locationProfile state already... sketchy
+  
+    const [name, changeName] = useState("")
     const [realm, changeRealm] = useState("")
     const [governance, changeGovernance] = useState("")
     const [primaryPopulation, changePrimaryPopulation] = useState("")
     const [description, changeDescription] = useState("")
     
     //need to set these to the location's existing rating, numVisited, and image ARRAY
-    const [rating, changeRating] = useState(0)
-    const [numVisited, changeNumVisited] = useState(0)
-    const [image, changeImage] = useState<any>(undefined)
-    const [latitude, changelatitude] = useState(0)
-    const [longitude, changelongitude] = useState(0)
+    // const [rating, changeRating] = useState(0)
+    // const [numVisited, changeNumVisited] = useState(0)
+    // const [image, changeImage] = useState<any>(undefined)
+    // const [latitude, changelatitude] = useState(0)
+    // const [longitude, changelongitude] = useState(0)
 
 
     const updateName = (e:any) => {
@@ -48,46 +52,81 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
     } 
 
     //this stuff should not be doing anything; no fields for input (but how to set....)
-    const updateRating = (e:any) => {
-        e.preventDefault()
-        changeRating(e.currentTarget.value)
-    }
-    const updateNumVisited = (e:any) => {
-        e.preventDefault()
-        changeNumVisited(e.currentTarget.value)
-    }
+    // const updateNumVisited = (e:any) => {
+    //     e.preventDefault()
+    //     changeNumVisited(e.currentTarget.value)
+    // }
 
-    const updateImage = (e:any) => {
-        e.preventDefault()
-        //type file has array called files, since you could upload multiple. Thus we speficy we want only want the first 
-        let file:File = e.currentTarget.files[0]
-        //utlize FileReader - the old way of doing it without promises
-        let reader = new FileReader()
-        //start an async function on reader object
-        reader.readAsDataURL(file)
-        //set a callback for when it's done reading
-        reader.onload = () =>{
-            console.log(reader.result); //to see binary representation of the image
-            changeImage(reader.result) 
-        }
-    }
+    // const updateImage = (e:any) => {
+    //     e.preventDefault()
+    //     //type file has array called files, since you could upload multiple. Thus we speficy we want only want the first 
+    //     let file:File = e.currentTarget.files[0]
+    //     //utlize FileReader - the old way of doing it without promises
+    //     let reader = new FileReader()
+    //     //start an async function on reader object
+    //     reader.readAsDataURL(file)
+    //     //set a callback for when it's done reading
+    //     reader.onload = () =>{
+    //         console.log(reader.result); //to see binary representation of the image
+    //         changeImage(reader.result) 
+    //     }
+    // }
     
     const dispatch = useDispatch()
+
+    //for permissions, get current user
+    const user = useSelector((state: IState) => {
+      return state.loginState.currUser
+    })
     
     const updateThisLocation = async (e:SyntheticEvent) => {
-      e.preventDefault()        
-        let thunk = adminUpdateLocationActionMapper(locationId, name, image, realm, governance, primaryPopulation, description, rating, numVisited, latitude, longitude)
-        dispatch(thunk) 
-        
+      e.preventDefault()  
+      const getLocation = async ()=>{
+        //get the locationProfile state 
+        let thunk = locationProfileActionMapper(locationId)
+        dispatch(thunk)
+      }
+      if (!locationToUpdate){
+        getLocation()
+      }
+      if(locationToUpdate){
+          //if the locationProfile for an id exists, we update it
+          let updatingLocation:Location = {
+            locationId: locationToUpdate.locationId, 
+            name, 
+            realm, 
+            governance, 
+            primaryPopulation, 
+            description, 
+            rating: locationToUpdate.rating, 
+            numVisited: locationToUpdate.numVisited, 
+            image: locationToUpdate.image, 
+            latitude: locationToUpdate.latitude, 
+            longitude: locationToUpdate.longitude
+          }     
+            let thunk2 = adminUpdateLocationActionMapper(updatingLocation)
+            dispatch(thunk2) //is this ok? should be... 
+        }
+          //call the action mapper function if there is no current location profile
+          
     }
-    const updatedLocation= useSelector((state:IState) => {
+    //before update
+    const locationToUpdate= useSelector((state:IState) => {
       return state.locationProfileState.profLocation
     })
+    console.log(locationToUpdate); //better check....
+
+    //the location state after update
+    const updatedLocation= useSelector((state:IState) => {
+      return state.locationEditState.edittedLocation
+    })
+    console.log(updatedLocation); //better check....
 
     const errorMessage = useSelector((state:IState) => {
-      return state.locationProfileState.errorMessage
-    })
+      return state.locationEditState.errorMessage
+    }) 
 
+    //if there's an error
     useEffect(() => {
       if(errorMessage){
         toast.error(errorMessage)
@@ -96,13 +135,14 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
     })
 
     useEffect(()=>{
-      if(updatedLocation){
+      if(updatedLocation){ //with the updated location
         props.history.push(`/profile/${updatedLocation.locationId}`)
 
       }
     })
 
     return (
+      (user?.role ==="Admin")?
         <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -169,14 +209,14 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
                   onChange={updateDescription}
                 />
               </Grid>
-              <br />
+              {/* <br />
               <Typography>
               Profile Picture
               <br/>
               <input type="file" name="file" accept="image/*" onChange={updateImage} />
               <img src={image} width="100%"/>
               <hr />
-              </Typography>
+              </Typography> */}
               <Grid item xs={12} >
                 <CustomButton
                   type="submit"
@@ -203,6 +243,10 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
           </form>
         </div>
       </Container>
+      :
+      <div>
+          <h3> You are either not logged in or not worthy</h3>
+      </div>
     )
 }
 const CustomButton = withStyles((theme) => ({

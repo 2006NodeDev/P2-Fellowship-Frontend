@@ -6,6 +6,8 @@ import { makeStyles, CardActions, Card, CardContent, Typography, CardMedia, Butt
 import { teal } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
 import { User } from '../../models/User';
+import { IState } from '../../reducers';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({ //customize this more!
     root: {
@@ -53,8 +55,13 @@ interface IUserDisplayProps {
 export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (props) => {
     const classes = useStyles(); 
 
+    //get user state to see page
+    const user = useSelector((state: IState) => {
+        return state.loginState.currUser
+    })
+
     return(
-        (props.user)?
+        (user)?
         <Grid
             container
             spacing={0}
@@ -63,7 +70,6 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
             justify="center"
             style={{ minHeight: '100vh' }}
         >
-       
         <Card className={classes.root} >
             <CardMedia
                 className={classes.media}
