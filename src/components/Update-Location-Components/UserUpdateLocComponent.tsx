@@ -1,7 +1,7 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
 import { Button, makeStyles, Container, CssBaseline, Typography, Grid, withStyles, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { Link, useParams } from 'react-router-dom';
-import { green, lime } from "@material-ui/core/colors";
+import { teal } from "@material-ui/core/colors";
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from "react-redux";
 import { userUpdateLocationActionMapper, updateLocationErrorReset } from "../../action-mappers/user-update-location-action-mapper";
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
-        backgroundColor: lime[700],
+        backgroundColor: teal[700],
         color: 'white',
         //background color?
         fontFamily: "Bookman Old Style",
@@ -57,13 +57,6 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
     const user = useSelector((state: IState) => {
         return state.loginState.currUser
     })
-    const updatedLocation = useSelector((state: IState) => {
-        return state.locationProfileState.profLocation
-    })
-
-    const errorMessage = useSelector((state: IState) => {
-        return state.locationProfileState.errorMessage
-    })
 
     let { locationId } = useParams()
 
@@ -73,9 +66,14 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
 
     
     const updateVisited = (event: React.ChangeEvent<{ value: unknown }>) => {
-        changeVisited(event.target.value as boolean);
+        event.preventDefault()
+        changeVisited(event.target.value as boolean)
+        if (event.target.value as number !== 0){
+            changeVisited(true);
+        }
     };
     const updateRating = (event: React.ChangeEvent<{ value: unknown }>) => {
+        event.preventDefault()
         changeRating(event.target.value as number);
     };
 
@@ -97,17 +95,22 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
         }
     }
 
-
     const dispatch = useDispatch()
+
+    const updatedLocation = useSelector((state: IState) => {
+        return state.locationProfileState.profLocation
+    })
+
+    const errorMessage = useSelector((state: IState) => {
+        return state.locationProfileState.errorMessage
+    })
 
     const updateThisLocation = async (e: SyntheticEvent) => {
         e.preventDefault()
         if (user) {
             let thunk = userUpdateLocationActionMapper(locationId, user.userId, visited, rating, image)
             dispatch(thunk)
-
         }
-
     }
 
     useEffect(() => {
@@ -150,13 +153,13 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
                                 <FormControl variant="outlined" className={classes.formControl}>
                                     <InputLabel id="demo-simple-select-outlined-label">Visited?</InputLabel>
                                     <Select
+                                        required
                                         labelId="demo-simple-select-outlined-label"
                                         id="demo-simple-select-outlined"
                                         value={visited}
                                         onChange={updateVisited}
                                         label="Visited"
                                     >
-                                       
                                         <MenuItem value={0}>No</MenuItem>
                                         <MenuItem value={1}>Yes</MenuItem>
                                     </Select>
@@ -201,9 +204,8 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
                 </CustomButton>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <Link to="/home" style={{ textDecoration: "none" }}>
+                                <Link to="/" style={{ textDecoration: "none" }}>
                                     <CustomButton
-                                        type="submit"
                                         fullWidth
                                         variant="contained"
                                         color="primary"
@@ -221,12 +223,12 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
 //buttons
 const CustomButton = withStyles((theme) => ({
     root: {
-        color: theme.palette.getContrastText(lime[700]),
-        backgroundColor: "lime[700]",
+        color: theme.palette.getContrastText(teal[700]),
+        backgroundColor: "teal[700]",
         '&:hover': {
-            backgroundColor: green[900],
+          backgroundColor: teal[800],
         },
-    },
+      },
 }))(Button);
 
 

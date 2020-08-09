@@ -96,7 +96,6 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   //const open = Boolean(anchorEl);
 
-  console.log(props)
 
   const currUser = useSelector((state: IState) => {
     return state.loginState.currUser
@@ -117,6 +116,9 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  //check current user
+  //console.log(currUser)
+
 
   let menuItems = []
   //changes the nav bar back after logout for when the there is no currenUser

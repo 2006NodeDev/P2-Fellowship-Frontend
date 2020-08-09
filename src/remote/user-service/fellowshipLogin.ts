@@ -12,7 +12,7 @@ export const fellowshipLogin = async (username:string, password:string) => {
         fellowshipClient.defaults.headers.common['Authorization'] = response.headers.authorization
         document.cookie = `token=${response.headers.authorization}`
 
-        console.log(response)
+        console.log(`in the API ${response.data[0]}`)
         return response.data
 
     } catch(err){

@@ -16,7 +16,7 @@ export const adminUpdateLocationReducer=(state = initialState, action:AnyAction)
         case adminUpdateLocationTypes.BAD_CREDENTIALS:{
             return {
                 ...state,
-                errorMessage:'Please Fill Out All Fields'
+                errorMessage:'Please fill out required fields'
             }
         }
         case adminUpdateLocationTypes.NAME_TAKEN:{

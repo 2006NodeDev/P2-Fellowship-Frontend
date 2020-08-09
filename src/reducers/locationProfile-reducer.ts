@@ -14,12 +14,6 @@ const initialState:ILocationProfileState = {
 
 export const locationProfileReducer=(state = initialState, action:AnyAction) => {
     switch(action.type){
-        case locationProfileTypes.BAD_CREDENTIALS:{
-            return {
-                ...state,
-                errorMessage:'Please Fill Out All Fields'
-            }
-        }
         case locationProfileTypes.PROFILE_NOT_FOUND:{
             return {
                 ...state,

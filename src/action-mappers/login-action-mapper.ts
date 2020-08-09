@@ -1,4 +1,5 @@
 import { fellowshipLogin } from "../remote/user-service/fellowshipLogin";
+import { User } from "../models/User";
 
 
 export const loginTypes = {
@@ -12,9 +13,9 @@ export const loginTypes = {
 
 export const loginActionMapper = (username:string, password:string) => async (dispatch:any) => {
     try{
-        let currUser = await fellowshipLogin(username, password)
+        let currUser:User = await fellowshipLogin(username, password)
         console.log("current User is now: " + currUser)
-        
+        //console.log(currUser[1])
         dispatch({
             type:loginTypes.LOGIN_SUCCESSFUL,
             payload:{
