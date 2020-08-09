@@ -23,14 +23,6 @@ const background = {
 export const NewUserComponent:FunctionComponent<any> = ((props) => {
     const classes = useStyles();
 
-    const user = useSelector((state:IState) => {
-      return state.loginState.currUser
-    })
-
-    const errorMessage = useSelector((state:IState) => {
-      return state.loginState.errorMessage
-    })
-
     const [username, changeUsername] = useState('')
     const [password, changePassword] = useState('')
     const [confirmPassword, changeConfirmPassword] = useState("")
@@ -102,27 +94,34 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
       role:"User",
       image
     }
-    console.log(newUser);
-    
+    //console.log(newUser);
     let thunk = newUserActionMapper(newUser)
     dispatch(thunk)
   }
         //Note: placesVisited starts at 0 by default so 
         //User is not required to fill in this field of the form below.
         //new usr doesnt need a role because they default to "User"
-    useEffect(()=>{
-      if(errorMessage){
-          toast.error(errorMessage)
-          dispatch(loginErrorReset())
-      }
-    })
-    console.log(user);
+  const user = useSelector((state:IState) => {
+    return state.loginState.currUser
+  })
+
+  const errorMessage = useSelector((state:IState) => {
+    return state.loginState.errorMessage
+  })
     
-    useEffect(()=>{
-      if(user){
-        props.history.push(`users/profile/${user.userId}`)
-      }
-    })
+  useEffect(()=>{
+    if(errorMessage){
+        toast.error(errorMessage)
+        dispatch(loginErrorReset())
+    }
+  })
+    
+  useEffect(()=>{
+    if(user){
+      console.log(`the current user ${user}`);
+      props.history.push(`users/profile/${user.userId}`)
+    }
+  })
 //Note: placesVisited starts at 0 by default so 
 //User is not required to fill in this field of the form below.
 
@@ -242,6 +241,7 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
                   variant="contained"
                   color="primary"
                   className={classes.submit}
+                  onClick={newUserSubmit}
                 > Register
                 </CustomButton>
               </Grid>

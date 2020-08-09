@@ -1,6 +1,7 @@
 import { IUserProfileState } from "./index";
 import { AnyAction } from "redux";
 import { userProfileTypes } from "../action-mappers/user-profile-action-mapper";
+import { logoutTypes } from "../action-mappers/logout-action-mapper";
 
 
 
@@ -42,6 +43,12 @@ export const userProfileReducer=(state = initialState, action:AnyAction) => {
             return {
                 ...state,
                 profUser:action.payload.profUser
+            }
+        }
+        case logoutTypes.LOGOUT_SUCCESSFUL:{
+            return {
+                ...state,
+                profUser:action.payload.noUser
             }
         }
         default:{

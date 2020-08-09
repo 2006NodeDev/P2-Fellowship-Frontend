@@ -2,6 +2,7 @@ import { ILoginState } from "./index";
 import { AnyAction } from "redux";
 import { loginTypes } from "../action-mappers/login-action-mapper";
 import { logoutTypes } from "../action-mappers/logout-action-mapper";
+import { newUserTypes } from "../action-mappers/new-user-action-mapper";
 
 
 //when running reducer for the first time this initializes it to null
@@ -15,7 +16,7 @@ export const loginReducer=(state = initialState, action:AnyAction) => {
         case loginTypes.AUTH_ERROR:{
             return {
                 ...state,
-                errorMessage:'Incorrect Username or Pasword'
+                errorMessage:'Incorrect Username or Password'
             }
         }
         case loginTypes.USER_NOT_FOUND:{
@@ -58,6 +59,18 @@ export const loginReducer=(state = initialState, action:AnyAction) => {
             return {
                 ...state,
                 currUser:action.payload.noUser
+            }
+        }
+        case newUserTypes.USERNAME_TAKEN:{
+            return {
+                ...state,
+                errorMessage:'Username Taken'
+            }
+        }
+        case newUserTypes.LOGIN_SUCCESSFUL: {
+            return {
+                ...state,
+                currUser:action.payload.currUser
             }
         }
         default:{

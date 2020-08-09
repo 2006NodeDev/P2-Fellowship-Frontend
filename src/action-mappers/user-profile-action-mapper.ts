@@ -15,7 +15,7 @@ export const userProfileActionMapper = (userId:number)=> async (dispatch:any) =>
     
     try{
         let profUser = await getUserProfile(userId)
-        console.log(profUser)
+        //console.log(`user profile ${profUser}`)
         dispatch({
             type:userProfileTypes.PROFILE_FOUND,
             payload:{

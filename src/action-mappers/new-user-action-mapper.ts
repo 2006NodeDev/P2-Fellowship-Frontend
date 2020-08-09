@@ -2,7 +2,7 @@ import { createNewUser } from "../remote/user-service/createNewUser";
 import { User } from "../models/User";
 
 
-export const newuserTypes = {
+export const newUserTypes = {
     LOGIN_SUCCESSFUL: 'P2_SUCCESSFUL_LOGIN',
     BAD_CREDENTIALS: 'P2_BAD_CREDENTIALS',
     USERNAME_TAKEN:'P2_USERNAME_TAKEN',
@@ -14,9 +14,9 @@ export const newuserTypes = {
 export const newUserActionMapper = (newUser:User)=> async (dispatch:any) => {
     try{
         let currUser = await createNewUser(newUser)
-        console.log(currUser)
+        console.log(`current user: ${currUser}`)
         dispatch({
-            type:newuserTypes.LOGIN_SUCCESSFUL,
+            type:newUserTypes.LOGIN_SUCCESSFUL,
             payload:{
                 currUser
             }
@@ -25,15 +25,15 @@ export const newUserActionMapper = (newUser:User)=> async (dispatch:any) => {
         console.log(err.message)
         if(err.message.includes('400')){
             dispatch({
-                type:newuserTypes.BAD_CREDENTIALS
+                type:newUserTypes.BAD_CREDENTIALS
             })
         }else if (err.message.includes('405')){
             dispatch({
-                type:newuserTypes.USERNAME_TAKEN
+                type:newUserTypes.USERNAME_TAKEN
             })
         } else{
             dispatch({
-                type:newuserTypes.SERVER_ERROR
+                type:newUserTypes.SERVER_ERROR
             })
         }        
     }
@@ -42,7 +42,7 @@ export const newUserActionMapper = (newUser:User)=> async (dispatch:any) => {
 
 export const newuserErrorReset = () => {
     return{
-        type:newuserTypes.RESET_ERROR
+        type:newUserTypes.RESET_ERROR
 
     }
 

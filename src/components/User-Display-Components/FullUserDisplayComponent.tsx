@@ -4,11 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import React, { FunctionComponent, useEffect } from 'react'
 import { makeStyles, CardActions, Card, CardContent, Typography, CardMedia, Button, withStyles, Grid } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors';
-import { Link, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { IState } from '../../reducers';
-import { userProfileActionMapper, userProfileErrorReset } from '../../action-mappers/user-profile-action-mapper';
-import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { User } from '../../models/User';
 
 const useStyles = makeStyles({ //customize this more!
     root: {
@@ -49,42 +46,15 @@ const CustomButton = withStyles((theme) => ({
     }
 }))(Button);
 
+interface IUserDisplayProps {
+    user:User
+}
 
-export const FullUserDisplayComponent :FunctionComponent<any> = (props) => {
+export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (props) => {
     const classes = useStyles(); 
 
-    let { userId } = useParams()
-
-    const currentUser = useSelector((state: IState) => {
-        return state.loginState.currUser
-    })
-
-    const dispatch = useDispatch()
-
-    const openProfile = async () => {
-        let thunk = userProfileActionMapper(userId)
-        dispatch(thunk)
-    }
-    //the userProfile state is not the current user state in the case of admin, so we need to get both of them to use
-    const userProfile = useSelector((state: IState) => {
-        return state.userProfileState.profUser
-    })
-
-    const errorMessage = useSelector((state: IState) => {
-        return state.userProfileState.errorMessage
-    })
-    
-    useEffect(() => {
-        if (errorMessage) {
-            toast.error(errorMessage)
-            dispatch(userProfileErrorReset())
-        }
-    })
-    //make sure we are actually calling the action mapper
-    openProfile();
- 
     return(
-        (userProfile)?
+        (props.user)?
         <Grid
             container
             spacing={0}
@@ -98,45 +68,45 @@ export const FullUserDisplayComponent :FunctionComponent<any> = (props) => {
             <CardMedia
                 className={classes.media}
                 style={{marginTop: 20}}
-                image={userProfile.image}
+                image={props.user.image}
                 component="img"
                 title="Profile Picture"
             />
             <CardContent>
                     {/* Name of User: */}
                 <Typography className={classes.username} gutterBottom>
-                    {userProfile.firstName} {userProfile.lastName}
+                    {props.user.firstName} {props.user.lastName}
                 </Typography>
                 <Typography className={classes.userInfo}>
-                      USERNAME: {userProfile.username}
+                      USERNAME: {props.user.username}
                 </Typography>
                 <Typography className={classes.userInfo}>
-                    ROLE: {userProfile.role}
+                    ROLE: {props.user.role}
                 </Typography>
                 <Typography className={classes.userInfo}>
-                    AFFILIATION: {userProfile.affiliation}
+                    AFFILIATION: {props.user.affiliation}
                 </Typography>
                 <Typography className={classes.userInfo}>
-                    ADDRESS: {userProfile.address}
+                    ADDRESS: {props.user.address}
                 </Typography>
                 <Typography className={classes.userInfo}>
-                    EMAIL: {userProfile.email}
+                    EMAIL: {props.user.email}
                 </Typography>
                 <Typography className={classes.userInfo}>
-                    PLACES VISITED: {userProfile.placesVisited}
+                    PLACES VISITED: {props.user.placesVisited}
                 </Typography>
             </CardContent>
             
             <CardActions className={classes.root}> 
-            {currentUser?.role === "Admin" && 
-                <Link to={`/users/profile/admin/update/${userProfile.userId}`} style={{ textDecoration:"none"}}>
+            {props.user.role === "Admin" && 
+                <Link to={`/users/profile/admin/update/${props.user.userId}`} style={{ textDecoration:"none"}}>
                     <CustomButton variant="contained" className={classes.submit}>
                         Admin Update Profile
                     </CustomButton>
                 </Link>
             }
-            {currentUser?.role === "User" &&
-                <Link to={`/users/profile/update/${userProfile.userId}`} style={{ textDecoration:"none"}}>
+            {props.user.role === "User" &&
+                <Link to={`/users/profile/update/${props.user.userId}`} style={{ textDecoration:"none"}}>
                     <CustomButton variant="contained" className={classes.submit}>
                         Update Profile
                     </CustomButton>

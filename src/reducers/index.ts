@@ -15,7 +15,7 @@ export interface ILoginState{
 //user interface
 //profile that we are viewing/editing (Admin)
 export interface IUserProfileState{
-    profUser:User | undefined,
+    profUser:User | null  | undefined,
     errorMessage:string
 
 }
