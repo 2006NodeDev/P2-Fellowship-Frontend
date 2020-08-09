@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({ //change color too
   root: {
     flexGrow: 1,
     background: teal[800],
-    display: 'flex',
+    // display: 'flex',
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -176,7 +176,7 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
 
       <CssBaseline />
       <AppBar
-        position="static"
+        position="fixed"
         className={clsx(classes.root, classes.appBar, {
           [classes.appBarShift]: open,
         })}
