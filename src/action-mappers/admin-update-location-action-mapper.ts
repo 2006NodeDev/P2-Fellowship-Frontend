@@ -4,7 +4,6 @@ import { adminUpdateLocation } from "../remote/location-service/adminUpdateLocat
 
 export const adminUpdateLocationTypes = {
     UPDATE_SUCCESSFUL: 'P2_UPDATE_LOGIN',
-    BAD_CREDENTIALS: 'P2_BAD_CREDENTIALS',
     NAME_TAKEN:'P2_NAME_TAKEN',
     SERVER_ERROR:'P2_LOCATION_SERVER_ERROR',
     RESET_ERROR:'P2_RESET_ERROR'
@@ -39,11 +38,7 @@ export const adminUpdateLocationActionMapper = (locationId:number, name:string, 
         })
     }catch (err) {
         console.log(err.message)
-        if(err.message.includes('400')){
-            dispatch({
-                type:adminUpdateLocationTypes.BAD_CREDENTIALS
-            })
-        }else if (err.message.includes('405')){
+        if (err.message.includes('405')){
             dispatch({
                 type:adminUpdateLocationTypes.NAME_TAKEN
             })
