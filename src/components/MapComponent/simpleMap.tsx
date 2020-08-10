@@ -26,7 +26,7 @@ export const SimpleMap: FunctionComponent<any> = (props: any) => {
             changeAllLocations(locations)
         }
 
-        if (allLocations.length === 0) {
+        if (!allLocations) {
             getLocations()
         }
     })
