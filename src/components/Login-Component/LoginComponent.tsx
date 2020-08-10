@@ -99,7 +99,7 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
   useEffect(() => {
     if (thisUser) {
       //send to profile page if login works
-      props.history.push(`users/profile/${thisUser.userId}`)
+      props.history.push(`/users/profile/${thisUser.userId}`)
     }
   })
 

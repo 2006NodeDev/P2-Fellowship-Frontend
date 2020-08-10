@@ -136,7 +136,7 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
 
     useEffect(()=>{
       if(updatedLocation){ //with the updated location
-        props.history.push(`/profile/${updatedLocation.locationId}`)
+        props.history.push(`/locations/profile/${updatedLocation.locationId}`)
 
       }
     })

@@ -120,7 +120,7 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
     if(thisUser){
       console.log(`the current user ${thisUser}`); //check
       //send to profile page
-      props.history.push(`users/profile/${thisUser.userId}`)
+      props.history.push(`/users/profile/${thisUser.userId}`)
     }
   })
 

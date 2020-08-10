@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const HomeComponent:FunctionComponent<any> = (props) =>{
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   //get current user (to hide or show buttons)
   const currUser = useSelector((state:IState) => {

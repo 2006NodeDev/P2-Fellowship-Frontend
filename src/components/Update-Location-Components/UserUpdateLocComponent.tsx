@@ -117,7 +117,7 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
     //redirect to the updated locationProfile now
     useEffect(() => {
         if (updatedLocation) {
-            props.history.push(`/profile/${updatedLocation.locationId}`)
+            props.history.push(`/locations/profile/${updatedLocation.locationId}`)
 
         }
     })
