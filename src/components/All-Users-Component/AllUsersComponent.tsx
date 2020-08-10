@@ -51,7 +51,7 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
             changeAllUsers(response)
         }
 
-        if (allUsers.length === 0) {
+        if (!allUsers) {
             getUsers()
         }
     })

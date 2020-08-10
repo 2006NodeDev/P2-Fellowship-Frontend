@@ -30,6 +30,7 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
         const getUser = async ()=>{
             //sending to action mapper
             let thunk = userProfileActionMapper(userId)
+            console.log(thunk)
             dispatch(thunk)
         }
         if(!userProfile){ //should this be in a seperate useEffect?
@@ -37,6 +38,7 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
             getUser()
         }
     })  
+    console.log("user profile: " + userProfile)
     //if there's an error
     useEffect(() => {
         if (errorMessage) {
@@ -47,8 +49,8 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
    
  
     return(
-        (userProfile)? 
-        <FullUserDisplayComponent user={userProfile} />
+        (currentUser)? 
+        <FullUserDisplayComponent user={userProfile || currentUser} />
         :
         <div>
            <h3> User not found </h3>

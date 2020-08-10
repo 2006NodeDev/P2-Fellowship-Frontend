@@ -45,18 +45,27 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     //query the server
     useEffect(()=>{
         const getLocations = async ()=>{
-            let response = await getAllLocations() //doesn't affect state rn... idk if it needs to though... 
-            changeAllLocations(response)
+            try{
+                let response = await getAllLocations() //doesn't affect state rn... idk if it needs to though... 
+                console.log("get all users: " + response)
+                changeAllLocations(response)
+
+            }catch (e){
+                console.log(e)
+
+            }
+           
         }
-        if(allLocations.length === 0){
+        if(!allLocations){
             getLocations()
         }
     })  
-    console.log(allLocations)
+
+    console.log("all locations:" + allLocations)
     
 
     return(
-        (thisUser)?
+        (allLocations)?
         <div className={classes.root}>
             <GridList cellHeight={300} cols={3} className={classes.gridList}>
                 <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
@@ -77,7 +86,7 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
         </div>
         :
         <div>
-            <h3> Please log in to view</h3>
+            <h3> No Locations to Display </h3>
         </div>
 
     )
