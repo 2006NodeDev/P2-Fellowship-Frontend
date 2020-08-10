@@ -170,12 +170,12 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
                                         onChange={updateRating}
                                         label="Rating"
                                     >
-                                        <MenuItem value={0}>No Stars. Horrible.</MenuItem>
+                                        <MenuItem value={0}>No Stars. Got stabbed or something.</MenuItem>
                                         <MenuItem value={1}>1 Stars. Horrible but didn't Die.</MenuItem>
-                                        <MenuItem value={2}>2 Stars. Meh but wouldn't go again.</MenuItem>
-                                        <MenuItem value={3}>3 Stars. Meh.</MenuItem>
-                                        <MenuItem value={4}>4 Stars. Sorta okay.</MenuItem>
-                                        <MenuItem value={5}>5 Stars. Big Yes. Would Live There if I could.</MenuItem>
+                                        <MenuItem value={2}>2 Stars. Wouldn't do that again.</MenuItem>
+                                        <MenuItem value={3}>3 Stars. Meh. It was 'aight.</MenuItem>
+                                        <MenuItem value={4}>4 Stars. Pretty Cool. </MenuItem>
+                                        <MenuItem value={5}>5 Stars. The best place on (middle) Earth.</MenuItem>
 
                                     </Select>
                                 </FormControl>
