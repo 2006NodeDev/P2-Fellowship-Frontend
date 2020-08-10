@@ -31,7 +31,7 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
     const [affiliation, changeAffiliation] = useState('')
     const [address, changeAddress] = useState('')
     const [email, changeEmail] = useState('')
-    const [image, changeImage] = useState<any>(null)
+    const [image, changeImage] = useState<any>(undefined)
 
   const updateUsername = (event:any) => {
       event.preventDefault()
@@ -241,7 +241,6 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
                   variant="contained"
                   color="primary"
                   className={classes.submit}
-                  onClick={newUserSubmit}
                 > Register
                 </CustomButton>
               </Grid>

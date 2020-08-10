@@ -79,7 +79,7 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
   let [affiliation, changeAffiliation] = useState("")
   let [address, changeAddress] = useState("")
   let [email, changeEmail] = useState("")
-  let [image, changeImage] = useState<any>(null)
+  let [image, changeImage] = useState<any>(undefined)
 
   const updateUsername = (e: any) => {
     e.preventDefault()

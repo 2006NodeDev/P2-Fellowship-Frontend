@@ -7,6 +7,7 @@ import { locationProfileActionMapper, locationProfileErrorReset } from "../../ac
 import { useDispatch, useSelector } from "react-redux"
 import { IState } from "../../reducers"
 import { toast } from "react-toastify"
+import { resetUpdateActionMapper } from "../../action-mappers/reset-update-action-mapper"
 
 
 export const LocationProfileComponent:FunctionComponent<any> = (props) => {
@@ -19,6 +20,11 @@ export const LocationProfileComponent:FunctionComponent<any> = (props) => {
     const thisUser = useSelector((state: IState) => {
         return state.loginState.currUser
     })
+
+    //for check and reset
+    const updatedLocation= useSelector((state:IState) => {
+        return state.locationEditState.edittedLocation
+      })
 
     const locationProfile = useSelector((state: IState)=>{
         return state.locationProfileState.profLocation
@@ -35,9 +41,13 @@ export const LocationProfileComponent:FunctionComponent<any> = (props) => {
             let thunk = locationProfileActionMapper(locationId)
             dispatch(thunk)
         }
-        if(!locationProfile){ //should this be in a seperate useEffect?
+        if(thisUser){ //should this be in a seperate useEffect?
             //call the action mapper function if there is no current location profile
             getLocation()
+        }
+        if (updatedLocation) {
+            let thunk2 = resetUpdateActionMapper()
+            dispatch(thunk2)
         }
     })  
     //if there's an error

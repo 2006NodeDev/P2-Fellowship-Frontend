@@ -50,73 +50,44 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
             console.log(response);
             changeAllUsers(response)
         }
-
-        if (!allUsers) {
+        if (thisUser) {
             getUsers()
         }
     })
 
     console.log(allUsers);
     
-    if (thisUser && thisUser.role==="Admin"){ 
         return (
-            (allUsers) ?
-            <div className={classes.root}>
-                <GridList cellHeight={300} cols={3} className={classes.gridList}>
-                <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
-                    <ListSubheader className={classes.label}>All Users</ListSubheader>
-                </GridListTile>
-                {allUsers.map((tile) => (
-                    <GridListTile key={tile.userId}>
-                    <Link to={`/users/profile/${tile.userId}`}>
-                        <img src={tile.image} alt={"Profile Picture"}/>
-                        <GridListTileBar
-                            title={tile.firstName}
-                            subtitle={<span>Affiliation: {tile.affiliation}<br/> Places Visted:{tile.placesVisited} </span>}
-                        />
-                    </Link>
+            (thisUser)? 
+            <div>{
+                (allUsers) ?
+                <div className={classes.root}>
+                    <GridList cellHeight={300} cols={3} className={classes.gridList}>
+                    <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
+                        <ListSubheader className={classes.label}>All Users</ListSubheader>
                     </GridListTile>
-                ))}
-                </GridList>
-            </div>
+                    {allUsers.map((tile) => (
+                        <GridListTile key={tile.userId}>
+                            <img src={tile.image} alt={"Profile Picture"}/>
+                            <Link to={`/users/profile/${tile.userId}`}>
+                            <GridListTileBar
+                                title={tile.firstName}
+                                subtitle={<span>Affiliation: {tile.affiliation}<br/> Places Visted:{tile.placesVisited} </span>}
+                            />
+                        </Link>
+                        </GridListTile>
+                    ))}
+                    </GridList>
+                </div>
+                :
+                <div>
+                    No Users Found
+                </div>
+            }</div>
             :
             <div>
-                No Users Found
+                <h3> Must log in to view content </h3>
             </div>
-        )
-    } else if (thisUser){
-        return (
-            (allUsers) ?
-            <div className={classes.root}>
-                <GridList cellHeight={300} cols={3} className={classes.gridList}>
-                <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
-                    <ListSubheader className={classes.label}>All Users</ListSubheader>
-                </GridListTile>
-                {allUsers.map((tile) => (
-                    <GridListTile key={tile.userId}>
-                    <img src={tile.image} alt={"Profile Picture"}/>
-                    <GridListTileBar
-                        title={tile.firstName}
-                        subtitle={<span>Affiliation: {tile.affiliation} <br/> Places Visted:{tile.placesVisited} </span>}
-                    />
-                    </GridListTile>
-                ))}
-                </GridList>
-            </div>
-            :
-            <div>
-                No Users Found
-            </div>
-        )
-    } else {
-        return (
-            <div>
-                No Users Found
-            </div>
+        
         )
     }
-
-   
-}
-
-

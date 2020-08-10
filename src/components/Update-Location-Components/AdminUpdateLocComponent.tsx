@@ -22,13 +22,6 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
     const [primaryPopulation, changePrimaryPopulation] = useState("")
     const [description, changeDescription] = useState("")
     
-    //need to set these to the location's existing rating, numVisited, and image ARRAY
-    // const [rating, changeRating] = useState(0)
-    // const [numVisited, changeNumVisited] = useState(0)
-    // const [image, changeImage] = useState<any>(undefined)
-    // const [latitude, changelatitude] = useState(0)
-    // const [longitude, changelongitude] = useState(0)
-
 
     const updateName = (e:any) => {
         e.preventDefault()
@@ -51,27 +44,6 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
         changeDescription(e.currentTarget.value)
     } 
 
-    //this stuff should not be doing anything; no fields for input (but how to set....)
-    // const updateNumVisited = (e:any) => {
-    //     e.preventDefault()
-    //     changeNumVisited(e.currentTarget.value)
-    // }
-
-    // const updateImage = (e:any) => {
-    //     e.preventDefault()
-    //     //type file has array called files, since you could upload multiple. Thus we speficy we want only want the first 
-    //     let file:File = e.currentTarget.files[0]
-    //     //utlize FileReader - the old way of doing it without promises
-    //     let reader = new FileReader()
-    //     //start an async function on reader object
-    //     reader.readAsDataURL(file)
-    //     //set a callback for when it's done reading
-    //     reader.onload = () =>{
-    //         console.log(reader.result); //to see binary representation of the image
-    //         changeImage(reader.result) 
-    //     }
-    // }
-    
     const dispatch = useDispatch()
 
     //for permissions, get current user
@@ -86,7 +58,7 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
         let thunk = locationProfileActionMapper(locationId)
         dispatch(thunk)
       }
-      if (!locationToUpdate){
+      if (user){
         getLocation()
       }
       if(locationToUpdate){
@@ -114,13 +86,13 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
     const locationToUpdate= useSelector((state:IState) => {
       return state.locationProfileState.profLocation
     })
-    console.log(locationToUpdate); //better check....
+    //console.log(locationToUpdate); //better check....
 
     //the location state after update
     const updatedLocation= useSelector((state:IState) => {
       return state.locationEditState.edittedLocation
     })
-    console.log(updatedLocation); //better check....
+    //console.log(updatedLocation); //better check....
 
     const errorMessage = useSelector((state:IState) => {
       return state.locationEditState.errorMessage
@@ -137,7 +109,7 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
     useEffect(()=>{
       if(updatedLocation){ //with the updated location
         props.history.push(`/locations/profile/${updatedLocation.locationId}`)
-
+        
       }
     })
 
@@ -157,7 +129,7 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
                   margin="normal"
                   fullWidth
                   id="name"
-                  label="New Name"
+                  label="change Name"
                   name="Name"
                   value={name}
                   onChange={updateName}
@@ -169,7 +141,7 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
                   margin="normal"
                   fullWidth
                   name="realm"
-                  label="New Realm"
+                  label="change Realm"
                   id="realm"
                   value={realm}
                   onChange={updateRealm}
@@ -181,7 +153,7 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
                   margin="normal"
                   fullWidth
                   name="governance"
-                  label="New Governance"
+                  label="change Governance"
                   id="governance"
                   value={governance}
                   onChange={updateGovernance}
@@ -192,7 +164,7 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
                   variant="outlined"
                   fullWidth
                   id="primaryPopulation"
-                  label="New Primary Population"
+                  label="change Primary Population"
                   name="primary-population"
                   value={primaryPopulation}
                   onChange={updatePrimaryPopulation}

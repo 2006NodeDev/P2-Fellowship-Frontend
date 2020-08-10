@@ -26,9 +26,10 @@ const useStyles = makeStyles({
         alignItems: "center"
     },
     media: {
-        height: "auto",
+        height: 500,
         width: "100%",
         margin: "auto",
+        marginTop: 30
     },
     locationName: {
         fontSize: 20,
@@ -48,7 +49,6 @@ const useStyles = makeStyles({
         marginTop: 10,
         marginBottom: 10,
     },
-
     submit: {
         backgroundColor: teal[700],
         color: 'white',

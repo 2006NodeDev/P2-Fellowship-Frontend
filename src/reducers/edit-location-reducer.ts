@@ -2,6 +2,8 @@ import { IEdittedLocationState } from "./index"
 import { AnyAction } from "redux";
 import { adminUpdateLocationTypes } from "../action-mappers/admin-update-location-action-mapper";
 import { userUpdateLocationTypes } from "../action-mappers/user-update-location-action-mapper";
+import { updateTypes } from "../action-mappers/reset-update-action-mapper";
+
 
 const initialState:IEdittedLocationState = {
     edittedLocation:undefined,
@@ -30,6 +32,13 @@ export const editLocationReducer=(state = initialState, action:AnyAction) => {
             return {
                 ...state,
                 edittedLocation:action.payload.updateLoc
+            }
+        }
+        //reset it (for profile component)
+        case updateTypes.RESET_UPDATE_STATE:{
+            return {
+                ... state,
+                edittedLocation:action.payload.reset
             }
         }
         //server error

@@ -14,7 +14,7 @@ export const newUserTypes = {
 export const newUserActionMapper = (newUser:User)=> async (dispatch:any) => {
     try{
         let newUserResults = await createNewUser(newUser)
-        console.log(`created user: ${newUserResults}`)
+        console.log(newUserResults)
         dispatch({
             type:newUserTypes.CREATION_SUCCESSFUL,
             payload:{

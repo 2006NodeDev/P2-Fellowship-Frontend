@@ -2,7 +2,7 @@ import { IEdittedUserState } from "./index";
 import { AnyAction } from "redux";
 import { userUpdateProfileTypes } from "../action-mappers/update-user-action-mapper"
 import { adminUpdateProfileTypes } from "../action-mappers/admin-user-update-actionampper";
-
+import { updateTypes } from "../action-mappers/reset-update-action-mapper";
 
 const initialState:IEdittedUserState = {
     edittedUser: undefined,
@@ -39,7 +39,13 @@ export const editUserReducer=(state = initialState, action:AnyAction) => {
                 edittedUser:action.payload.adminUpdateProfile
             }
         }
-       
+        //reset it (for profile component)
+        case updateTypes.RESET_UPDATE_STATE:{
+            return {
+                ... state,
+                edittedUser:action.payload.reset
+            }
+        }
         //server error
         case (userUpdateProfileTypes.SERVER_ERROR || adminUpdateProfileTypes.SERVER_ERROR) :{
             return {

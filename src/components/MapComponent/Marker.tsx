@@ -24,8 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         typography: {
             color: 'black',
-            fontSize: 12,
-            
+            fontSize: 12, 
         }
     }),
 );

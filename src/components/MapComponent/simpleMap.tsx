@@ -4,6 +4,8 @@ import { Marker } from './Marker';
 //import { getAllLocations } from '../../remote/location-service/getAllLocations';
 import { Location } from '../../models/Location';
 import { getAllLocations } from '../../remote/location-service/getAllLocations';
+import { useSelector } from 'react-redux';
+import { IState } from '../../reducers';
 
 export const SimpleMap: FunctionComponent<any> = (props: any) => {
   const getMapOptions = (maps: any) => {
@@ -20,13 +22,16 @@ export const SimpleMap: FunctionComponent<any> = (props: any) => {
 
     let [allLocations, changeAllLocations] = useState<Location[]>([])
 
+    const thisUser = useSelector((state: IState) => {
+      return state.loginState.currUser
+    })
+
     useEffect(() => {
         const getLocations = async () => {
             let locations = await getAllLocations()
             changeAllLocations(locations)
         }
-
-        if (!allLocations) {
+        if (thisUser) {
             getLocations()
         }
     })

@@ -29,7 +29,7 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<any> = (props) =
   let [address, changeAddress] = useState("")
   let [email, changeEmail] = useState("")
   let [role, changeRole] = useState("")
-  let [image, changeImage] = useState<any>(null)
+  let [image, changeImage] = useState<any>(undefined)
 
   const updateUsername = (e: any) => {
     e.preventDefault()
@@ -155,7 +155,7 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<any> = (props) =
   })
 
   useEffect(() => {
-    if (updatedUser) { //send to updated profile
+    if (updatedUser) { //send to updated profile --this is making it impossible to update more than one at a time
       props.history.push(`/users/profile/${updatedUser.userId}`)
 
     }

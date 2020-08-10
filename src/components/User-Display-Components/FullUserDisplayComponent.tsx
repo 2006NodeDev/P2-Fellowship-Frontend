@@ -11,15 +11,14 @@ import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({ //customize this more!
     root: {
-      margin: "auto",
       minWidth: 275,
       maxWidth: 500,
       justifyContent: "center",
       alignItems:"center"
     },
     media: {
-      height:"auto",
-      width: "100%",
+      maxHeight: 400,
+      width: "auto",
       margin: "auto",
     },
     username: {
@@ -56,70 +55,67 @@ export const FullUserDisplayComponent :FunctionComponent<IUserDisplayProps> = (p
     const classes = useStyles(); 
 
     //get user state to see page
-    const user = useSelector((state: IState) => {
-        return state.loginState.currUser
+    const userProfile = useSelector((state: IState) => {
+        return state.userProfileState.profUser
     })
 
     return(
-        (user)?
+        (userProfile)?
         <Grid
             container
-            spacing={0}
-            direction="column"
+            spacing={3}
             alignItems="center"
             justify="center"
-            style={{ minHeight: '100vh' }}
+            style={{ minHeight: '100vh', marginTop: 100}}
         >
-        <Card className={classes.root} >
-            <CardMedia
-                className={classes.media}
-                style={{marginTop: 20}}
-                image={props.user.image}
-                component="img"
-                title="Profile Picture"
-            />
-            <CardContent>
-                    {/* Name of User: */}
-                <Typography className={classes.username} gutterBottom>
-                    {props.user.firstName} {props.user.lastName}
-                </Typography>
-                <Typography className={classes.userInfo}>
-                      USERNAME: {props.user.username}
-                </Typography>
-                <Typography className={classes.userInfo}>
-                    ROLE: {props.user.role}
-                </Typography>
-                <Typography className={classes.userInfo}>
-                    AFFILIATION: {props.user.affiliation}
-                </Typography>
-                <Typography className={classes.userInfo}>
-                    ADDRESS: {props.user.address}
-                </Typography>
-                <Typography className={classes.userInfo}>
-                    EMAIL: {props.user.email}
-                </Typography>
-                <Typography className={classes.userInfo}>
-                    PLACES VISITED: {props.user.placesVisited}
-                </Typography>
-            </CardContent>
-            
-            <CardActions className={classes.root}> 
-            {props.user.role === "Admin" && 
-                <Link to={`/users/profile/admin/update/${props.user.userId}`} style={{ textDecoration:"none"}}>
-                    <CustomButton variant="contained" className={classes.submit}>
-                        Admin Update Profile
-                    </CustomButton>
-                </Link>
-            }
-            {props.user.role === "User" &&
-                <Link to={`/users/profile/update/${props.user.userId}`} style={{ textDecoration:"none"}}>
-                    <CustomButton variant="contained" className={classes.submit}>
-                        Update Profile
-                    </CustomButton>
-                </Link>
-            }
-            </CardActions>
-        </Card>
+            <Grid item xs={12} sm={6}>
+                <img className={classes.media} alt="Profile Picture" src={props.user.image}/>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+                <Card className={classes.root} >
+                <CardContent>
+                        {/* Name of User: */}
+                    <Typography className={classes.username} gutterBottom>
+                        {props.user.firstName} {props.user.lastName}
+                    </Typography>
+                    <Typography className={classes.userInfo}>
+                        USERNAME: {props.user.username}
+                    </Typography>
+                    <Typography className={classes.userInfo}>
+                        ROLE: {props.user.role}
+                    </Typography>
+                    <Typography className={classes.userInfo}>
+                        AFFILIATION: {props.user.affiliation}
+                    </Typography>
+                    <Typography className={classes.userInfo}>
+                        ADDRESS: {props.user.address}
+                    </Typography>
+                    <Typography className={classes.userInfo}>
+                        EMAIL: {props.user.email}
+                    </Typography>
+                    <Typography className={classes.userInfo}>
+                        PLACES VISITED: {props.user.placesVisited}
+                    </Typography>
+                </CardContent>
+                
+                <CardActions className={classes.root}> 
+                {props.user.role === "Admin" && 
+                    <Link to={`/users/profile/admin/update/${userProfile.userId}`} style={{ textDecoration:"none"}}>
+                        <CustomButton variant="contained" className={classes.submit}>
+                            Admin Update Profile
+                        </CustomButton>
+                    </Link>
+                }
+                {props.user.role === "User" &&
+                    <Link to={`/users/profile/update/${userProfile.userId}`} style={{ textDecoration:"none"}}>
+                        <CustomButton variant="contained" className={classes.submit}>
+                            Update Profile
+                        </CustomButton>
+                    </Link>
+                }
+                </CardActions>
+            </Card>
+        </Grid>
 
         </Grid>
         :

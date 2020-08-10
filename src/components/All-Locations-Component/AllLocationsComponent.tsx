@@ -6,7 +6,9 @@ import { SingleImageDisplay } from '../Location-Display-Components/SingleImageDi
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { IState } from '../../reducers';
-
+import StarIcon from '@material-ui/icons/Star';
+import { Rating } from '@material-ui/lab';
+import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme)=>({ //customize this more!
     root: {
@@ -49,14 +51,11 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
                 let response = await getAllLocations() //doesn't affect state rn... idk if it needs to though... 
                 console.log("get all users: " + response)
                 changeAllLocations(response)
-
-            }catch (e){
+            }catch (e) {
                 console.log(e)
-
             }
-           
         }
-        if(!allLocations){
+        if(thisUser){
             getLocations()
         }
     })  
@@ -65,30 +64,39 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     
 
     return(
-        (allLocations)?
-        <div className={classes.root}>
-            <GridList cellHeight={300} cols={3} className={classes.gridList}>
-                <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
-                    <ListSubheader className={classes.label}>Places to see</ListSubheader>
-                </GridListTile>
-                {allLocations.map((tile) => (
-                    <GridListTile key={tile.locationId}>
-                    <Link to={`/locations/profile/${tile.locationId}`}>                        
-                        <SingleImageDisplay location={tile}/>
-                        <GridListTileBar
-                            title={tile.name}
-                            subtitle={<span> {tile.realm}<br/> {tile.rating} <br/> {tile.numVisited} have visited </span>}
-                        />
-                    </Link>
-                    </GridListTile>
-                ))}
-            </GridList>
-        </div>
+        (thisUser)?
+            <div>{ 
+                (allLocations)?
+                <div className={classes.root}>
+                    <GridList cellHeight={300} cols={3} className={classes.gridList}>
+                        <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
+                            <ListSubheader className={classes.label}>Places to see</ListSubheader>
+                        </GridListTile>
+                        {allLocations.map((tile) => (
+                            <GridListTile key={tile.locationId}>
+                            <Link to={`/locations/profile/${tile.locationId}`}>                        
+                                <SingleImageDisplay location={tile}/>
+                                <GridListTileBar
+                                    title={tile.name}
+                                    subtitle={<span> {tile.realm}<br/>
+                                        <Rating size="small" color="white" value={tile.rating} precision={0.5} readOnly emptyIcon={<StarIcon fontSize="inherit"/>}/>
+                                        <br/> {tile.numVisited} have visited </span>}
+                                />
+                            </Link>
+                            </GridListTile>
+                        ))}
+                    </GridList>
+                </div>
+                :
+                <div>
+                    No Locations Found
+                </div>
+            }</div>
         :
         <div>
-            <h3> No Locations to Display </h3>
+            <h3> Must log in to view content </h3>
         </div>
-
+            
     )
 }
 

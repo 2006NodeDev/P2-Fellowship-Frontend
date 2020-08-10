@@ -20,6 +20,7 @@ export const userProfileActionMapper = (userId:number)=> async (dispatch:any) =>
             payload:{
                 userProfile
             }
+            
         })
     }catch (err) {
         console.log(err.message)
