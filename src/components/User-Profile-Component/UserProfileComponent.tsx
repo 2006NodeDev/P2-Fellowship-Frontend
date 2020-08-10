@@ -26,17 +26,16 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
     const errorMessage = useSelector((state: IState) => {
         return state.userProfileState.errorMessage
     })
-    useEffect(()=>{
-        const getUser = async ()=>{
-            //sending to action mapper
+    useEffect(()=> {
+        if (currentUser?.role === "Admin"){
             let thunk = userProfileActionMapper(userId)
             dispatch(thunk)
+        } else if (currentUser) {
+            let thunk = userProfileActionMapper(currentUser?.userId)
+            dispatch(thunk)
         }
-        if(!userProfile){ //should this be in a seperate useEffect?
-            //call the action mapper function if there is no current user profile
-            getUser()
-        }
-    })  
+    })
+    
     //if there's an error
     useEffect(() => {
         if (errorMessage) {
@@ -44,11 +43,11 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
             dispatch(userProfileErrorReset())
         }
     })
-   
+
  
     return(
-        (userProfile)? 
-        <FullUserDisplayComponent user={userProfile} />
+        (currentUser)? 
+        <FullUserDisplayComponent user={ userProfile || currentUser} />
         :
         <div>
            <h3> User not found </h3>

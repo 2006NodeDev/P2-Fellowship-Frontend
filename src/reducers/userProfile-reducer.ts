@@ -25,7 +25,7 @@ export const userProfileReducer=(state = initialState, action:AnyAction) => {
         case userProfileTypes.PROFILE_FOUND:{
             return {
                 ...state,
-                profUser:action.payload.profUser
+                profUser:action.payload.userProfile
             }
         }
         // actually let's not do this so that our function for the action mapper is always called upon log in/after creation

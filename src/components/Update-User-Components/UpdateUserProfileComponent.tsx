@@ -186,7 +186,7 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
 
   useEffect(() =>{
     if (updatedUser){ //send to profile of updated user
-      props.history.push(`users/profile/${updatedUser.userId}`)
+      props.history.push(`/users/profile/${updatedUser.userId}`)
     }
   })
  
