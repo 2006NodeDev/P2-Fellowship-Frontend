@@ -58,9 +58,7 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
     console.log(allUsers);
     
         return (
-            (thisUser)? 
-            <div>{
-                (allUsers) ?
+            (thisUser?.role==="Admin")? 
                 <div className={classes.root}>
                     <GridList cellHeight={300} cols={3} className={classes.gridList}>
                     <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
@@ -80,14 +78,22 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
                     </GridList>
                 </div>
                 :
-                <div>
-                    No Users Found
+                <div className={classes.root}>
+                    <GridList cellHeight={300} cols={3} className={classes.gridList}>
+                    <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
+                        <ListSubheader className={classes.label}>All Users</ListSubheader>
+                    </GridListTile>
+                    {allUsers.map((tile) => (
+                        <GridListTile key={tile.userId}>
+                            <img src={tile.image} alt={"Profile Picture"}/>
+                            <GridListTileBar
+                                title={tile.firstName}
+                                subtitle={<span>Affiliation: {tile.affiliation}<br/> Places Visted:{tile.placesVisited} </span>}
+                            />
+                        </GridListTile>
+                    ))}
+                    </GridList>
                 </div>
-            }</div>
-            :
-            <div>
-                <h3> Must log in to view content </h3>
-            </div>
-        
+            
         )
     }
