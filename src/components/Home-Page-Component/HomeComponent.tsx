@@ -7,44 +7,14 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { IState } from '../../reducers';
 
-const CustomButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText(teal[700]),
-    backgroundColor: "teal[700]",
-    '&:hover': {
-      backgroundColor: teal[800],
-    },
-  },
-}))(Button);
-
 const background = {
-card : { 
-    height: 1000,
-    maxWidth: 20000,
-    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/Project-Images/home-map.jpg"})`
+  image: {
+    minHeight: "120vh",
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: "cover",
+    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/home-page.jpg"})`
     }
 }
-
-const useStyles = makeStyles((theme) => ({
-  root: { //figure out spacing for this (so it's relative to screen size and centered)
-    margin: "auto",
-    maxWidth: 600,
-    justifyContent: "center",
-    alignItems:"center"
-
-  },
-  text: {
-    fontFamily:"Bookman Old Style",
-    color:"black"
-  },
-  submit: {
-    margin: theme.spacing(1),
-    backgroundColor: teal[700],
-    color: 'white',
-    fontFamily: "Bookman Old Style",
-    fontSize: 16,
-  }
-}));
 
 export const HomeComponent:FunctionComponent<any> = (props) =>{
   const classes = useStyles();
@@ -58,48 +28,95 @@ export const HomeComponent:FunctionComponent<any> = (props) =>{
   
   if (!currUser){
     buttonsDisplayed.push(
-      <Link to= "/register" style={{ textDecoration:"none"}}>
-        <CustomButton variant="contained" className={classes.submit}>
-          Register Now!
-        </CustomButton>
-      </Link>,
-      <Link to="/login" style={{ textDecoration:"none"}} >
-        <CustomButton variant="contained" className={classes.submit}>
-          Login
-        </CustomButton> 
-      </Link>
+      <CardActions className={classes.buttons}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Link to= "/register" style={{ textDecoration:"none"}}>
+              <CustomButton fullWidth variant="contained" className={classes.submit}>
+                Register
+              </CustomButton>
+            </Link>
+          </Grid>
+          <Grid item xs={6}>
+            <Link to="/login" style={{ textDecoration:"none"}} >
+              <CustomButton fullWidth variant="contained" className={classes.submit}>
+                Login
+              </CustomButton> 
+            </Link>
+          </Grid>
+        </Grid>
+      </CardActions>
   )}
 
   return (
-    <div style={background.card} >
+    <div style={background.image} >
       <Grid
         container
         spacing={0}
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ minHeight: '100vh' }}
       >
-      <Card className={classes.root}>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2" className={classes.text}>
-               Explore the unknown territories of the world!                 
-            </Typography>
-            <Typography variant="body1" component="p" className={classes.text}>
-                Join the Fellowship of the Ring, a selective, diverse 
-                team working to overthrow the Dark Lord as they travel across 
-                the legendary, luscious landscape of Middle-Earth to 
-                earn their places in the history books. 
-                There’s only an 11% chance of dying!
-            </Typography>  
-        </CardContent>
-        <CardActions className={classes.root}>
-          <Typography > 
+      <Card className={classes.card}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <CardContent>
+              <Typography gutterBottom className={classes.bigText}>
+                Explore the unknown territories of the world!                 
+              </Typography>
+              <Typography variant="body1" component="p" className={classes.text}>
+                  Join the Fellowship of the Ring, a selective, diverse 
+                  team working to overthrow the Dark Lord as they travel across 
+                  the legendary, luscious landscape of Middle-Earth to 
+                  earn their places in the history books. 
+                  There’s only an 11% chance of dying!
+              </Typography>  
+          </CardContent>
+        </Grid>
+        <Grid item xs={12}>
             {buttonsDisplayed}
-          </Typography>
-        </CardActions>
+        </Grid>
+      </Grid>
       </Card>
     </Grid>
     </div>
   )
 }
+const useStyles = makeStyles((theme) => ({
+  card: {
+    marginTop: "10%",
+    minWidth: 400,
+    maxWidth:"33%",
+  },
+  buttons: {
+    width: '95%',
+    margin:"auto",
+  },
+  bigText: {
+    marginTop: 5,
+    marginBottom: 10,
+    fontSize: 25,
+    fontFamily: "Bookman Old Style",
+  },
+  text: {
+    fontFamily:"Bookman Old Style",
+    color:"black"
+  },
+  submit: {
+    margin: theme.spacing(0, 0, 2),
+    backgroundColor: teal[700],
+    color: 'white',
+    fontFamily: "Bookman Old Style",
+    fontSize: 16
+  }
+}));
+
+const CustomButton = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText(teal[700]),
+    backgroundColor: "teal[700]",
+    '&:hover': {
+      backgroundColor: teal[800],
+    },
+  },
+}))(Button);

@@ -13,10 +13,10 @@ import { User } from '../../models/User';
 
 const background = {
   image: {
+    minHeight: "150vh",
     backgroundRepeat: 'no-repeat',
-    width:'100%',
-    height:'100%',
-    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/Project-Images/register.jpg"})`
+    backgroundSize: "cover",
+    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/register.jpg"})`
   }
 }
 
@@ -126,53 +126,47 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
 
   return (
      <div style={background.image}>
-       
-     <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
+     <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+      >
         <Card className={classes.card}>
           <form autoComplete="off" onSubmit={newUserSubmit} className={classes.form} noValidate>
             <Typography className={classes.registerMessage}>
-              Join the expedition!
+              Registration
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  margin="normal"
                   required
                   fullWidth
-                  id="username"
                   label="Username"
-                  name="username"
                   value={username}
                   onChange={updateUsername}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6}>
                 <TextField
                   variant="outlined"
-                  margin="normal"
                   required
                   fullWidth
-                  name="password"
                   label="Password"
                   type="password"
-                  id="password"
                   value={password}
                   onChange={updatePassword}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6}>
                 <TextField
                   variant="outlined"
-                  margin="normal"
                   required
                   fullWidth
-                  name="confirm-password"
                   label="Confirm Password"
                   type="password"
-                  id="confirm-password"
                   value={confirmPassword}
                   onChange={updateConfirmPassword}
                 />
@@ -182,14 +176,13 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
                   variant="outlined"
                   required
                   fullWidth
-                  id="email"
                   label="Email"
-                  name="email"
+                  type="email"
                   value={email}
                   onChange={updateEmail}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6}>
                 <TextField
                   variant="outlined"
                   fullWidth
@@ -199,7 +192,7 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
                   onChange={updateFirstName}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6}>
                 <TextField
                   variant="outlined"
                   fullWidth
@@ -233,22 +226,20 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
                 <input type="file" name="file" accept="image/*" onChange={updateImage} />
                 <img src={image} width="100%"/>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6}>
                 <CustomButton
                   type="submit"
                   fullWidth
                   variant="contained"
-                  color="primary"
                   className={classes.submit}
                 > Register
                 </CustomButton>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6}>
                 <Link to= "/" style={{ textDecoration:"none"}}>
                 <CustomButton
                   fullWidth
                   variant="contained"
-                  color="primary"
                   className={classes.submit}
                 > Cancel 
                 </CustomButton>
@@ -256,32 +247,24 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
               </Grid>
             </Grid>            
           </form>
-          </Card>
-        </div>
-      </Container>
+        </Card>
+        </Grid>
       </div>
     )
 })
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
   card: {
-    width:"100%",
+    marginTop: "10%",
+    minWidth: 400,
+    maxWidth:"33%",
   },
   registerMessage: {
     marginTop: 5,
+    marginBottom: 10,
     fontSize: 25,
     fontFamily: "Bookman Old Style",
     alignItems:'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '90%',
@@ -292,7 +275,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
     backgroundColor: teal[700],
     color: 'white',
-    //background color?
     fontFamily: "Bookman Old Style",
     fontSize: 16
   }

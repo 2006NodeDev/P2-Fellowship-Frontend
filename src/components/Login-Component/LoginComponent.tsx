@@ -5,50 +5,14 @@ import { IState } from '../../reducers';
 import { loginActionMapper, loginErrorReset } from '../../action-mappers/login-action-mapper';
 import { toast } from 'react-toastify'
 import { teal } from '@material-ui/core/colors';
-
-
-const LoginButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText(teal[700]),
-    backgroundColor: "teal[700]",
-    '&:hover': {
-      backgroundColor: teal[800],
-    },
-  },
-}))(Button);
-
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '50ch',
-        height:'30ch',
-        alignItems:'center'
-      },
-    },
-    loginMessage: {
-      marginTop: 5,
-      fontSize: 25,
-      fontFamily: "Bookman Old Style",
-      alignItems:'center'
-    },
-    submit: {
-      margin: theme.spacing(1),
-      backgroundColor: teal[600],
-      color: 'white',
-      fontFamily: "Bookman Old Style",
-      fontSize: 16,
-    }
-  }),
-);
+import { Link } from 'react-router-dom';
 
 const background = {
-  card: {
-    // height: '100%',
-    // maxWidth: '100%',
-    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/Project-Images/login.jpg"})`
+  image: {
+    minHeight: "120vh",
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: "cover",
+    backgroundImage: `url(${"https://storage.googleapis.com/p2-fellowship/login.jpg"})`
 
   }
 }
@@ -103,7 +67,7 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
   })
 
   return (
-    <div style={background.card}>
+    <div style={background.image}>
      
       <Grid
         container
@@ -111,24 +75,103 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ minHeight: '100vh' }}
       >
-        <Card className={classes.root} >
-          <form autoComplete="off" onSubmit={loginSubmit}>
-              <br />
+        <Card className={classes.card} >
+          <form autoComplete="off" onSubmit={loginSubmit} className={classes.form}>
             <Typography className={classes.loginMessage}>
-              Please login:
+              Login
             </Typography>
-            <TextField id="username-basic" label="Username" value={username} onChange={updateUsername} />
-              <br />
-            <TextField id="password-basic" label="Password" type='password' value={password} onChange={updatePassword} />
-              <br />
-              <br />
-            <LoginButton type='submit' variant='contained' onClick={loginSubmit} className={classes.submit}> Submit </LoginButton>          
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField 
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Username" 
+                  value={username} 
+                  onChange={updateUsername} 
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField 
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Password" 
+                  type='password' 
+                  value={password} 
+                  onChange={updatePassword} 
+                />
+            </Grid>
+            <Grid item xs={6}>
+              <CustomButton
+                type='submit'  
+                fullWidth
+                variant='contained'
+                className={classes.submit}> 
+                Submit 
+              </CustomButton>
+            </Grid>
+            <Grid item xs={6}>
+                <Link to= "/" style={{ textDecoration:"none"}}>
+                <CustomButton
+                  fullWidth
+                  variant="contained"
+                  className={classes.submit}
+                > Cancel 
+                </CustomButton>
+                </Link>
+              </Grid>
+            </Grid>
           </form>
         </Card>
       </Grid> 
     </div>
     )
-
 }
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+        width: '50ch',
+        height:'30ch',
+        alignItems:'center'
+      },
+    },
+    card: {
+      marginTop: "15%",
+      minWidth: 400,
+      width:"33%",
+    },
+    loginMessage: {
+      marginTop: 5,
+      marginBottom: 10,
+      fontSize: 25,
+      fontFamily: "Bookman Old Style",
+      alignItems:'center'
+    },
+    form: {
+      width: '90%',
+      margin:"auto",
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+      backgroundColor: teal[700],
+      color: 'white',
+      fontFamily: "Bookman Old Style",
+      fontSize: 16,
+    }
+  }),
+);
+
+const CustomButton = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText(teal[700]),
+    backgroundColor: "teal[700]",
+    '&:hover': {
+      backgroundColor: teal[800],
+     }
+  }
+}))(Button);
