@@ -43,17 +43,23 @@ export const AllUsersComponent: FunctionComponent<any> = (props) => {
     let [allUsers, changeAllUsers] = useState<User[]>([])
 
     //query the server
-    useEffect(() => {
+    //useEffect(() => { //add all user state!!
 
-        const getUsers = async () => {
-            let response = await getAllUsers() //doesn't affect state rn... idk if it needs to though... 
-            console.log(response);
-            changeAllUsers(response)
-        }
-        if (thisUser) {
-            getUsers()
-        }
-    })
+        const getUsers = async () => { 
+            try {
+                let response = await getAllUsers() //doesn't affect state rn... idk if it needs to though... 
+                console.log(response);
+                changeAllUsers(response)
+            } catch (e) {
+                console.log(e)
+            }
+        } 
+        getUsers()
+        //without useEffect
+    //     if (thisUser) {
+    //         getUsers()
+    //     }
+    // })
 
     console.log(allUsers);
     

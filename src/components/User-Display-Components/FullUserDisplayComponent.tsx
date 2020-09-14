@@ -1,7 +1,7 @@
 //display a user's profile in full detail -ADMIN
 
 import 'react-toastify/dist/ReactToastify.css';
-import React, { FunctionComponent, useEffect } from 'react'
+import React, { FunctionComponent } from 'react'
 import { makeStyles, CardActions, Card, CardContent, Typography, CardMedia, Button, withStyles, Grid } from '@material-ui/core'
 import { teal } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';

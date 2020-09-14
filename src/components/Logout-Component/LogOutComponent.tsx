@@ -28,14 +28,13 @@ export const LogOutComponent: FunctionComponent<any> = (props)=>{
         e.preventDefault()
         //log in the user using the action mapper
         //should update thisUser, userProfile AND errorMessage
-        let thunk = logoutActionMapper() //no params (like endpoint in backend)
-        dispatch(thunk)
+        dispatch(logoutActionMapper())//no params (like endpoint in backend)
       }
 
     useEffect(() =>{
         //if there's an error, show it
       if (errorMessage) {
-          toast.error(errorMessage)
+        toast.error(errorMessage)
         dispatch(logoutErrorReset())
       }
     })

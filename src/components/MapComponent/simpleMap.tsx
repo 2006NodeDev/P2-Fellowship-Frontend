@@ -26,15 +26,13 @@ export const SimpleMap: FunctionComponent<any> = (props: any) => {
       return state.loginState.currUser
     })
 
-    useEffect(() => {
-        const getLocations = async () => {
-            let locations = await getAllLocations()
-            changeAllLocations(locations)
-        }
-        if (thisUser) {
-            getLocations()
-        }
-    })
+    //trying without userEffect
+    const getLocations = async () => {
+        let locations = await getAllLocations()
+        changeAllLocations(locations)
+    }
+    getLocations()
+
     let locationsTag = allLocations.map((location) => {
       return <Marker
       key={'locations-key-' + location.locationId}

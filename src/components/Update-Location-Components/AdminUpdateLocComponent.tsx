@@ -1,7 +1,7 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
 import { Button, TextField, makeStyles, Container, CssBaseline, Typography, Grid, withStyles } from "@material-ui/core";
 import { Link, useParams } from 'react-router-dom';
-import { green, lime } from "@material-ui/core/colors";
+import { teal } from "@material-ui/core/colors";
 import {toast} from 'react-toastify'
 import { updateLocationErrorReset, adminUpdateLocationActionMapper } from "../../action-mappers/admin-update-location-action-mapper";
 import { useSelector, useDispatch } from "react-redux";
@@ -55,8 +55,7 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
       e.preventDefault()  
       const getLocation = async ()=>{
         //get the locationProfile state 
-        let thunk = locationProfileActionMapper(locationId)
-        dispatch(thunk)
+        dispatch(locationProfileActionMapper(locationId))
       }
       if (user){
         getLocation()
@@ -76,8 +75,8 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
             latitude: locationToUpdate.latitude, 
             longitude: locationToUpdate.longitude
           }     
-            let thunk2 = adminUpdateLocationActionMapper(updatingLocation)
-            dispatch(thunk2) //is this ok? should be... 
+            dispatch(adminUpdateLocationActionMapper(updatingLocation))
+            //is this ok? should be... 
         }
           //call the action mapper function if there is no current location profile
           
@@ -223,12 +222,12 @@ export const AdminUpdateLocationProfileComponent:FunctionComponent<any> = (props
 }
 const CustomButton = withStyles((theme) => ({
   root: {
-      color: theme.palette.getContrastText(lime[700]),
-      backgroundColor: "lime[700]",
+      color: theme.palette.getContrastText(teal[700]),
+      backgroundColor: "teal[700]",
       '&:hover': {
-        backgroundColor: green[900],
-      },
-  },
+          backgroundColor: teal[800],
+      }
+  }
 }))(Button);
 
 //styles at the bottom because closer to html return
@@ -249,7 +248,7 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
-      backgroundColor: lime[700],
+      backgroundColor: teal[700],
       color: 'white',
       //background color?
       fontFamily: "Bookman Old Style",

@@ -101,8 +101,7 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
     const updateThisLocation = async (e: SyntheticEvent) => {
         e.preventDefault()
         if (user) {
-            let thunk = userUpdateLocationActionMapper(locationId, user.userId, visited, rating, image)
-            dispatch(thunk)
+            dispatch(userUpdateLocationActionMapper(locationId, user.userId, visited, rating, image))
         }
     }
 
@@ -118,7 +117,6 @@ export const UserUpdateLocationComponent: FunctionComponent<any> = (props) => {
     useEffect(() => {
         if (updatedLocation) {
             props.history.push(`/locations/profile/${updatedLocation.locationId}`)
-
         }
     })
 

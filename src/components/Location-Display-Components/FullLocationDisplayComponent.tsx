@@ -122,12 +122,19 @@ export const FullLocationDisplayComponent: FunctionComponent<ILocationDisplayPro
                                     Record your visit!
                                 </CustomButton>
                             </Link>
+                            <Link to={`/locations`} style={{ textDecoration:"none"}}>
+                                <CustomButton variant="contained" className={classes.submit}>
+                                    Back
+                                </CustomButton> {/*Edit the color of the back button */}
+                            </Link>
                             {user?.role === "Admin" &&
+                                <div>
                                 <Link to={`/locations/profile/admin/update/${props.location.locationId}`} style={{ textDecoration:"none"}}>
                                     <CustomButton variant="contained" className={classes.submit}>
                                         Update Location Information
                                     </CustomButton>
                                 </Link> 
+                                </div>
                             }
                         </CardActions>
                     </Card>

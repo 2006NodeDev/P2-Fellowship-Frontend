@@ -126,10 +126,9 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     if (!currUser) {
       menuItems = []
       menuItems.push(
-
+        <ListItem button component={Link} key="listeItem5" to="/" ><ListItemText onClick={handleDrawerClose}>Home</ListItemText></ListItem>,
         <ListItem button component={Link} key="listeItem3" to="/login" ><ListItemText onClick={handleDrawerClose}>Login</ListItemText></ListItem>,
-        <ListItem button component={Link} key="listeItem4" to="/register" ><ListItemText onClick={handleDrawerClose}>Register</ListItemText></ListItem>,
-        <ListItem button component={Link} key="listeItem5" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
+        <ListItem button component={Link} key="listeItem4" to="/register" ><ListItemText onClick={handleDrawerClose}>Register</ListItemText></ListItem>
       )}
 
   })
@@ -165,9 +164,9 @@ export const NavBarComponent: FunctionComponent<any> = (props) => {
     //info page? 
   } else {
     menuItems.push(
+      <ListItem button component={Link} key="listeItem5" to="/" ><ListItemText onClick={handleDrawerClose}>Home</ListItemText></ListItem>,
       <ListItem button component={Link} key="listeItem3" to="/login" ><ListItemText onClick={handleDrawerClose}>Login</ListItemText></ListItem>,
-      <ListItem button component={Link} key="listeItem4" to="/register" ><ListItemText onClick={handleDrawerClose}>Register</ListItemText></ListItem>,
-      <ListItem button component={Link} key="listeItem5" to="/logout" ><ListItemText onClick={handleDrawerClose}>Logout</ListItemText></ListItem>
+      <ListItem button component={Link} key="listeItem4" to="/register" ><ListItemText onClick={handleDrawerClose}>Register</ListItemText></ListItem>
         )
   }
 

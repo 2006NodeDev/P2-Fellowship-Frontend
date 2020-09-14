@@ -24,7 +24,7 @@ export const LocationProfileComponent:FunctionComponent<any> = (props) => {
     //for check and reset
     const updatedLocation= useSelector((state:IState) => {
         return state.locationEditState.edittedLocation
-      })
+    })
 
     const locationProfile = useSelector((state: IState)=>{
         return state.locationProfileState.profLocation
@@ -38,16 +38,14 @@ export const LocationProfileComponent:FunctionComponent<any> = (props) => {
     useEffect(()=>{
         const getLocation = async ()=>{
             //sending to action mapper
-            let thunk = locationProfileActionMapper(locationId)
-            dispatch(thunk)
+            dispatch(locationProfileActionMapper(locationId))
         }
-        if(thisUser){ //should this be in a seperate useEffect?
+        if(!locationProfile){ //should this be in a seperate useEffect?
             //call the action mapper function if there is no current location profile
             getLocation()
         }
         if (updatedLocation) {
-            let thunk2 = resetUpdateActionMapper()
-            dispatch(thunk2)
+            dispatch(resetUpdateActionMapper())
         }
     })  
     //if there's an error

@@ -26,7 +26,7 @@ export const locationProfileActionMapper = (locationId:number)=> async (dispatch
                 currLocation
             }
         })
-    }catch (err) {
+    } catch (err) {
         console.log(err.message)
         if (err.message.includes('404')){
             dispatch({

@@ -45,20 +45,22 @@ export const AllLocationsComponent:FunctionComponent<any> = (props) => {
     let [allLocations, changeAllLocations] = useState<Location[]>([])
 
     //query the server
-    useEffect(()=>{
-        const getLocations = async ()=>{
+    //useEffect(()=>{
+        const getLocations = async ()=>{ //add all locations state!!
             try{
                 let response = await getAllLocations() //doesn't affect state rn... idk if it needs to though... 
-                console.log("get all users: " + response)
+                console.log("get all locations: " + response)
                 changeAllLocations(response)
             }catch (e) {
                 console.log(e)
             }
         }
-        if(thisUser){
-            getLocations()
-        }
-    })  
+        getLocations()
+        //trying without useEffect
+    //     if(thisUser){
+    //         getLocations()
+    //     }
+    //})  
 
     console.log("all locations:" + allLocations)
     

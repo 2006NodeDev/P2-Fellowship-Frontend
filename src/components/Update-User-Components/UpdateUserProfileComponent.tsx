@@ -172,8 +172,7 @@ export const UpdateUserProfileComponent: FunctionComponent<any> = (props) => {
       role: "User", 
       image
     }
-    let thunk = updateUserActionMapper(updatedUser)
-    dispatch(thunk)
+    dispatch(updateUserActionMapper(updatedUser))
   }
   
   //if error

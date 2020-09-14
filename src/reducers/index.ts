@@ -6,6 +6,8 @@ import { userProfileReducer } from "./userProfile-reducer";
 import { locationProfileReducer } from "./locationProfile-reducer";
 import { editLocationReducer } from "./edit-location-reducer";
 import { editUserReducer } from "./edit-user-reducer";
+import { allLocationsReducer } from "./all-locations-reducer";
+import { allUsersReducer } from "./all-users-reducer";
 
 //login interface
 //user who is currently logged in
@@ -19,17 +21,31 @@ export interface IUserProfileState{
     profUser:User | null | undefined,
     errorMessage:string
 }
+
+//state for all users
+export interface IAllUsersState {
+    usersArray: User[] | undefined
+    errorMessage: string
+}
+
 //for the editted user profiles
 export interface IEdittedUserState{
     edittedUser:User | undefined,
     errorMessage:string
 }
-//location interface
+
+//location interfaces
 //current Location that we are viewing/editing (Admin)
 export interface ILocationProfileState{
     profLocation:Location | undefined,
     errorMessage:string
 }
+//state for all locations
+export interface IAllLocationsState {
+    locationsArray: Location[] | undefined,
+    errorMessage:string
+}
+
 //for the edited locations
 export interface IEdittedLocationState{
     edittedLocation:Location | undefined,
@@ -44,6 +60,8 @@ export interface IState{
     userProfileState:IUserProfileState
     locationEditState:IEdittedLocationState
     userEditState:IEdittedUserState
+    allUsersState:IAllUsersState
+    allLocationsState:IAllLocationsState
 }
 
 //the whole state i.e. combination of all the mini states
@@ -53,5 +71,7 @@ export const state = combineReducers <IState>({
     locationProfileState:locationProfileReducer,
     userProfileState:userProfileReducer,
     locationEditState:editLocationReducer,
-    userEditState:editUserReducer
+    userEditState:editUserReducer,
+    allUsersState:allUsersReducer,
+    allLocationsState:allLocationsReducer
 })

@@ -35,16 +35,13 @@ export const UserProfileComponent:FunctionComponent<any> = (props) => {
 
     useEffect(()=> {
         if (updatedUser){
-            let thunk2 = resetUpdateActionMapper()
-            dispatch(thunk2)
+            dispatch(resetUpdateActionMapper())
         }
-        if (currentUser?.role === "Admin"){
-            let thunk = userProfileActionMapper(userId)
-            console.log(thunk)
-            dispatch(thunk)
-        } else if (currentUser) {
-            let thunk = userProfileActionMapper(currentUser?.userId)
-            dispatch(thunk)
+        if (!userProfile && currentUser?.role === "Admin"){ //does this work?
+            dispatch(userProfileActionMapper(userId))
+        }
+        else if (!userProfile && currentUser) {
+            dispatch(userProfileActionMapper(currentUser?.userId))
         }
     })
     

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, SyntheticEvent, useState, useEffect } from "react";
 import { Button, makeStyles, Container, CssBaseline, Typography, Grid, withStyles, Card, TextField } from "@material-ui/core";
 import { Link, useParams, } from 'react-router-dom';
-import { green, lime } from "@material-ui/core/colors";
+import { teal } from "@material-ui/core/colors";
 import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from "react-redux";
 import { createStyles } from '@material-ui/core/styles';
@@ -120,8 +120,7 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<any> = (props) =
     }
     const getUser = async ()=>{
       //get the userProfile state 
-      let thunk = userProfileActionMapper(userId)
-      dispatch(thunk)
+      dispatch(userProfileActionMapper(userId))
     }
     if (!userToUpdate){
       getUser()
@@ -140,8 +139,7 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<any> = (props) =
         role, 
         image
       }
-      let thunk2 = adminUpdateUserActionMapper(updatingUserInfo)
-      dispatch(thunk2)
+      dispatch(adminUpdateUserActionMapper(updatingUserInfo))
     } 
    
   }
@@ -320,12 +318,12 @@ export const AdminUpdateUserProfileComponent: FunctionComponent<any> = (props) =
 }
 const CustomButton = withStyles((theme) => ({
   root: {
-    color: theme.palette.getContrastText(lime[700]),
-    backgroundColor: "lime[700]",
-    '&:hover': {
-      backgroundColor: green[900],
-    },
-  },
+      color: theme.palette.getContrastText(teal[700]),
+      backgroundColor: "teal[700]",
+      '&:hover': {
+          backgroundColor: teal[800],
+      }
+  }
 }))(Button);
 
 //styles at the bottom because closer to html return
@@ -354,7 +352,7 @@ const useStyles = makeStyles((theme) =>
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
-      backgroundColor: lime[700],
+      backgroundColor: teal[700],
       color: 'white',
       //background color?
       fontFamily: "Bookman Old Style",

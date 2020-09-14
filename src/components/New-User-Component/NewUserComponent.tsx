@@ -104,8 +104,7 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
     }
     //sending the user to the action mapper
     //should set thisUser or errorMessage
-    let thunk = newUserActionMapper(newUser)
-    dispatch(thunk)
+    dispatch(newUserActionMapper(newUser))
   }  
   //if error
   useEffect(()=>{
@@ -118,7 +117,7 @@ export const NewUserComponent:FunctionComponent<any> = ((props) => {
   useEffect(()=>{
     //if sign up successful
     if(thisUser){
-      console.log(`the current user ${thisUser}`); //check
+      //console.log(`the current user ${thisUser}`); //check
       //send to profile page
       props.history.push(`/users/profile/${thisUser.userId}`)
     }

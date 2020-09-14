@@ -85,8 +85,7 @@ export const LoginComponent: FunctionComponent<any> = (props) => {
   const loginSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
     //log in the user using the action mapper, updating thisUser and errorMessage
-    let thunk = loginActionMapper(username, password)
-    dispatch(thunk)
+    dispatch(loginActionMapper(username, password))
   }
   //if there's an error
   useEffect(() => {
